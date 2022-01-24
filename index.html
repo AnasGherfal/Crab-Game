@@ -1,20 +1,35 @@
+﻿
 <!DOCTYPE html>
 <html>
 <head>
-    <title>  </title>
-    
+    <meta charset="utf-8">
+    <title>Game Project Title Goes Here</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+  
     <script type="text/javascript" src="./assetmanager.js"></script>
-    <script type="text/javascript" src="./util.js"></script>
     <script type="text/javascript" src="./timer.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./entities.js"></script>
+    <script type="text/javascript" src="./thing.js"></script>
     <script type="text/javascript" src="./animator.js"></script>
-    <script type="text/javascript" src="./boundingBox.js"></script>
-    <script type="text/javascript" src="./background.js"></script>
-    <script type="text/javascript" src="./player.js"></script>
+
+    <script type="text/javascript" src="./entities/base.js"></script>
+    <script type="text/javascript" src="./entities/shapes.js"></script>
+    <script type="text/javascript" src="./entities/player.js"></script>
+    <script type="text/javascript" src="./entities/ui.js"></script>
+    <script type="text/javascript" src="./entities/sceneElements.js"></script>
+    <script type="text/javascript" src="./handlers/inputHandler.js"></script>
+    <script type="text/javascript" src="./handlers/misc.js"></script>
+    <!--To be deleted-->
+    <script type="text/javascript" src="./entities/testEntities.js"></script>
+
     <script type="text/javascript" src="./main.js"></script>
-    
 </head>
 <body>
-    <canvas id="gameWorld" width="900" height="700" style="background: black;" tabindex="1"></canvas>
+    <canvas id="gameWorld" width="1024" height="768" style="background: white; border: 1px solid black"></canvas>
 </body>
 </html>
