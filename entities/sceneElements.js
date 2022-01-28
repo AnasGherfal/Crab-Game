@@ -14,10 +14,20 @@ class Scene extends Entity
 
         //Player
         this.player = new Player(game, 200, 300);
+        this.game.addEntity(this.player);
 
-        this.children.push(this.player);
-
-        
+        //Test Button
+        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133,1.0));
+        this.testButton.onMouseClicked = function() {
+            this.game.addEntity(new HitText(game, 200, 300, "HIT!", 100));
+        };
+        this.game.addEntity(this.testButton);
 
     }
+
+    addEntity(entity)
+    {
+        this.game.addEntity(entity);
+    }
+
 }

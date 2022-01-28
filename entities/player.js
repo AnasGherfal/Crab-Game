@@ -10,10 +10,24 @@ class Player extends Entity
 
         this.direction = 0;
 
+        //Flags
+        this.clickable = true;
+        this.hoverable = true;
+
         this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
 
         // this.bitSpawner = new BitSpawner(game, x + this.width / 2 * this.scale, y + this.height * this.scale);
         // this.children.push(this.bitSpawner);
+    }
+
+    mouseClicked(mouseX, mouseY)
+    {
+        this.displayDamageText("10");
+    }
+
+    displayDamageText(text)
+    {
+        this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
     }
 
     update()
@@ -47,7 +61,7 @@ class Player extends Entity
         var m = this.game.mouse;
         if (m != null)
         {
-            // ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
+            ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
         }
 
         ctx.stroke();

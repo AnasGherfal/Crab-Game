@@ -26,8 +26,7 @@ class Entity
 
         //Update children's x and y
         this.children.forEach(child => {
-            child.x += x;
-            child.y += y;
+            child.moveBy(x, y);
         });
     }
 
@@ -55,20 +54,36 @@ class Entity
     draw(ctx)
     {
         ctx.save();
-        this.children.forEach(child => {
-            child.draw(ctx);
-        });
+
+        // Runs through children and deletes and draws
+        for (let i = 0; i < this.children.length; i++)
+        {
+            if (this.children[i].removeFromWorld)
+            {
+                delete this.children.splice(i, i + 1);
+            }
+            else
+            {
+                this.children[i].draw(ctx);
+            }
+        }
+
         ctx.restore();
     }
 
-    mouseHover(x, y)
+    mouseHover(mouseX, mouseY)
     {
 
     }
 
-    mouseClicked(x, y)
+    mouseClicked(mouseX, mouseY)
     {
         
+    }
+
+    mouseUp(mouseX, mouseY)
+    {
+
     }
 
 }

@@ -46,6 +46,58 @@ class TextElement extends UIElement
     }
 }
 
+class DamageIndicator extends TextElement
+{
+    constructor(game, x, y, text, fadeTime)
+    {
+        super(game, x, y, text);
+
+        this.fadeTime = fadeTime;
+        this.currentTick = 0;
+        this.opacityPercent = 1.0;
+
+        //Choose random angle to rotate text
+        this.rotationAngle = (randomInt(20)-10) * (Math.PI / (180));
+    }
+
+    update()
+    {
+        //Floating Effect
+        this.y -= 1;
+
+        this.currentTick++;
+        this.opacityPercent = 1 - (this.currentTick / this.fadeTime);
+        this.color = "rgba(0,0,0, " + this.opacityPercent + ")"
+        if (this.currentTick >= this.fadeTime)
+        {
+            console.log("Removing from world");
+            this.removeFromWorld = true;
+        }
+    }
+
+    draw(ctx)
+    {
+        ctx.save();
+
+        ctx.font = (this.fontSize) + "px " + (this.fontFamily); 
+        ctx.fillStyle = this.color;
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotationAngle);
+        ctx.fillText(this.text, 0, 0);
+
+        ctx.restore();
+    }
+
+    moveBy(x, y)
+    {
+
+    }
+
+}
+
 class Panel extends UIElement
 {
     constructor(game, x, y, width, height, panelColor)
@@ -96,7 +148,13 @@ class Button extends UIElement
         if (mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height)
         {
             this.buttonFront.color = this.backColor;
+            this.onMouseClicked();
         }
+    }
+
+    onMouseClicked()
+    {
+        
     }
 
     mouseUp(mouseX, mouseY)
