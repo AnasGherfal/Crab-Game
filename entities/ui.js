@@ -162,7 +162,7 @@ class Button extends UIElement
 
         this.buttonBack = new RoundedRectangle(game, x, y, width, height, backColor);
         this.buttonFront = new RoundedRectangle(game, x, y, width, height - 6, frontColor);
-        this.text = new TextElement(game, (x + width / 2), (y + height / 2), "Start", "robotoCondensed", height / 2, textColor, "center");
+        this.text = new TextElement(game, (x + width / 2), (y + height / 2), "Explode!", "robotoCondensed", height / 2, textColor, "center");
 
         this.children.push(this.buttonBack);
         this.children.push(this.buttonFront);

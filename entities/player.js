@@ -16,8 +16,10 @@ class Player extends Entity
 
         this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
 
-        // this.bitSpawner = new BitSpawner(game, x + this.width / 2 * this.scale, y + this.height * this.scale);
-        // this.children.push(this.bitSpawner);
+        // this.particleSpawner = new ParticleSpawner(game, x + this.width / 2 * this.scale, y + this.height * this.scale);
+        // this.children.push(this.particleSpawner);
+
+        this.jumpCooldown = 100;
     }
 
     mouseClicked(mouseX, mouseY)
@@ -34,22 +36,45 @@ class Player extends Entity
     {
         super.update();
 
+        
+
+        if (this.jumpCooldown > 0)
+        {
+            this.jumpCooldown -= 1;
+        }
+
         let dampenHorizontal = true;
 
-        this.vx *= 0.95;
+        this.vx *= 0.94;
+
+        if (this.y < this.game.height - this.height * this.scale)
+        {
+            this.vy += 0.25;
+        }
+        else
+        {
+            this.vy = 0;
+        }
 
         if (this.game.keys != undefined)
         {
+            if (this.game.keys["w"] && this.jumpCooldown == 0)
+            {
+                this.vy -= 10;
+                this.jumpCooldown = 100;
+                // this.particleSpawner.trigger();
+            }
+
             if (this.game.keys["a"])
             {
-                this.vx = -1;
+                this.vx = -2;
                 dampenHorizontal = false;
             }
             if (this.game.keys["d"])
             {
                 if (dampenHorizontal)
                 {
-                    this.vx = 1;
+                    this.vx = 2;
                 }
                 else
                 {
@@ -59,7 +84,26 @@ class Player extends Entity
             }
         }
 
+        if (this.vx > 10)
+        {
+            this.vx = 10;
+        }
+        if (this.vx < -10)
+        {
+            this.vx = -10;
+        }
+
+        if (this.vy > 10)
+        {
+            this.vy = 10;
+        }
+        if (this.vy < -10)
+        {
+            this.vy = -10;
+        }
+
         this.x += this.vx;
+        this.y += this.vy;
 
         if (abs(this.vx) < 0.0001)
         {
@@ -80,13 +124,13 @@ class Player extends Entity
         ctx.beginPath();
         ctx.moveTo(this.x + (this.scale * this.width/2), this.y + (this.scale * this.height/2));
         
-        var m = this.game.mouse;
-        if (m != null)
-        {
-            ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
-        }
+        // var m = this.game.mouse;
+        // if (m != null)
+        // {
+        //     ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
+        // }
 
-        ctx.stroke();
+        // ctx.stroke();
 
         super.draw(ctx);
         this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale, this.direction);

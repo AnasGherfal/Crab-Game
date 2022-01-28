@@ -11,7 +11,6 @@ class BitSpawner {
 
     trigger()
     {
-        console.log("Spawning bits");
         this.bits.push(new Bit(this.game, this.x, this.y));
     }
 
@@ -21,13 +20,13 @@ class BitSpawner {
 
         if (this.game.keys != undefined)
         {
-            if (this.game.keys["Control"])
-            {
-                this.trigger();
-                this.trigger();
-                this.trigger();
-                this.trigger();
-            }
+            // if (this.game.keys["Control"])
+            // {
+            //     this.trigger();
+            //     this.trigger();
+            //     this.trigger();
+            //     this.trigger();
+            // }
         }
         else
         {
@@ -106,12 +105,16 @@ class Bit {
 
     draw(ctx)
     {
+        ctx.save();
+
         if (this.markedForDeletion) return;
         ctx.beginPath();
         ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan)/this.lifeSpanInit)*50) + ', 100%, 50%)'
         
         ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.stroke();
+
+        ctx.restore();
     }
 }
 
