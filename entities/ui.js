@@ -18,6 +18,7 @@ class TextElement extends UIElement
         this.fontSize = fontSize;
         this.color = color;
         this.textAlign = textAlign;
+        this.maxWidth = 0;
     }
 
     draw(ctx)
@@ -115,6 +116,32 @@ class Panel extends UIElement
 
         // this.children.push(new Rectangle(game, x, y, width, height, panelColor));
     }
+
+}
+
+class EntityTracker extends Panel
+{
+    constructor(game, x, y, entityToTrack)
+    {
+        super(game, x, y, 200, 100, rgba(50, 50, 50, 1));
+
+        this.trackedEntity = entityToTrack;
+
+        this.entityPosition = new TextElement(game, x + 5, y + 25, "pos : " + this.trackedEntity.getFormattedPosition());
+        this.entityPosition.maxWidth = 200 - 5;
+        this.children.push(this.entityPosition);
+
+        this.entityVelocity = new TextElement(game, x + 5, y + 55, "vel : " + this.trackedEntity.getFormattedPosition());
+        this.entityVelocity.maxWidth = 200 - 5;
+        this.children.push(this.entityVelocity);
+    }
+
+    update()
+    {
+        this.entityPosition.text = "pos : " + this.trackedEntity.getFormattedPosition();
+        this.entityVelocity.text = "vel : " + this.trackedEntity.getFormattedVelocity();
+    }
+
 
 }
 

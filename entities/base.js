@@ -71,6 +71,16 @@ class Entity
         ctx.restore();
     }
 
+    getFormattedPosition()
+    {
+        return "(" + this.x + ", " + this.y + ")";
+    }
+
+    getFormattedVelocity()
+    {
+        return "(" + this.vx + ", " + this.vy + ")";
+    }
+
     mouseHover(mouseX, mouseY)
     {
 

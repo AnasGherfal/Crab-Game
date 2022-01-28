@@ -22,7 +22,7 @@ class Player extends Entity
 
     mouseClicked(mouseX, mouseY)
     {
-        this.displayDamageText("10");
+        this.displayDamageText(randomInt(10) + 1);
     }
 
     displayDamageText(text)
@@ -33,17 +33,39 @@ class Player extends Entity
     update()
     {
         super.update();
+
+        let dampenHorizontal = true;
+
+        this.vx *= 0.95;
+
         if (this.game.keys != undefined)
         {
             if (this.game.keys["a"])
             {
-                this.moveBy(-1, 0);
+                this.vx = -1;
+                dampenHorizontal = false;
             }
             if (this.game.keys["d"])
             {
-                this.moveBy(1, 0);
+                if (dampenHorizontal)
+                {
+                    this.vx = 1;
+                }
+                else
+                {
+                    this.vx = 0;
+                }
+                dampenHorizontal = false;
             }
         }
+
+        this.x += this.vx;
+
+        if (abs(this.vx) < 0.0001)
+        {
+            this.vx = 0;
+        }
+
     }
 
     draw(ctx)

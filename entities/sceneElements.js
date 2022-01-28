@@ -19,9 +19,12 @@ class Scene extends Entity
         //Test Button
         this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133,1.0));
         this.testButton.onMouseClicked = function() {
-            this.game.addEntity(new HitText(game, 200, 300, "HIT!", 100));
+            this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
         };
         this.game.addEntity(this.testButton);
+
+        this.entityTracker = new EntityTracker(game, 10, 600, this.player);
+        this.addEntity(this.entityTracker);
 
     }
 
