@@ -1,23 +1,24 @@
-class Background extends Entity
-{
-    constructor(game, images)
-    {
-        super(game, 0, 0);
-    }
-}
+// class Background extends Entity {
+//     constructor(game, images) {
+//         super(game, 0, 0);
+//     }
+// }
 
-class Scene extends Entity
-{
-    constructor(game)
-    {
+class Scene extends Entity {
+    constructor(game) {
         super(game, 0, 0);
 
         //Player
-        this.player = new Player(game, 200, 300);
+        this.player = new Player(game, 300, 300);
         this.game.addEntity(this.player);
 
+        //Zombie
+        this.zombie = new Zombie(game, 250, 300);
+        this.game.addEntity(this.zombie);
+
+
         //Test Button
-        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133,1.0));
+        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
         this.testButton.onMouseClicked = function() {
             // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
         };
@@ -26,46 +27,39 @@ class Scene extends Entity
         this.entityTracker = new EntityTracker(game, 10, 600, this.player);
         this.addEntity(this.entityTracker);
 
+
+
     }
 
-    addEntity(entity)
-    {
+    addEntity(entity) {
         this.game.addEntity(entity);
     }
 
 }
 
-class ParticleSpawner extends Entity
-{
-    constructor(game, x, y)
-    {
+class ParticleSpawner extends Entity {
+    constructor(game, x, y) {
         super(game, x, y);
     }
 
-    trigger()
-    {
+    trigger() {
         this.spawnBits();
     }
 
-    spawnBits()
-    {
+    spawnBits() {
         this.children.push(new Particle(this.game, this.x, this.y));
     }
 
-    draw(ctx)
-    {
-        for (let i = 0; i < this.children.length; i++)
-        {
+    draw(ctx) {
+        for (let i = 0; i < this.children.length; i++) {
             this.children[i].draw(ctx);
         }
     }
 
 }
 
-class Particle extends Entity
-{
-    constructor(game, x, y)
-    {
+class Particle extends Entity {
+    constructor(game, x, y) {
         super(game, x, y);
 
         this.vx = Math.random() * 10 - 5;
@@ -81,22 +75,18 @@ class Particle extends Entity
         this.markedForDeletion = false; ////TODO
     }
 
-    update()
-    {
+    update() {
         this.tick += 1;
-        if (this.tick >= this.updateTick) 
-        {
+        if (this.tick >= this.updateTick) {
             this.tick = 0;
-            if (--this.lifeSpan <= 0)
-            {
+            if (--this.lifeSpan <= 0) {
                 this.removeFromWorld = true;
             }
         }
         this.updatePos();
     }
 
-    updatePos()
-    {
+    updatePos() {
         this.x += this.vx;
         this.y += this.vy;
 
@@ -106,14 +96,13 @@ class Particle extends Entity
         this.vy += 0.1;
     }
 
-    draw(ctx)
-    {
+    draw(ctx) {
         ctx.save();
 
         if (this.removeFromWorld) return;
         ctx.beginPath();
-        ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan)/this.lifeSpanInit)*50) + ', 100%, 50%)'
-        
+        ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)'
+
         ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.stroke();
 
