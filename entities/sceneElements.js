@@ -11,13 +11,16 @@ class Scene extends Entity {
         this.x = 0;
 
         //Player
-        this.player = new Player(game, 300, 300);
+        this.player = new Player(game, 400, 300);
         this.game.addEntity(this.player);
 
         //Zombie
         this.zombie = new Zombie(game, 250, 300);
         this.game.addEntity(this.zombie);
 
+        //Platform
+        this.platform = new Platform(game, 300, 600);
+        this.game.addEntity(this.platform);
 
         //Test Button
         this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
@@ -29,19 +32,33 @@ class Scene extends Entity {
         this.entityTracker = new EntityTracker(game, 10, 600, this.player);
         this.addEntity(this.entityTracker);
 
-
-
     }
 
     addEntity(entity) {
         this.game.addEntity(entity);
+
     }
-    
-    update(){
+
+    update() {
         //1024 = canvas width
-        let cam = 1024 * 3/4;
-        if (this.x < this.player.x - cam) this.x = this.player.x - cam;        
-        
+        let midpoint = 1024 / 2;
+        if (this.x < this.player.x - midpoint) this.x = this.player.x - midpoint;
+
+        //zombie following player
+        if (this.player.x - this.zombie.x > 30) {
+            this.zombie.x++;
+        } else if (this.player.x - this.zombie.x < -30) {
+            this.zombie.x--;
+        }
+
+        //platform collistion detection
+
+        // if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
+        //     this.player.height + this.player.vy >= this.platform.y && this.player.x +
+        //     this.player.width >= this.platform.x) {
+        //     this.player.vy = 0
+        // }
+
     }
 
 }

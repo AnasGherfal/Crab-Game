@@ -1,9 +1,7 @@
-class Player extends Entity
-{
-    constructor(game, x, y)
-    {
+class Player extends Entity {
+    constructor(game, x, y) {
         super(game, x, y);
-        
+
         this.width = 6;
         this.height = 11;
         this.scale = 5;
@@ -22,24 +20,20 @@ class Player extends Entity
         this.jumpCooldown = 100;
     }
 
-    mouseClicked(mouseX, mouseY)
-    {
+    mouseClicked(mouseX, mouseY) {
         this.displayDamageText(randomInt(10) + 1);
     }
 
-    displayDamageText(text)
-    {
+    displayDamageText(text) {
         this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
     }
 
-    update()
-    {
+    update() {
         super.update();
 
-        
 
-        if (this.jumpCooldown > 0)
-        {
+
+        if (this.jumpCooldown > 0) {
             this.jumpCooldown -= 1;
         }
 
@@ -47,83 +41,70 @@ class Player extends Entity
 
         this.vx *= 0.94;
 
-        if (this.y < this.game.height - this.height * this.scale)
-        {
+        if (this.y < this.game.height - this.height * this.scale) {
             this.vy += 0.25;
-        }
-        else
-        {
+        } else {
             this.vy = 0;
         }
 
-        if (this.game.keys != undefined)
-        {
-            if (this.game.keys["w"] && this.jumpCooldown == 0)
-            {
+        if (this.game.keys != undefined) {
+            if (this.game.keys["w"] && this.jumpCooldown == 0) {
                 this.vy -= 10;
                 this.jumpCooldown = 100;
                 // this.particleSpawner.trigger();
             }
 
-            if (this.game.keys["a"])
-            {
+            if (this.game.keys["a"] && this.x > 100) {
                 this.vx = -2;
                 dampenHorizontal = false;
-            }
-            if (this.game.keys["d"])
-            {
-                if (dampenHorizontal)
-                {
+            } else
+                this.vs = 0;
+
+            if (this.game.keys["d"] && this.x < 500) {
+                if (dampenHorizontal) {
                     this.vx = 2;
-                }
-                else
-                {
+                } else {
                     this.vx = 0;
                 }
                 dampenHorizontal = false;
             }
+
         }
 
-        if (this.vx > 10)
-        {
+        if (this.vx > 10) {
             this.vx = 10;
         }
-        if (this.vx < -10)
-        {
+        if (this.vx < -10) {
             this.vx = -10;
         }
 
-        if (this.vy > 10)
-        {
+        if (this.vy > 10) {
             this.vy = 10;
         }
-        if (this.vy < -10)
-        {
+        if (this.vy < -10) {
             this.vy = -10;
         }
 
         this.x += this.vx;
         this.y += this.vy;
 
-        if (abs(this.vx) < 0.0001)
-        {
+        if (abs(this.vx) < 0.0001) {
             this.vx = 0;
         }
 
+
     }
 
-    draw(ctx)
-    {
+    draw(ctx) {
         ctx.save();
-        if (this.direction == 1)
-        {
+        if (this.direction == 1) {
             ctx.scale(-1, 1);
         }
 
         //Draw Aim Line
         ctx.beginPath();
-        ctx.moveTo(this.x + (this.scale * this.width/2), this.y + (this.scale * this.height/2));
-        
+        ctx.moveTo(this.x + (this.scale * this.width / 2), this.y + (this.scale * this.height / 2));
+
         // var m = this.game.mouse;
         // if (m != null)
         // {
@@ -136,6 +117,6 @@ class Player extends Entity
         this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
 
         ctx.restore();
-        
+
     }
 }
