@@ -5,7 +5,7 @@ class Platform extends Entity {
         //     x: 300,
         //     y: 600
         // }
-        this.width = 100;
+        this.width = 200;
         this.height = 20;
     }
     update() {
