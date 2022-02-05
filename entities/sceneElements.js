@@ -39,8 +39,8 @@ class Scene extends Entity {
     
     update(){
         //1024 = canvas width
-        let midpoint = 1024/2;
-        if (this.x < this.player.x - midpoint) this.x = this.player.x - midpoint;        
+        let cam = 1024 * 3/4;
+        if (this.x < this.player.x - cam) this.x = this.player.x - cam;        
         
     }
 
