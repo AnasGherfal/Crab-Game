@@ -18,10 +18,9 @@ class Scene extends Entity {
         this.zombie = new Zombie(game, 250, 300);
         this.game.addEntity(this.zombie);
 
-        this.platform = new Platform();
-        this.game.addEntity(this.platform);
-
-
+        //Platform
+        // this.platform = new Platform();
+        // this.game.addEntity(this.platform);
 
         //Test Button
         this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
