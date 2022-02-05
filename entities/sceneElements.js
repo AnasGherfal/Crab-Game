@@ -7,6 +7,8 @@
 class Scene extends Entity {
     constructor(game) {
         super(game, 0, 0);
+        this.game.camera = this;
+        this.x = 0;
 
         //Player
         this.player = new Player(game, 300, 300);
@@ -33,6 +35,13 @@ class Scene extends Entity {
 
     addEntity(entity) {
         this.game.addEntity(entity);
+    }
+    
+    update(){
+        //1024 = canvas width
+        let midpoint = 1024/2;
+        if (this.x < this.player.x - midpoint) this.x = this.player.x - midpoint;        
+        
     }
 
 }

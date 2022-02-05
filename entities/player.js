@@ -133,7 +133,9 @@ class Player extends Entity
         // ctx.stroke();
 
         super.draw(ctx);
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale, this.direction);
+        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
+
         ctx.restore();
+        
     }
 }

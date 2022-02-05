@@ -126,8 +126,11 @@ class GameEngine {
 
         // Draw latest things first
         for (let i = this.entities.length - 1; i >= 0; i--) {
-            this.entities[i].draw(this.ctx, this);
+            this.entities[i].draw(this.ctx);
         }
+        
+        this.camera.draw(this.ctx);
+        
     };
 
     update() {
@@ -136,10 +139,15 @@ class GameEngine {
 
         // Remove dead things
         this.entities = this.entities.filter(entity => !entity.removeFromWorld);
-
+        
+        this.camera.update();
+        
         // Add new things
         this.entities = this.entities.concat(this.entitiesToAdd);
         this.entitiesToAdd = [];
+        
+        
+        
     };
 
     loop() {

@@ -1,5 +1,7 @@
 /** Global Parameters Object */
-const params = { };
+const PARAMS = {
+    DEBUG: true
+};
 
 /** Easy access to math functions */
 const {
