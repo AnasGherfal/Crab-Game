@@ -19,8 +19,8 @@ class Scene extends Entity {
         this.game.addEntity(this.zombie);
 
         //Platform
-        // this.platform = new Platform();
-        // this.game.addEntity(this.platform);
+        this.platform = new Platform(game, 300, 600);
+        this.game.addEntity(this.platform);
 
         //Test Button
         this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
@@ -53,9 +53,9 @@ class Scene extends Entity {
 
         //platform collistion detection
 
-        // if (this.player.vy + this.player.height <= this.platform.positon.y && this.player.y +
-        //     this.player.height + this.player.vy >= this.platform.positon.y && this.player.x +
-        //     this.player.width >= this.platform.positon.x) {
+        // if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
+        //     this.player.height + this.player.vy >= this.platform.y && this.player.x +
+        //     this.player.width >= this.platform.x) {
         //     this.player.vy = 0
         // }
 
