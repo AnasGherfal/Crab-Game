@@ -22,6 +22,15 @@ class Scene extends Entity {
         this.platform = new Platform(game, 300, 600);
         this.game.addEntity(this.platform);
 
+        // this.background = new Tree(game, 400, 300);
+        // this.game.addEntity(this.background);
+
+        this.background = new Sun(game, 800, 70);
+        this.game.addEntity(this.background);
+
+        // this.background = new Clouds(game, 800, 70);
+        // this.game.addEntity(this.background);
+
         //Test Button
         this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
         this.testButton.onMouseClicked = function() {
