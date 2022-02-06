@@ -16,8 +16,8 @@ class Tree {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
-        this.width = 90;
-        this.height = 90;
+        this.width = 250;
+        this.height = 300;
 
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/tree.png");
@@ -28,7 +28,7 @@ class Tree {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
 
         // ctx.fillRect(this.x, this.y, this.width, this.height)
 
@@ -59,17 +59,17 @@ class Clouds {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
-        this.width = 90;
-        this.height = 90;
+        this.width = 1240;
+        this.height = 200;
 
-        this.spritesheet = ASSET_MANAGER.getAsset("images/cloud.png");
+        this.spritesheet = ASSET_MANAGER.getAsset("images/clouds.png");
     };
     update() {
 
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
     };
 
 };

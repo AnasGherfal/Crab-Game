@@ -23,7 +23,11 @@ class Zombie extends Entity {
 
     update() {
 
-        super.update();
+
+        // super.update();
+        this.vx = 0.2;
+
+
 
 
         // if (this.jumpCooldown > 0) {
@@ -32,34 +36,14 @@ class Zombie extends Entity {
 
         let dampenHorizontal = true;
 
-        this.vx *= 0.94;
-
         if (this.y < this.game.height - this.height * this.scale) {
             this.vy += 0.25;
         } else {
             this.vy = 0;
         }
-
-        if (this.vx > 10) {
-            this.vx = 10;
-        }
-        if (this.vx < -10) {
-            this.vx = -10;
-        }
-
-        if (this.vy > 10) {
-            this.vy = 10;
-        }
-        if (this.vy < -10) {
-            this.vy = -10;
-        }
-
         this.x += this.vx;
         this.y += this.vy;
 
-        if (abs(this.vx) < 0.0001) {
-            this.vx = 0;
-        }
 
     }
 
