@@ -146,8 +146,6 @@ class GameEngine {
         this.entities = this.entities.concat(this.entitiesToAdd);
         this.entitiesToAdd = [];
         
-        
-        
     };
 
     loop() {

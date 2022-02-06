@@ -41,23 +41,28 @@ class Scene extends Entity {
 
     update() {
         //1024 = canvas width
-        let midpoint = 1024 / 2;
-        if (this.x < this.player.x - midpoint) this.x = this.player.x - midpoint;
-
+        //camera follow forward movement
+        let camF = 1024 * 3/4;
+        if (this.x < this.player.x - camF) this.x = this.player.x - camF;
+        //camera follow backwards movement
+        let camB = 1024 * 1/8;
+        if (this.x > this.player.x - camB) this.x = this.player.x - camB;
+        
         //zombie following player
         if (this.player.x - this.zombie.x > 30) {
             this.zombie.x++;
         } else if (this.player.x - this.zombie.x < -30) {
             this.zombie.x--;
         }
+        
 
         //platform collistion detection
-
-        // if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
-        //     this.player.height + this.player.vy >= this.platform.y && this.player.x +
-        //     this.player.width >= this.platform.x) {
-        //     this.player.vy = 0
-        // }
+        /*
+         if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
+             this.player.height + this.player.vy >= this.platform.y && this.player.x +
+             this.player.width >= this.platform.x) {
+             this.player.vy = 0
+         } */
 
     }
 

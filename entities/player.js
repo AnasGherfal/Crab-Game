@@ -54,13 +54,13 @@ class Player extends Entity {
                 // this.particleSpawner.trigger();
             }
 
-            if (this.game.keys["a"] && this.x > 100) {
+            if (this.game.keys["a"] ) { 
                 this.vx = -2;
                 dampenHorizontal = false;
             } else
                 this.vs = 0;
 
-            if (this.game.keys["d"] && this.x < 500) {
+            if (this.game.keys["d"] ) { 
                 if (dampenHorizontal) {
                     this.vx = 2;
                 } else {
@@ -96,6 +96,7 @@ class Player extends Entity {
     }
 
     draw(ctx) {
+        
         ctx.save();
         if (this.direction == 1) {
             ctx.scale(-1, 1);
