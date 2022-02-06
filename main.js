@@ -4,6 +4,7 @@ const ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("images/riskPlayer.png");
 ASSET_MANAGER.queueDownload("images/zombie.png");
+ASSET_MANAGER.queueDownload("images/sky.png");
 ASSET_MANAGER.queueDownload("images/clouds.png");
 ASSET_MANAGER.queueDownload("images/tree.png");
 ASSET_MANAGER.queueDownload("images/sun.png");

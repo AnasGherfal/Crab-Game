@@ -22,29 +22,6 @@ class Scene extends Entity {
         this.platform = new Platform(game, 300, 600);
         this.game.addEntity(this.platform);
 
-        //Tree
-        this.background = new Tree(game, 850, 400);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, -60, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 50, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 160, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 270, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 380, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 490, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 600, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 710, 200);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 810, 200);
-        this.game.addEntity(this.background);
-
-
         //Clouds
         this.background = new Clouds(game, 0, 50);
         this.game.addEntity(this.background);
@@ -52,7 +29,59 @@ class Scene extends Entity {
         this.game.addEntity(this.background);
 
 
+        //Tree
+
+        this.background = new Tree(game, 900, 300);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, -80, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 0, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 50, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 150, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 100, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 250, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 200, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 350, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 300, 170);
+        this.game.addEntity(this.background);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 450, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 400, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 550, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 500, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 650, 170);
+        this.game.addEntity(this.background);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 600, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 750, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 700, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 850, 170);
+        this.game.addEntity(this.background);
+        this.background = new Tree(game, 800, 170);
+        this.game.addEntity(this.background);
+
+
+
+
         this.background = new Sun(game, 900, 80);
+        this.game.addEntity(this.background);
+
+        //sky
+        this.background = new Sky(game, 0, 80);
         this.game.addEntity(this.background);
 
         //Test Button

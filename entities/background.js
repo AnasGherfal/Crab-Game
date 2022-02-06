@@ -60,9 +60,28 @@ class Clouds {
         Object.assign(this, { game, x, y });
 
         this.width = 1240;
-        this.height = 200;
+        this.height = 150;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/clouds.png");
+    };
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
+
+};
+
+class Sky {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 1240;
+        this.height = 200;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/sky.png");
     };
     update() {
 
