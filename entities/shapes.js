@@ -50,6 +50,30 @@ class RoundedRectangle extends Entity
 
 }
 
+class Circle extends Entity
+{
+    constructor(game, x, y, color, radius)
+    {
+        super(game, x, y);
+
+        this.color = color;
+        this.radius = radius;
+    }
+
+    draw(ctx)
+    {
+        super.draw(ctx);
+        ctx.save();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
 class ImageEntity extends Entity
 {
     constructor(game, x, y, image, width, height, opacity = 1.0)
@@ -66,9 +90,9 @@ class ImageEntity extends Entity
         super.draw(ctx);
         ctx.save();
         ctx.beginPath();
-        // ctx.filter = "blur(5px)";
+        ctx.filter = "blur(5px)";
         ctx.imageSmoothingEnabled = false;
-        ctx.globalAlpha = 0.4;
+        // ctx.globalAlpha = 0.4;
         ctx.scale(1, 1);
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         ctx.filter = "none";
