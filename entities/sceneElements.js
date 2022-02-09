@@ -10,6 +10,11 @@ class Scene extends Entity {
         this.game.camera = this;
         this.x = 0;
 
+        //UI Panels
+        // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
+        this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        this.game.addEntity(this.playerHealthBar);
+
         //Player
         this.player = new Player(game, 400, 300);
         this.game.addEntity(this.player);
@@ -92,7 +97,14 @@ class Scene extends Entity {
         this.game.addEntity(this.testButton);
 
         this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        this.addEntity(this.entityTracker);
+        // this.addEntity(this.entityTracker);
+
+        // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
+        this.addEntity(new FloatingBalls(game, game.width, game.height));
+
+        //Background
+        this.Background = new Background(game, undefined);
+        this.game.addEntity(this.Background);
 
     }
 

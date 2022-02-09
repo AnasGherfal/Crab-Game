@@ -24,7 +24,7 @@ const randomInt = n => floor(random() * n);
  * @param {Number} b Blue Value
  * @returns String that can be used as a rgb web color
  */
-const rgb = (r, g, b) => `rgba(${r}, ${g}, ${b})`;
+const rgb = (r, g, b) => `rgb(${r}, ${g}, ${b})`;
 
 /**
  * @param {Number} r Red Value

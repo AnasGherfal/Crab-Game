@@ -241,10 +241,9 @@ class StatTracker extends UIElement
 
 }
 
-//TODO FIX
 class ProgressBar extends UIElement
 {
-    constructor(game, x, y, width, height, color = "rgba(231, 76, 60,1.0)")
+    constructor(game, x, y, width, height, color = rgb(160,38,37), settable = false)
     {
         super(game, x, y, false);
 
@@ -254,13 +253,15 @@ class ProgressBar extends UIElement
 
         this.currentPercent = 0.5;
 
-        this.progressBarBack = new Rectangle(game, x, y, this.width, this.height, "rgba(0, 0, 0, 0.5)");
-        this.progressBarFront = new Rectangle(game, x, y, this.width * this.currentPercent, this.height, color);
-        this.percentText = new TextElement(game, x, y, "50/100");
+        this.progressBarBack = new Rectangle(game, x, y, this.width, this.height, "rgba(0, 0, 0, 0.4)");
+        this.progressBarFront = new Rectangle(game, x, y, this.width * this.currentPercent, this.height, this.color);
+
+        let whiteBarPercent = 0.08;
+        this.progressBarBottom = new Rectangle(game, x, y + height - this.height * whiteBarPercent, this.width, this.height * whiteBarPercent, rgba(255,255,255, 1));
 
         this.children.push(this.progressBarBack);
         this.children.push(this.progressBarFront);
-        this.children.push(this.percentText);
+        this.children.push(this.progressBarBottom);
     }
 
     setPercent(percent)
@@ -276,4 +277,31 @@ class ProgressBar extends UIElement
     {
         this.setPercent(this.currentPercent += percentToIncrement);
     }
+}
+
+class PlayerHealthBar extends UIElement
+{
+    constructor(game, x, y, scale)
+    {
+        super(game, x, y);
+
+        this.icon = new Rectangle(game, x, y, 50, 50, rgb(255, 255, 255));
+        this.progressBarHealth = new ProgressBar(game, x + 55, y + 20, 400, 30, rgb(160,38,37));
+        this.progressBarText = new TextElement(game, x + 55, y + 18, "Health");
+        
+        this.children.push(this.icon);
+        this.children.push(this.progressBarHealth);
+        this.children.push(this.progressBarText);
+    }
+
+    setPercent(percent)
+    {
+        this.progressBarHealth(percent);
+    }
+
+    incrementPercent(percentToIncrement)
+    {
+        this.progressBarHealth(percentToIncrement);
+    }
+
 }
