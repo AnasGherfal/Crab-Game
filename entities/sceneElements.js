@@ -102,10 +102,6 @@ class Scene extends Entity {
         // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
         this.addEntity(new FloatingBalls(game, game.width, game.height));
 
-        //Background
-        this.Background = new Background(game, undefined);
-        this.game.addEntity(this.Background);
-
     }
 
     addEntity(entity) {
