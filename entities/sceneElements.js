@@ -97,7 +97,7 @@ class Scene extends Entity {
         this.game.addEntity(this.testButton);
 
         this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        // this.addEntity(this.entityTracker);
+        this.addEntity(this.entityTracker);
 
         // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
         this.addEntity(new FloatingBalls(game, game.width, game.height));
@@ -106,7 +106,6 @@ class Scene extends Entity {
 
     addEntity(entity) {
         this.game.addEntity(entity);
-
     }
 
     update() {
@@ -117,6 +116,8 @@ class Scene extends Entity {
         //camera follow backwards movement
         let camB = 1024 * 1 / 8;
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
+
+        console.log(this.x + ", " + this.y);
 
         //zombie following player
         if (this.player.x - this.zombie.x < 30) {

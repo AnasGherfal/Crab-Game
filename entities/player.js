@@ -25,7 +25,11 @@ class Player extends Entity {
     }
 
     displayDamageText(text) {
-        this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
+        
+        let sX = this.game.sceneManager.x;
+        let sY = this.game.sceneManager.y;
+
+        this.children.push(new DamageIndicator(this.game, this.x - sX, this.y - sY, text, 100));
     }
 
     update() {
