@@ -45,6 +45,30 @@ class Player extends Entity {
 
         this.vx *= 0.94;
 
+
+        // COLLISION DETECTION
+        for (let i = 0; i < this.game.entities.length; i++)
+        {
+            if (this.game.entities[i].collisions)
+            {
+                let t = this.game.entities[i];
+                if (this.x > t.x && this.x < t.x + t.width)
+                {
+                    if (this.y < t.y - this.height * this.scale)
+                    {
+                        t.platformRect.color = rgba(255, 100, 100, 1);
+                    }
+                    
+                }
+                else
+                {
+                    t.platformRect.color = rgba(0, 100, 100, 1);
+                }
+            }
+        }
+
+        
+
         if (this.y < this.game.height - this.height * this.scale) {
             this.vy += 0.25;
         } else {

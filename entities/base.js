@@ -17,6 +17,8 @@ class Entity
         this.affectedByGravity = false;
         this.clickable = false;
         this.hoverable = false;
+
+        this.collisions = false;
     }
 
     moveBy(x, y)

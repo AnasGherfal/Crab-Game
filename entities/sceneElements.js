@@ -24,7 +24,7 @@ class Scene extends Entity {
         this.game.addEntity(this.zombie);
 
         //Platform
-        this.platform = new Platform(game, 300, 600);
+        this.platform = new Platform(game, 300, 600, 100, 10);
         this.game.addEntity(this.platform);
 
         //Clouds
@@ -116,8 +116,6 @@ class Scene extends Entity {
         //camera follow backwards movement
         let camB = 1024 * 1 / 8;
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
-
-        console.log(this.x + ", " + this.y);
 
         //zombie following player
         if (this.player.x - this.zombie.x < 30) {
