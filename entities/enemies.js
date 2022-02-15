@@ -73,6 +73,6 @@ class Dummy extends Entity
     }
 
     displayDamageText(text) {
-        this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
+        this.children.push(new DamageIndicator(this.game, this.x - this.game.camera.x, this.y, text, 100));
     }
 }
