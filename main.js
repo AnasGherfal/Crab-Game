@@ -24,9 +24,6 @@ ASSET_MANAGER.downloadAll(() => {
         console.log("Font Loaded");
     });
 
-    // gameEngine.addEntity(new StatTracker(gameEngine, 300, 8, 200, 40));
-    gameEngine.addEntity(new Panel(gameEngine, 0, 0, canvas.width, 60, "rgba(52, 73, 94,1.0)"));
-
 	sceneManager = new Scene(gameEngine);
     gameEngine.addEntity(sceneManager);
 	gameEngine.sceneManager = sceneManager;
@@ -35,5 +32,3 @@ ASSET_MANAGER.downloadAll(() => {
 
     gameEngine.start();
 });
-
-gameEngine.addEntity(new Tracker(gameEngine, 50, 50));

@@ -3,6 +3,7 @@ class UIElement extends Entity
     constructor(game, x, y, clickable = false)
     {
         super(game, x, y);
+        this.sceneElement = true;
     }
 
 }
@@ -129,10 +130,12 @@ class EntityTracker extends Panel
 
         this.entityPosition = new TextElement(game, x + 5, y + 25, "pos : " + this.trackedEntity.getFormattedPosition());
         this.entityPosition.maxWidth = 200 - 5;
+        this.entityPosition.sceneElement = false;
         this.children.push(this.entityPosition);
 
         this.entityVelocity = new TextElement(game, x + 5, y + 55, "vel : " + this.trackedEntity.getFormattedPosition());
         this.entityVelocity.maxWidth = 200 - 5;
+        this.entityVelocity.sceneElement = false;
         this.children.push(this.entityVelocity);
     }
 
@@ -163,6 +166,10 @@ class Button extends UIElement
         this.buttonBack = new RoundedRectangle(game, x, y, width, height, backColor);
         this.buttonFront = new RoundedRectangle(game, x, y, width, height - 6, frontColor);
         this.text = new TextElement(game, (x + width / 2), (y + height / 2), "Explode!", "robotoCondensed", height / 2, textColor, "center");
+
+        this.buttonBack.sceneElement = false;
+        this.buttonFront.sceneElement = false;
+        this.text.sceneElement = false;
 
         this.children.push(this.buttonBack);
         this.children.push(this.buttonFront);
@@ -220,6 +227,10 @@ class StatTracker extends UIElement
         this.text = new TextElement(game, (x + width / 2) + (height / 2), (y + height / 2), "100k", "robotoCondensed", height / 2, "#fff", "center");
         this.heartIcon = new ImageEntity(game, x, y, ASSET_MANAGER.getAsset("images/iconHeart.png"), height, height);
 
+        this.trackerBack.sceneElement = false;
+        this.text.sceneElement = false;
+        this.heartIcon.sceneElement = false;
+
         this.children.push(this.trackerBack);
         this.children.push(this.text);
         this.children.push(this.heartIcon);
@@ -259,6 +270,10 @@ class ProgressBar extends UIElement
         let whiteBarPercent = 0.08;
         this.progressBarBottom = new Rectangle(game, x, y + height - this.height * whiteBarPercent, this.width, this.height * whiteBarPercent, rgba(255,255,255, 1));
 
+        this.progressBarBack.sceneElement = false;
+        this.progressBarFront.sceneElement = false;
+        this.progressBarBottom.sceneElement = false;
+
         this.children.push(this.progressBarBack);
         this.children.push(this.progressBarFront);
         this.children.push(this.progressBarBottom);
@@ -289,6 +304,10 @@ class PlayerHealthBar extends UIElement
         this.progressBarHealth = new ProgressBar(game, x + 55, y + 20, 400, 30, rgb(160,38,37));
         this.progressBarText = new TextElement(game, x + 55, y + 18, "Health");
         
+        this.icon.sceneElement = false;
+        this.progressBarHealth.sceneElement = false;
+        this.progressBarText.sceneElement = false;
+
         this.children.push(this.icon);
         this.children.push(this.progressBarHealth);
         this.children.push(this.progressBarText);

@@ -19,93 +19,39 @@ class Scene extends Entity {
         this.player = new Player(game, 400, 300);
         this.game.addEntity(this.player);
 
-        //Zombie
-        this.zombie = new Zombie(game, 200, 300);
-        this.game.addEntity(this.zombie);
-
-        //Platform
-        this.platform = new Platform(game, 300, 600, 100, 10);
-        this.game.addEntity(this.platform);
-
-        //Clouds
-        this.background = new Clouds(game, 0, 50);
-        this.game.addEntity(this.background);
-        this.background = new Clouds(game, 1236, 50);
-        this.game.addEntity(this.background);
-
-
-        //Tree
-
-        this.background = new Tree(game, 900, 300);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, -80, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 0, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 50, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 150, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 100, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 250, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 200, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 350, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 300, 170);
-        this.game.addEntity(this.background);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 450, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 400, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 550, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 500, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 650, 170);
-        this.game.addEntity(this.background);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 600, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 750, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 700, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 850, 170);
-        this.game.addEntity(this.background);
-        this.background = new Tree(game, 800, 170);
-        this.game.addEntity(this.background);
-
-
-
-
-        this.background = new Sun(game, 900, 80);
-        this.game.addEntity(this.background);
-
-        //sky
-        this.background = new Sky(game, 0, 80);
-        this.game.addEntity(this.background);
+        //Test Dummy
+        this.testDummy = new Dummy(game, 850, 700);
+        this.game.addEntity(this.testDummy);
 
         //Test Button
-        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
-        this.testButton.onMouseClicked = function() {
-            // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
-        };
-        this.game.addEntity(this.testButton);
-
-        this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        this.addEntity(this.entityTracker);
+        // this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
+        // this.testButton.onMouseClicked = function() {
+        //     // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
+        // };
+        // this.game.addEntity(this.testButton);
 
         // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
-        this.addEntity(new FloatingBalls(game, game.width, game.height));
+        this.addEntity(new FloatingBalls(game, 1024/2, 800/2));
 
     }
 
     addEntity(entity) {
         this.game.addEntity(entity);
+    }
+
+    getHit(shootingVector)
+    {
+        let hitEntities = []
+        this.game.entities.forEach(entity => {
+            if (entity.shootable)
+            {
+                if (shootingVector.intersect(entity.hitVector))
+                {
+                    hitEntities.push(entity);
+                }
+            }
+        });
+        return hitEntities;
     }
 
     update() {
@@ -117,10 +63,27 @@ class Scene extends Entity {
         let camB = 1024 * 1 / 8;
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
 
-        //zombie following player
-        if (this.player.x - this.zombie.x < 30) {
-            this.zombie.vx = 0;
-        }
+
+        // Shoot Detection
+        this.player.hitVector.color = rgba(0, 0, 0, 1);
+        this.game.entities.forEach(entity => {
+            if (entity.shootable)
+            {
+                if (this.player.hitVector.intersect(entity.hitVector))
+                {
+                    this.player.hitVector.color = rgba(255, 0, 0, 1);
+                }
+            }
+        });
+
+        // if (this.lineOne.intersect(this.player.hitVector))
+        // {
+        //     this.player.hitVector.color = rgba(255, 0, 0, 1);
+        // }
+        // else
+        // {
+        //     this.player.hitVector.color = rgba(0, 0, 0, 1);
+        // }
 
         //platform collistion detection
         /*

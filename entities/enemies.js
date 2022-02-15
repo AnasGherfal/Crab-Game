@@ -56,3 +56,23 @@ class Zombie extends Entity {
     }
 
 }
+
+class Dummy extends Entity
+{
+    constructor(game, x, y)
+    {
+        super(game, x, y);
+
+        this.body = new Rectangle(game, x, y, 40, 80, rgba(150, 0, 150, 1));
+        this.children.push(this.body);
+
+        this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
+        this.children.push(this.hitVector);
+
+        this.shootable = true;
+    }
+
+    displayDamageText(text) {
+        this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
+    }
+}

@@ -19,6 +19,10 @@ class Entity
         this.hoverable = false;
 
         this.collisions = false;
+        this.shootable = false;
+        this.invisible = false;
+
+        this.sceneElement = true;
     }
 
     moveBy(x, y)
@@ -55,6 +59,11 @@ class Entity
 
     draw(ctx)
     {
+        if (this.invisible)
+        {
+            return;
+        }
+
         ctx.save();
 
         // Runs through children and deletes and draws

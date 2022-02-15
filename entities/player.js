@@ -2,26 +2,40 @@ class Player extends Entity {
     constructor(game, x, y) {
         super(game, x, y);
 
+        //Sizing
         this.width = 6;
         this.height = 11;
         this.scale = 5;
 
+        //Right = 0
+        //Left  = 1
         this.direction = 0;
 
         //Flags
         this.clickable = true;
         this.hoverable = true;
 
+        //Sprite
         this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
 
-        // this.particleSpawner = new ParticleSpawner(game, x + this.width / 2 * this.scale, y + this.height * this.scale);
-        // this.children.push(this.particleSpawner);
-
+        //Properties
         this.jumpCooldown = 100;
+
+        //Attached Objects
+        this.hitVector = new Vector(game, x, y, x, y);
+        this.children.push(this.hitVector);
+
+        //Debug Options
+        this.hitVector.invisible = false;
     }
 
     mouseClicked(mouseX, mouseY) {
-        this.displayDamageText(randomInt(10) + 1);
+        // this.displayDamageText(randomInt(10) + 1);
+        console.log(this.hitVector.toString())
+        this.setHitVector();
+        this.game.sceneManager.getHit(this.hitVector).forEach(entity => {
+            entity.displayDamageText("HIT"); //Deal damage
+        });
     }
 
     displayDamageText(text) {
@@ -32,10 +46,40 @@ class Player extends Entity {
         this.children.push(new DamageIndicator(this.game, this.x - sX, this.y - sY, text, 100));
     }
 
+    setHitVector()
+    {
+        let sX = this.game.sceneManager.x;
+        let sY = this.game.sceneManager.y;
+
+        var mouse = this.game.mouse;
+
+        if (mouse != null)
+        {
+            let x1 = this.x + (this.width * this.scale / 2);
+            let y1 = this.y + (this.height * this.scale / 2);
+
+            let x2 = mouse.x + sX;
+            let y2 = mouse.y;
+
+            let m = (y2 - y1) / (x2 - x1);
+
+            let reach = 50;
+
+            //Get x2 distance (with direction) and extend by reach
+            x2 = (x2 - x1) * reach + x1;
+            y2 = m * (x2 - x1) + y1;
+
+            this.hitVector.x = x1;
+            this.hitVector.y = y1;
+            this.hitVector.x2 = x2;
+            this.hitVector.y2 = y2;
+        }
+    }
+
     update() {
         super.update();
 
-
+        this.setHitVector();
 
         if (this.jumpCooldown > 0) {
             this.jumpCooldown -= 1;
@@ -66,8 +110,6 @@ class Player extends Entity {
                 }
             }
         }
-
-        
 
         if (this.y < this.game.height - this.height * this.scale) {
             this.vy += 0.25;
@@ -133,14 +175,6 @@ class Player extends Entity {
         //Draw Aim Line
         ctx.beginPath();
         ctx.moveTo(this.x + (this.scale * this.width / 2), this.y + (this.scale * this.height / 2));
-
-        // var m = this.game.mouse;
-        // if (m != null)
-        // {
-        //     ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
-        // }
-
-        // ctx.stroke();
 
         super.draw(ctx);
         this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);

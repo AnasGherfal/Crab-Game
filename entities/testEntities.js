@@ -75,7 +75,6 @@ class FloatingBalls extends Entity
         {
             let x = getRandomInteger(-width, width + width*2);
             let y = getRandomInteger(-height, height + height*2);
-            // let temp = new Circle(game, x, y, rgba(149, 165, 166, Math.random() / 2), 2);
             let w = getRandomInteger(80, 150);
             let temp = new Circle(game, x, y, rgba(w, w, w, 0.1), 2);
             temp.vx = (Math.random() - 0.5) / 4;
@@ -83,6 +82,8 @@ class FloatingBalls extends Entity
 
             temp.timer = getRandomInteger(100, 1000);
             temp.initialTimerValue = temp.timer;
+
+            temp.sceneElement = false;
 
             this.children.push(temp);
 
