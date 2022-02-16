@@ -88,7 +88,7 @@ class Sky {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x, this.y, this.width, this.height);
     };
 
 };
