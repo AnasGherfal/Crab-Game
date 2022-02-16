@@ -254,7 +254,7 @@ class StatTracker extends UIElement
 
 class ProgressBar extends UIElement
 {
-    constructor(game, x, y, width, height, color = rgb(160,38,37), settable = false)
+    constructor(game, x, y, width, height, color = rgb(160,38,37), isSceneElement = false)
     {
         super(game, x, y, false);
 
@@ -270,9 +270,9 @@ class ProgressBar extends UIElement
         let whiteBarPercent = 0.08;
         this.progressBarBottom = new Rectangle(game, x, y + height - this.height * whiteBarPercent, this.width, this.height * whiteBarPercent, rgba(255,255,255, 1));
 
-        this.progressBarBack.sceneElement = false;
-        this.progressBarFront.sceneElement = false;
-        this.progressBarBottom.sceneElement = false;
+        this.progressBarBack.sceneElement = isSceneElement;
+        this.progressBarFront.sceneElement = isSceneElement;
+        this.progressBarBottom.sceneElement = isSceneElement;
 
         this.children.push(this.progressBarBack);
         this.children.push(this.progressBarFront);

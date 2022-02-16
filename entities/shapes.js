@@ -112,6 +112,13 @@ class Vector extends Entity
         this.color = rgba(0, 0, 0, 1);
     }
 
+    moveBy(x, y)
+    {
+        super.moveBy(x, y);
+        this.x2 += x;
+        this.y2 += y;
+    }
+
     intersect(v2)
     {
         let x1 = this.x;

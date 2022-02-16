@@ -25,6 +25,24 @@ class Entity
         this.sceneElement = true;
     }
 
+    setSceneElement(val)
+    {
+        this.sceneElement = val;
+        this.children.forEach(child => {
+            console.log("Setting " + child);
+            child.setSceneElement(val);
+        });
+    }
+
+    getChildrenCount()
+    {
+        let c = 0;
+        this.children.forEach(child => {
+            c += child.getChildrenCount() + 1;
+        });
+        return c;
+    }
+
     moveBy(x, y)
     {
         this.x += x;

@@ -25,13 +25,16 @@ class Player extends Entity {
         this.hitVector = new Vector(game, x, y, x, y);
         this.children.push(this.hitVector);
 
+        this.muzzleFlash = new ParticleSpawner(game, x, y, [rgba(255, 200, 0, 1)]);
+        this.children.push(this.muzzleFlash);
+
         //Debug Options
         this.hitVector.invisible = false;
     }
 
     mouseClicked(mouseX, mouseY) {
         // this.displayDamageText(randomInt(10) + 1);
-        console.log(this.hitVector.toString())
+        this.muzzleFlash.spawnParticles(1, 0, -1);
         this.setHitVector();
         this.game.sceneManager.getHit(this.hitVector).forEach(entity => {
             let damage = -getRandomInteger(1, 10);
@@ -157,8 +160,10 @@ class Player extends Entity {
             this.vy = -10;
         }
 
-        this.x += this.vx;
-        this.y += this.vy;
+        // this.x += this.vx;
+        // this.y += this.vy;
+
+        this.moveBy(this.vx, this.vy);
 
         if (abs(this.vx) < 0.0001) {
             this.vx = 0;
