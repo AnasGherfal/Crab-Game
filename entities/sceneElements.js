@@ -19,6 +19,10 @@ class Scene extends Entity {
         this.player = new Player(game, 400, 300);
         this.game.addEntity(this.player);
 
+        //Entity Counter
+        this.entityCounter = new TextElement(game, 50, 200, "Entities: " + game.entities.length);
+        this.game.addEntity(this.entityCounter);
+
         //Test Dummy
         this.testDummy = new Dummy(game, 850, 700);
         this.game.addEntity(this.testDummy);
@@ -64,6 +68,12 @@ class Scene extends Entity {
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
 
 
+        let c = 0;
+        this.game.entities.forEach(entity => {
+            c += entity.getChildrenCount() + 1;
+        });
+        this.entityCounter.text = "Entities: " + c;
+
         // Shoot Detection
         this.player.hitVector.color = rgba(0, 0, 0, 1);
         this.game.entities.forEach(entity => {
@@ -93,80 +103,6 @@ class Scene extends Entity {
              this.player.vy = 0
          } */
 
-    }
-
-}
-
-class ParticleSpawner extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-    }
-
-    trigger() {
-        this.spawnBits();
-    }
-
-    spawnBits() {
-        this.children.push(new Particle(this.game, this.x, this.y));
-    }
-
-    draw(ctx) {
-        for (let i = 0; i < this.children.length; i++) {
-            this.children[i].draw(ctx);
-        }
-    }
-
-}
-
-class Particle extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-
-        this.vx = Math.random() * 10 - 5;
-        this.vy = Math.random() * 10 - 5;
-
-        this.updateTick = 5;
-        this.tick = 0;
-        this.lifeSpan = 50;
-        this.lifeSpanInit = this.lifeSpan;
-
-        this.size = Math.random() * 5;
-
-        this.markedForDeletion = false; ////TODO
-    }
-
-    update() {
-        this.tick += 1;
-        if (this.tick >= this.updateTick) {
-            this.tick = 0;
-            if (--this.lifeSpan <= 0) {
-                this.removeFromWorld = true;
-            }
-        }
-        this.updatePos();
-    }
-
-    updatePos() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        this.vx *= 0.999;
-        this.vy *= 0.999;
-
-        this.vy += 0.1;
-    }
-
-    draw(ctx) {
-        ctx.save();
-
-        if (this.removeFromWorld) return;
-        ctx.beginPath();
-        ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)'
-
-        ctx.fillRect(this.x, this.y, this.size, this.size);
-        ctx.stroke();
-
-        ctx.restore();
     }
 
 }
