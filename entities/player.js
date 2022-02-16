@@ -34,7 +34,9 @@ class Player extends Entity {
         console.log(this.hitVector.toString())
         this.setHitVector();
         this.game.sceneManager.getHit(this.hitVector).forEach(entity => {
-            entity.displayDamageText("HIT"); //Deal damage
+            let damage = -getRandomInteger(1, 10);
+            entity.displayDamageText(damage); //Deal damage
+            entity.changeHealth(damage);
         });
     }
 

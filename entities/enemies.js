@@ -69,7 +69,35 @@ class Dummy extends Entity
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
         this.children.push(this.hitVector);
 
+        this.healthBar = new ProgressBar(game, x - 10, y - 30, 60, 20);
+        this.children.push(this.healthBar);
+
         this.shootable = true;
+
+        //Properties
+        this.currentHealth = 100;
+        this.maxHealth = 100;
+    }
+
+    update()
+    {
+        super.update();
+        this.healthBar.setPercent(this.currentHealth / this.maxHealth);
+
+        if (this.currentHealth <= 0)
+        {
+            this.die();
+        }
+    }
+
+    die()
+    {
+        this.removeFromWorld = true;
+    }
+
+    changeHealth(amount)
+    {
+        this.currentHealth += amount;
     }
 
     displayDamageText(text) {
