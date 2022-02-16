@@ -9,6 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
 
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-size: 28px;
+        }
+        
+        canvas {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 20px;
+        }
+        
+        div {
+            text-align: center;
+        }
+    </style>
+
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./timer.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
@@ -29,11 +49,33 @@
     <!--To be deleted-->
     <script type="text/javascript" src="./entities/testEntities.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="menu.css" />
     <script type="text/javascript" src="./main.js"></script>
 </head>
 
 <body>
-    <canvas id="gameWorld" width="1024" height="768" style="background: white; border: 1px solid black"></canvas>
+    <div>
+        <br>Gold 3 <br /> <br>
+    </div>
+
+
+    <canvas id="gameWorld" width="1024" height="768" style="background: white; border: 1px solid black;" tabindex="0" autofocus></canvas>
+    <div id="start" style="display:none">
+        <a href="#" onclick="startGame()">Start Game</a>
+    </div>
+
+    <div id="game-over" style="display:none">
+        <h1>Game Over</h1>
+        <a href="#" onclick="startGame()">Start Game</a>
+    </div>
+
+    <div>
+        <br />
+        <input type="checkbox" id="debug"> Debug <input type="checkbox" id="mute"> Mute <input type="range" id="volume" min="0" max="1" value="0.2" step="0.05"> Volume
+
+    </div>
+
+
 </body>
 
 </html>

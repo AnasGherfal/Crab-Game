@@ -2,6 +2,7 @@ const gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
+//spritesheets
 ASSET_MANAGER.queueDownload("images/riskPlayer.png");
 ASSET_MANAGER.queueDownload("images/zombie.png");
 ASSET_MANAGER.queueDownload("images/sky.png");
@@ -10,10 +11,20 @@ ASSET_MANAGER.queueDownload("images/tree.png");
 ASSET_MANAGER.queueDownload("images/sun.png");
 ASSET_MANAGER.queueDownload("images/iconHeart.png");
 ASSET_MANAGER.queueDownload("images/background.png");
+ASSET_MANAGER.queueDownload("images/mountain.png");
+ASSET_MANAGER.queueDownload("images/grass.png");
+
+
+//music 
+ASSET_MANAGER.queueDownload("music/test.mp3");
+
+
 
 ASSET_MANAGER.downloadAll(() => {
     const canvas = document.getElementById("gameWorld");
     const ctx = canvas.getContext("2d");
+
+    ASSET_MANAGER.autoRepeat("music/test.mp3");
 
     ctx.imageSmoothingEnabled = false;
 
@@ -32,5 +43,8 @@ ASSET_MANAGER.downloadAll(() => {
 
     gameEngine.start();
 });
+
+
+
 
 gameEngine.addEntity(new Tracker(gameEngine, 50, 50));
