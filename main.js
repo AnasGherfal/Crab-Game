@@ -11,6 +11,9 @@ ASSET_MANAGER.queueDownload("images/tree.png");
 ASSET_MANAGER.queueDownload("images/sun.png");
 ASSET_MANAGER.queueDownload("images/iconHeart.png");
 ASSET_MANAGER.queueDownload("images/background.png");
+ASSET_MANAGER.queueDownload("images/mountain.png");
+ASSET_MANAGER.queueDownload("images/grass.png");
+
 
 //music 
 ASSET_MANAGER.queueDownload("music/test.mp3");

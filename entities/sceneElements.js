@@ -18,12 +18,10 @@ class Scene extends Entity {
             credits: false
         }
 
-
-
         //UI Panels
         // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
-        //this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
-        //this.game.addEntity(this.playerHealthBar);
+        // this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        // this.game.addEntity(this.playerHealthBar);
 
         //Player
         this.player = new Player(game, 400, 600);
@@ -92,7 +90,7 @@ class Scene extends Entity {
         }
 
         for (var i = 0; i < 50; i++) {
-            this.background = new Tree(this.game, -80 + i * 100, 170);
+            this.background = new Tree(this.game, -80 + i * 100, 300);
             this.game.addEntity(this.background);
         }
 
@@ -106,12 +104,18 @@ class Scene extends Entity {
         this.game.addEntity(this.background);
 
         for (var i = 0; i < 20; i++) {
+            this.background = new Mountain(this.game, i * 1236, 158);
+            this.game.addEntity(this.background);
+        }
+        for (var i = 0; i < 20; i++) {
             this.background = new Sky(this.game, i * 1236, 50);
             this.game.addEntity(this.background);
         }
 
-        this.background = new Sky(this.game, 0, 80);
-        this.game.addEntity(this.background);
+        for (var i = 0; i < 100; i++) {
+            this.background = new Ground(this.game, i * 48, 750);
+            this.game.addEntity(this.background);
+        }
 
 
         // if (music && !this.title) {
