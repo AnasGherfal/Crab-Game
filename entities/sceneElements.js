@@ -193,7 +193,7 @@ class Scene extends Entity {
 
         let c = 0;
         this.game.entities.forEach(entity => {
-            c += entity.getChildrenCount() + 1;
+            c += 1;
         });
         this.entityCounter.text = "Entities: " + c;
 

@@ -36,6 +36,7 @@ class Entity
 
     getChildrenCount()
     {
+
         let c = 0;
         this.children.forEach(child => {
             c += child.getChildrenCount() + 1;
