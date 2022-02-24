@@ -56,10 +56,10 @@ class Scene extends Entity {
     enemyWave() {
 
         //generate 5 zombies
-        for (var i = 0; i < 5; i++) {
-            this.zombie = new Zombie(this.game, i * 200, 700);
-            this.game.addEntity(this.zombie);
-        }
+        // for (var i = 0; i < 5; i++) {
+        //     this.zombie = new Zombie(this.game, i * 200, 700);
+        //     this.game.addEntity(this.zombie);
+        // }
     }
 
     loadLevel(level, x, y, title) {
@@ -88,9 +88,22 @@ class Scene extends Entity {
                 this.game.addEntity(this.background);
             }
         }
+        for (var i = 0; i < 100; i++) {
+            this.background = new Ground(this.game, i * 48, 750);
+            this.game.addEntity(this.background);
+        }
 
         for (var i = 0; i < 50; i++) {
-            this.background = new Tree(this.game, -80 + i * 100, 300);
+            this.background = new PixalTree(this.game, i * 1200, 630);
+            this.game.addEntity(this.background);
+        }
+        for (var i = 0.01; i < 20; i++) {
+            this.background = new Mashroom(this.game, i * 1200, 737);
+            this.game.addEntity(this.background);
+        }
+
+        for (var i = 0; i < 50; i++) {
+            this.background = new Tree(this.game, -80 + i * 100, 250);
             this.game.addEntity(this.background);
         }
 
@@ -100,7 +113,8 @@ class Scene extends Entity {
         }
 
 
-        this.background = new Sun(this.game, 900, 80);
+
+        this.background = new Sun(this.game, 900, 90);
         this.game.addEntity(this.background);
 
         for (var i = 0; i < 20; i++) {
@@ -112,10 +126,7 @@ class Scene extends Entity {
             this.game.addEntity(this.background);
         }
 
-        for (var i = 0; i < 100; i++) {
-            this.background = new Ground(this.game, i * 48, 750);
-            this.game.addEntity(this.background);
-        }
+
 
 
         // if (music && !this.title) {
@@ -167,13 +178,6 @@ class Scene extends Entity {
         //}
 
 
-        //platform collistion detection
-        /*
-         if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
-             this.player.height + this.player.vy >= this.platform.y && this.player.x +
-             this.player.width >= this.platform.x) {
-             this.player.vy = 0
-         } */
 
     };
 
