@@ -1,5 +1,5 @@
 class Player extends Entity {
-    constructor(game, x, y) {
+    constructor(game, x, y ) {
         super(game, x, y);
 
         this.width = 6;
@@ -11,13 +11,17 @@ class Player extends Entity {
         //Flags
         this.clickable = true;
         this.hoverable = true;
-
+        //if(title == false){
         this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
+        //}
 
         // this.particleSpawner = new ParticleSpawner(game, x + this.width / 2 * this.scale, y + this.height * this.scale);
         // this.children.push(this.particleSpawner);
 
+        //this.updataBB();
+
         this.jumpCooldown = 100;
+        
     }
 
     mouseClicked(mouseX, mouseY) {
@@ -27,6 +31,12 @@ class Player extends Entity {
     displayDamageText(text) {
         this.children.push(new DamageIndicator(this.game, this.x, this.y, text, 100));
     }
+
+    updateBB(){
+
+        this.lastBB = this.BB;
+            this.BB = new BoundingBox(this.x, this.y, width, height);
+    };
 
     update() {
         super.update();
@@ -91,12 +101,29 @@ class Player extends Entity {
         if (abs(this.vx) < 0.0001) {
             this.vx = 0;
         }
+        //this.updateBB();
+        // collison
+
+        
 
 
     }
 
     draw(ctx) {
+        ctx.strokeStyle = "Red";
+        ctx.strokeRect(this.x,this.y, 36, 55);
+        ctx.save();
+        ctx.scale(-1, 1)
+        // ctx.font = 24 + "px " + "robotoCondensed";
+        // ctx.fillStyle = "White";
         
+        // if (this.title == false) { 
+        //     var width = 200;
+        //     var height = 250;
+        
+        // }
+        //this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, -400, 709, 8, 0.2);
+        ctx.restore();
         ctx.save();
         if (this.direction == 1) {
             ctx.scale(-1, 1);
@@ -111,7 +138,6 @@ class Player extends Entity {
         // {
         //     ctx.lineTo(this.game.mouse.x, this.y + (this.scale * this.height/2));
         // }
-
         // ctx.stroke();
 
         super.draw(ctx);
@@ -120,4 +146,6 @@ class Player extends Entity {
         ctx.restore();
 
     }
+
+    
 }

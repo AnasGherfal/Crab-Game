@@ -28,6 +28,7 @@ class TextElement extends UIElement
         ctx.font = (this.fontSize) + "px " + (this.fontFamily); 
 
         ctx.fillStyle = this.color;
+        
 
         ctx.textAlign = this.textAlign;
         if (this.textAlign == "center")
@@ -88,6 +89,7 @@ class DamageIndicator extends TextElement
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotationAngle);
         ctx.fillText(this.text, 0, 0);
+        
 
         ctx.restore();
     }
@@ -279,7 +281,7 @@ class ProgressBar extends UIElement
     }
 }
 
-class PlayerHealthBar extends UIElement
+class healthBar extends UIElement
 {
     constructor(game, x, y, scale)
     {

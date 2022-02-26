@@ -13,6 +13,8 @@ ASSET_MANAGER.queueDownload("images/iconHeart.png");
 ASSET_MANAGER.queueDownload("images/background.png");
 ASSET_MANAGER.queueDownload("images/mountain.png");
 ASSET_MANAGER.queueDownload("images/grass.png");
+ASSET_MANAGER.queueDownload("images/long.png");
+
 
 
 //music 

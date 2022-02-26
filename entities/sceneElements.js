@@ -12,23 +12,29 @@ class Scene extends Entity {
         this.x = 0;
 
         this.title = true;
+        this.gameOver = false;
 
         this.menuSelect = {
             newGame: false,
             credits: false
         }
 
-        //UI Panels
-        // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
-        // this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
-        // this.game.addEntity(this.playerHealthBar);
+        //Heakth bar for the player
+        this.game.addEntity(new ProgressBar(game, 25, 200, 350, 30, rgb(0,0,255)));
+        this.healthBar = new healthBar(game, 10, 10, 1);
+        this.game.addEntity(this.healthBar);
+
+        //Heakth bar for the enemy
+        this.game.addEntity(new ProgressBar(game, 650, 200, 350, 30, rgb(0,128,0)));
+        this.healthBar = new healthBar(game, 10, 10, 1);
+        this.game.addEntity(this.healthBar);
 
         //Player
-        this.player = new Player(game, 400, 600);
+        this.player = new Player(game, 400, 600, this.title);
         this.game.addEntity(this.player);
 
         this.loadLevel(400, 300);
-
+        
 
         /*
         //Test Button
@@ -57,12 +63,12 @@ class Scene extends Entity {
 
         //generate 5 zombies
         for (var i = 0; i < 5; i++) {
-            this.zombie = new Zombie(this.game, i * 200, 700);
+            this.zombie = new Zombie(this.game, i * 50, 700, this.title);
             this.game.addEntity(this.zombie);
         }
     }
 
-    loadLevel(level, x, y, title) {
+    loadLevel(level, x, y, transition, title) {
         this.game.entites = [];
         this.clearEntities();
         this.x = 0;
@@ -116,6 +122,10 @@ class Scene extends Entity {
             this.background = new Ground(this.game, i * 48, 750);
             this.game.addEntity(this.background);
         }
+        // for (var i = 0; i < 10; i++) {
+        //     this.background = new Water(this.game, i * 390,640);
+        //     this.game.addEntity(this.background);
+        // }
 
 
         // if (music && !this.title) {
@@ -143,6 +153,10 @@ class Scene extends Entity {
 
         ASSET_MANAGER.muteAudio(mute);
         ASSET_MANAGER.adjustVolume(volume);
+
+    };
+
+    updateTitle(){
 
     };
 
@@ -174,8 +188,7 @@ class Scene extends Entity {
              this.player.width >= this.platform.x) {
              this.player.vy = 0
          } */
-
-    };
+        };
 
 };
 
@@ -237,18 +250,27 @@ class Particle extends Entity {
 
         this.vy += 0.1;
     };
-
     draw(ctx) {
-        ctx.save();
 
+        
+        // ctx.font = 24 + "px " + "robotoCondensed";
+        // ctx.fillStyle = "White";
+        
+        // if (this.title) { 
+        //     var width = 200;
+        //     var height = 250;
+        //     ctx.fillText("Start", 100, 100, width, height);
+        // }
+        ctx.save();
         if (this.removeFromWorld) return;
         ctx.beginPath();
         ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)'
-
         ctx.fillRect(this.x, this.y, this.size, this.size);
         ctx.stroke();
 
         ctx.restore();
+
+        
     };
 
 };
