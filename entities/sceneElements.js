@@ -35,9 +35,10 @@ class Scene extends Entity {
         this.testDummy = new Dummy(game, 850, 700);
         this.game.addEntity(this.testDummy);
 
-        this.loadLevel(400, 300);
+        // this.loadLevel(400, 300);
 
-        // this.entityTracker = new EntityTracker(game, 10, 600, this.player);
+        this.teleporter = new Teleporter(game, 600, 710);
+        this.game.addEntity(this.teleporter);
 
     };
 
