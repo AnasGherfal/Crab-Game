@@ -35,13 +35,37 @@ class Tree {
     };
 
 };
+class PixalTree {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 80;
+        this.height = 130;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/pixalTree.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+        // ctx.fillRect(this.x, this.y, this.width, this.height)
+
+    };
+
+};
+
 
 class Sun {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
-        this.width = 90;
-        this.height = 90;
+        this.width = 50;
+        this.height = 50;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/sun.png");
     };
@@ -130,3 +154,21 @@ class Ground {
     };
 
 }
+class Mashroom {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 20;
+        this.height = 20;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/mashroom.png");
+    };
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
+
+};
