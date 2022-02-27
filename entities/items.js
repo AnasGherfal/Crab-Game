@@ -23,6 +23,7 @@ class Item extends Entity
 
         if (Math.abs(player.x - this.x) < 50 && Math.abs(player.y - this.y) < 50)
         {
+            this.activatable = false;
             this.setInvisible(true);
             player.changeHealth(0.1);
         }        
