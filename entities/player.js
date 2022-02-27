@@ -41,6 +41,9 @@ class Player extends Entity {
             entity.displayDamageText(damage); //Deal damage
             entity.changeHealth(damage);
         });
+
+        //Debug Stuff
+        //console.log(this.direction == 1 ? "RIGHT" : "LEFT");
     }
 
     displayDamageText(text) {
@@ -65,6 +68,8 @@ class Player extends Entity {
 
             let x2 = mouse.x + sX;
             let y2 = mouse.y;
+
+            this.direction = x1 > x2 ? 0 : 1;
 
             let m = (y2 - y1) / (x2 - x1);
 
@@ -175,16 +180,16 @@ class Player extends Entity {
     draw(ctx) {
         
         ctx.save();
-        if (this.direction == 1) {
-            ctx.scale(-1, 1);
-        }
+        // if (this.direction == 1) {
+        //     ctx.scale(-1, 1);
+        // }
 
         //Draw Aim Line
         ctx.beginPath();
         ctx.moveTo(this.x + (this.scale * this.width / 2), this.y + (this.scale * this.height / 2));
 
         super.draw(ctx);
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
+        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, 0);
 
         ctx.restore();
 
