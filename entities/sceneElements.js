@@ -31,14 +31,17 @@ class Scene extends Entity {
         this.entityCounter = new TextElement(game, 50, 200, "Entities: " + game.entities.length);
         this.game.addEntity(this.entityCounter);
 
-        //Test Dummy
-        this.testDummy = new Dummy(game, 850, 700);
-        this.game.addEntity(this.testDummy);
-
         // this.loadLevel(400, 300);
 
+        //Test Stuff
+        this.testDummy = new Dummy(game, 850, 700);
+        // this.game.addEntity(this.testDummy);
+
         this.teleporter = new Teleporter(game, 600, 710);
-        this.game.addEntity(this.teleporter);
+        // this.game.addEntity(this.teleporter);
+
+        this.platform = new Platform(game, 96, 644, 165, 22);
+        this.game.addEntity(this.platform);
 
     };
 

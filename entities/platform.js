@@ -11,8 +11,4 @@ class Platform extends Entity {
         
     }
 
-    update() {
-        this.platformRect.x = this.x - this.game.camera.x;
-    }
-
 }
