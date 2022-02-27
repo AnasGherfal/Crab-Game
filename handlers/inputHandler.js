@@ -7,6 +7,19 @@ class InputHandler
         this.downY = -1;
     }
 
+    keyDown(key)
+    {
+        if (key == "e") 
+        {
+            this.game.entities.forEach(entity => {
+                if (entity.activatable)
+                {
+                    entity.activate();
+                }
+            });
+        }
+    }
+
     mouseDown(mouseX, mouseY)
     {
         // console.log("Mouse down");

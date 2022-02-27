@@ -20,9 +20,13 @@ class Entity
 
         this.collisions = false;
         this.shootable = false;
-        this.invisible = false;
-
         this.sceneElement = true;
+
+        this.activatable = false;
+
+         //TODO
+         this.invisible = false;
+
     }
 
     setSceneElement(val)
