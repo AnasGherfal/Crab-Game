@@ -43,6 +43,9 @@ class Scene extends Entity {
         this.platform = new Platform(game, 96, 644, 165, 22);
         // this.game.addEntity(this.platform);
 
+        this.testItem = new Item(game, 172, 748);
+        this.game.addEntity(this.testItem);
+
     };
 
     clearEntities() {
