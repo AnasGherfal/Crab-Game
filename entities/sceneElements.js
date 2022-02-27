@@ -20,8 +20,8 @@ class Scene extends Entity {
 
         //UI Panels
         // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
-        // this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
-        // this.game.addEntity(this.playerHealthBar);
+        this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        this.game.addEntity(this.playerHealthBar);
 
         //Player
         this.player = new Player(game, 400, 600);
@@ -35,32 +35,9 @@ class Scene extends Entity {
         this.testDummy = new Dummy(game, 850, 700);
         this.game.addEntity(this.testDummy);
 
-        //Test Button
-        // this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
-        // this.testButton.onMouseClicked = function() {
-        //     // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
-        // };
-        // this.game.addEntity(this.testButton);
+        this.loadLevel(400, 300);
 
-        // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
-        this.addEntity(new FloatingBalls(game, 1024/2, 800/2));
-        // this.loadLevel(400, 300);
-
-
-        /*
-        //Test Button
-        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
-        this.testButton.onMouseClicked = function() {
-            // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
-        };
-        this.game.addEntity(this.testButton);
-        */
-
-        this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        // this.addEntity(this.entityTracker);
-
-        //this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
-        //this.addEntity(new FloatingBalls(game, game.width, game.height));
+        // this.entityTracker = new EntityTracker(game, 10, 600, this.player);
 
     };
 
