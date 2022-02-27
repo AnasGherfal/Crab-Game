@@ -35,7 +35,7 @@ class Scene extends Entity {
 
         //Test Stuff
         this.testDummy = new Dummy(game, 850, 700);
-        // this.game.addEntity(this.testDummy);
+        this.game.addEntity(this.testDummy);
 
         this.teleporter = new Teleporter(game, 600, 710);
         this.game.addEntity(this.teleporter);
@@ -45,6 +45,8 @@ class Scene extends Entity {
 
         this.testItem = new Item(game, 172, 748);
         this.game.addEntity(this.testItem);
+
+        
 
     };
 

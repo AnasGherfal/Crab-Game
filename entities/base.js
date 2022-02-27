@@ -23,10 +23,16 @@ class Entity
         this.sceneElement = true;
 
         this.activatable = false;
-
-         //TODO
          this.invisible = false;
 
+    }
+
+    setInvisible(b)
+    {
+        this.invisible = b;
+        this.children.forEach(child => {
+            child.setInvisible(b);
+        });
     }
 
     setSceneElement(val)

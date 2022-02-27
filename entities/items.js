@@ -5,10 +5,27 @@ class Item extends Entity
         super(game, x, y);
 
         //Properties
+        this.activatable = true;
         this.floatPercent = 0
 
-        this.tempSprite = new Rectangle(this.game, x, y, 10, 10, rgba(100, 100, 200, 1));
+        this.tempSprite = new Rectangle(this.game, x, y - 20, 10, 10, rgba(300, 50, 50, 1));
         this.children.push(this.tempSprite);
+
+        this.text = new TextElement(game, x + 5, y - 70, "ItemName [E]");
+        this.text.textAlign = "center";
+        this.text.sceneElement = true;
+        this.children.push(this.text);
+    }
+
+    activate()
+    {
+        let player = this.game.sceneManager.player;
+
+        if (Math.abs(player.x - this.x) < 50 && Math.abs(player.y - this.y) < 50)
+        {
+            this.setInvisible(true);
+            player.changeHealth(0.1);
+        }        
     }
 
     update()

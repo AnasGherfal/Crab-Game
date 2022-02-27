@@ -20,6 +20,7 @@ class Player extends Entity {
 
         //Properties
         this.jumpCooldown = 100;
+        this.currentHealth = 0.5;
 
         //Attached Objects
         this.hitVector = new Vector(game, x, y, x, y);
@@ -30,6 +31,11 @@ class Player extends Entity {
 
         //Debug Options
         this.hitVector.invisible = false;
+    }
+
+    changeHealth(val)
+    {
+        this.currentHealth += val;
     }
 
     mouseClicked(mouseX, mouseY) {
