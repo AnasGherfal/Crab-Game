@@ -44,7 +44,7 @@ class Scene extends Entity {
 
         // this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
         this.addEntity(new FloatingBalls(game, 1024/2, 800/2));
-        this.loadLevel(400, 300);
+        // this.loadLevel(400, 300);
 
 
         /*

@@ -101,6 +101,7 @@ class Dummy extends Entity
     {
         if (this.corpseTimer-- == 100)
         {
+            this.particleSpawner.spawnParticles(1000);
             this.vx += 5;
             this.vy -= 5;
         }
