@@ -232,3 +232,44 @@ class Particle extends Entity {
     }
 
 }
+
+class Teleporter extends Entity 
+{
+    constructor(game, x, y)
+    {
+        super(game, x, y);
+
+        //Properties
+        this.activatable = true;
+        this.playerInRange = false;
+
+        this.tempSprite = new Rectangle(game, x, y, 50, 50, rgba(200, 100, 100, 1));
+        this.children.push(this.tempSprite);
+    }
+
+    activate()
+    {
+        if (this.playerInRange)
+        {
+            console.log("TELEPORTING!");
+        }
+    }
+
+    update()
+    {
+        let player = this.game.sceneManager.player;
+
+        if (Math.abs(player.x - this.x) < 50 && Math.abs(player.y - this.y) < 50)
+        {
+            this.tempSprite.color = rgba(100, 200, 100, 1);
+            this.playerInRange = true;
+        }
+        else
+        {
+            this.tempSprite.color = rgba(200, 100, 100, 1);
+            this.playerInRange = false;
+        }
+
+    }
+
+}

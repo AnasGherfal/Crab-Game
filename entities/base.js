@@ -20,9 +20,19 @@ class Entity
 
         this.collisions = false;
         this.shootable = false;
-        this.invisible = false;
-
         this.sceneElement = true;
+
+        this.activatable = false;
+         this.invisible = false;
+
+    }
+
+    setInvisible(b)
+    {
+        this.invisible = b;
+        this.children.forEach(child => {
+            child.setInvisible(b);
+        });
     }
 
     setSceneElement(val)

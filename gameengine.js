@@ -113,7 +113,11 @@ class GameEngine {
             this.rightclick = getXandY(e);
         });
 
-        window.addEventListener("keydown", event => this.keys[event.key] = true);
+        window.addEventListener("keydown", event => {
+            this.keys[event.key] = true
+            //Input Handler
+            this.inputHandler.keyDown(event.key);
+        });
         window.addEventListener("keyup", event => this.keys[event.key] = false);
     };
 

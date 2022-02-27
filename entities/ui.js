@@ -20,11 +20,18 @@ class TextElement extends UIElement
         this.color = color;
         this.textAlign = textAlign;
         this.maxWidth = 0;
+
+        this.sceneElement = false;
     }
 
     draw(ctx)
     {
         ctx.save();
+
+        if (this.invisible)
+        {
+            return;
+        }
 
         ctx.font = (this.fontSize) + "px " + (this.fontFamily); 
 
@@ -38,11 +45,11 @@ class TextElement extends UIElement
 
         if (this.maxWidth == 0)
         {
-            ctx.fillText(this.text, this.x, this.y);
+            ctx.fillText(this.text, this.x - (this.sceneElement ? this.game.camera.x : 0), this.y);
         }
         else
         {
-            ctx.fillText(this.text, this.x, this.y, this.maxWidth);   
+            ctx.fillText(this.text, this.x - (this.sceneElement ? this.game.camera.x : 0), this.y, this.maxWidth);   
         }
         ctx.restore();
     }
@@ -313,9 +320,15 @@ class PlayerHealthBar extends UIElement
         this.children.push(this.progressBarText);
     }
 
+    update()
+    {
+        let currentHealth = this.game.sceneManager.player.currentHealth;
+        this.setPercent(currentHealth);
+    }
+
     setPercent(percent)
     {
-        this.progressBarHealth(percent);
+        this.progressBarHealth.setPercent(percent);
     }
 
     incrementPercent(percentToIncrement)
