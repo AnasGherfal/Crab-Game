@@ -31,6 +31,7 @@ class GameEngine {
 
         //My code
         this.inputHandler = new InputHandler(this);
+        this.sceneManager = null;
 
     };
 

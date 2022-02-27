@@ -17,6 +17,31 @@ class Entity
         this.affectedByGravity = false;
         this.clickable = false;
         this.hoverable = false;
+
+        this.collisions = false;
+        this.shootable = false;
+        this.invisible = false;
+
+        this.sceneElement = true;
+    }
+
+    setSceneElement(val)
+    {
+        this.sceneElement = val;
+        this.children.forEach(child => {
+            console.log("Setting " + child);
+            child.setSceneElement(val);
+        });
+    }
+
+    getChildrenCount()
+    {
+
+        let c = 0;
+        this.children.forEach(child => {
+            c += child.getChildrenCount() + 1;
+        });
+        return c;
     }
 
     moveBy(x, y)
@@ -53,6 +78,11 @@ class Entity
 
     draw(ctx)
     {
+        if (this.invisible)
+        {
+            return;
+        }
+
         ctx.save();
 
         // Runs through children and deletes and draws

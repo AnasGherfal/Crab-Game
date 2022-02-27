@@ -75,7 +75,6 @@ class FloatingBalls extends Entity
         {
             let x = getRandomInteger(-width, width + width*2);
             let y = getRandomInteger(-height, height + height*2);
-            // let temp = new Circle(game, x, y, rgba(149, 165, 166, Math.random() / 2), 2);
             let w = getRandomInteger(80, 150);
             let temp = new Circle(game, x, y, rgba(w, w, w, 0.1), 2);
             temp.vx = (Math.random() - 0.5) / 4;
@@ -83,6 +82,8 @@ class FloatingBalls extends Entity
 
             temp.timer = getRandomInteger(100, 1000);
             temp.initialTimerValue = temp.timer;
+
+            temp.sceneElement = false;
 
             this.children.push(temp);
 
@@ -146,6 +147,86 @@ class FloatingBalls extends Entity
                 child.draw(ctx);
             }
         }
+
+        ctx.restore();
+    }
+
+}
+
+class ParticleSpawner extends Entity {
+    constructor(game, x, y, colors = [rgba(255, 40, 40, 1)]) {
+        super(game, x, y);
+        this.colors = colors;
+    }
+
+    trigger() {
+        this.spawnParticles();
+    }
+
+    spawnParticles(amount = 10, xMod = 0, yMod = 0) {
+        for (let i = 0; i < amount; i++)
+        {
+            let col = this.colors[randomInt(this.colors.length)];
+            this.children.push(new Particle(this.game, this.x, this.y, xMod, yMod, col));
+        }
+    }
+
+    draw(ctx) {
+        super.draw(ctx);
+        for (let i = 0; i < this.children.length; i++) {
+            this.children[i].draw(ctx);
+        }
+    }
+
+}
+
+class Particle extends Entity {
+    constructor(game, x, y, xMod = 0, yMod = 0, color = rgba(255, 40, 40, 1)) {
+        super(game, x, y);
+
+        this.vx = Math.random() * 10 - 5 + (5 * xMod);
+        this.vy = Math.random() * 10 - 5 + (5 * yMod);
+
+        this.color = color;
+
+        this.updateTick = 5;
+        this.tick = 0;
+        this.lifeSpan = 50;
+        this.lifeSpanInit = this.lifeSpan;
+
+        this.size = Math.random() * 5;
+    }
+
+    update() {
+        this.tick += 1;
+        if (this.tick >= this.updateTick) {
+            this.tick = 0;
+            if (--this.lifeSpan <= 0) {
+                this.removeFromWorld = true;
+            }
+        }
+        this.updatePos();
+    }
+
+    updatePos() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        this.vx *= 0.999;
+        this.vy *= 0.999;
+
+        this.vy += 0.1;
+    }
+
+    draw(ctx) {
+        ctx.save();
+
+        if (this.removeFromWorld) return;
+        ctx.beginPath();
+        // ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)';
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x - this.game.camera.x, this.y, this.size, this.size);
+        ctx.stroke();
 
         ctx.restore();
     }

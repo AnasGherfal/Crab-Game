@@ -20,30 +20,24 @@ class Scene extends Entity {
 
         //UI Panels
         // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
-        // this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
-        // this.game.addEntity(this.playerHealthBar);
+        this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        this.game.addEntity(this.playerHealthBar);
 
         //Player
         this.player = new Player(game, 400, 600);
         this.game.addEntity(this.player);
 
+        //Entity Counter
+        this.entityCounter = new TextElement(game, 50, 200, "Entities: " + game.entities.length);
+        this.game.addEntity(this.entityCounter);
+
+        //Test Dummy
+        this.testDummy = new Dummy(game, 850, 700);
+        this.game.addEntity(this.testDummy);
+
         this.loadLevel(400, 300);
 
-
-        /*
-        //Test Button
-        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
-        this.testButton.onMouseClicked = function() {
-            // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
-        };
-        this.game.addEntity(this.testButton);
-        */
-
-        this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        // this.addEntity(this.entityTracker);
-
-        //this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
-        //this.addEntity(new FloatingBalls(game, game.width, game.height));
+        // this.entityTracker = new EntityTracker(game, 10, 600, this.player);
 
     };
 
@@ -159,8 +153,22 @@ class Scene extends Entity {
 
     addEntity(entity) {
         this.game.addEntity(entity);
+    }
 
-    };
+    getHit(shootingVector)
+    {
+        let hitEntities = []
+        this.game.entities.forEach(entity => {
+            if (entity.shootable)
+            {
+                if (shootingVector.intersect(entity.hitVector))
+                {
+                    hitEntities.push(entity);
+                }
+            }
+        });
+        return hitEntities;
+    }
 
     update() {
         //camera follow forward movement
@@ -170,89 +178,35 @@ class Scene extends Entity {
         let camB = this.game.width * 1 / 8;
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
 
-        //zombie following player
-        //if (this.zombie) {
-        //    if (this.player.x - this.zombie.x < 30) {
-        //    this.zombie.vx = 0;
-        //    }
-        //}
 
+        let c = 0;
+        this.game.entities.forEach(entity => {
+            c += 1;
+        });
+        this.entityCounter.text = "Entities: " + c;
 
-
-    };
-
-};
-
-class ParticleSpawner extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-    };
-
-    trigger() {
-        this.spawnBits();
-    };
-
-    spawnBits() {
-        this.children.push(new Particle(this.game, this.x, this.y));
-    };
-
-    draw(ctx) {
-        for (let i = 0; i < this.children.length; i++) {
-            this.children[i].draw(ctx);
-        }
-    };
-
-};
-
-class Particle extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-
-        this.vx = Math.random() * 10 - 5;
-        this.vy = Math.random() * 10 - 5;
-
-        this.updateTick = 5;
-        this.tick = 0;
-        this.lifeSpan = 50;
-        this.lifeSpanInit = this.lifeSpan;
-
-        this.size = Math.random() * 5;
-
-        this.markedForDeletion = false; ////TODO
-    };
-
-    update() {
-        this.tick += 1;
-        if (this.tick >= this.updateTick) {
-            this.tick = 0;
-            if (--this.lifeSpan <= 0) {
-                this.removeFromWorld = true;
+        // Shoot Detection
+        this.player.hitVector.color = rgba(0, 0, 0, 1);
+        this.game.entities.forEach(entity => {
+            if (entity.shootable)
+            {
+                if (this.player.hitVector.intersect(entity.hitVector))
+                {
+                    this.player.hitVector.color = rgba(255, 0, 0, 1);
+                }
             }
-        }
-        this.updatePos();
+        });
+
+        // if (this.lineOne.intersect(this.player.hitVector))
+        // {
+        //     this.player.hitVector.color = rgba(255, 0, 0, 1);
+        // }
+        // else
+        // {
+        //     this.player.hitVector.color = rgba(0, 0, 0, 1);
+        // }
+
+
     };
 
-    updatePos() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        this.vx *= 0.999;
-        this.vy *= 0.999;
-
-        this.vy += 0.1;
-    };
-
-    draw(ctx) {
-        ctx.save();
-
-        if (this.removeFromWorld) return;
-        ctx.beginPath();
-        ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)'
-
-        ctx.fillRect(this.x, this.y, this.size, this.size);
-        ctx.stroke();
-
-        ctx.restore();
-    };
-
-};
+}
