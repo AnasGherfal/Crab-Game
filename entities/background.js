@@ -13,11 +13,11 @@ class Background {
 }
 
 class Tree {
-    constructor(game, x, y) {
+    constructor(game, x, y, width, height) {
         Object.assign(this, { game, x, y });
 
-        this.width = 250;
-        this.height = 300;
+        this.width = width;
+        this.height = height;
 
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/tree.png");
@@ -35,12 +35,80 @@ class Tree {
     };
 
 };
+class Tree2 {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 70;
+        this.height = 200;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/tree2.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
+
+class Tree3 {
+    constructor(game, x, y, width, height) {
+        Object.assign(this, { game, x, y });
+
+        this.width = width;
+        this.height = height;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/bigTree.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
+
+class Grass {
+    constructor(game, x, y, width, height) {
+        Object.assign(this, { game, x, y });
+
+        this.width = width;
+        this.height = height;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/backGrass.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
 class PixalTree {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
-        this.width = 80;
-        this.height = 130;
+        this.width = 120;
+        this.height = 170;
 
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/pixalTree.png");
@@ -58,6 +126,76 @@ class PixalTree {
     };
 
 };
+
+class River {
+    constructor(game, x, y, width, height) {
+        Object.assign(this, { game, x, y });
+
+        this.width = width;
+        this.height = height;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/river.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
+
+class Rock {
+    constructor(game, x, y, width, height) {
+        Object.assign(this, { game, x, y });
+
+        this.width = width;
+        this.height = height;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/rock.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
+
+class Grass2 {
+    constructor(game, x, y, width, height) {
+        Object.assign(this, { game, x, y });
+
+        this.width = width;
+        this.height = height;
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/grass.png");
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+    };
+
+};
+
 
 
 class Sun {
@@ -84,7 +222,7 @@ class Clouds {
         Object.assign(this, { game, x, y });
 
         this.width = 1240;
-        this.height = 150;
+        this.height = 170;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/clouds.png");
     };
@@ -103,7 +241,7 @@ class Sky {
         Object.assign(this, { game, x, y });
 
         this.width = 1240;
-        this.height = 200;
+        this.height = 450;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/sky.png");
     };
@@ -122,11 +260,12 @@ class Mountain {
         Object.assign(this, { game, x, y });
 
         this.width = 1240;
-        this.height = 200;
+        this.height = 250;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/mountain.png");
     };
     update() {
+
 
     };
 
@@ -143,7 +282,7 @@ class Ground {
         this.width = 50;
         this.height = 50;
 
-        this.spritesheet = ASSET_MANAGER.getAsset("images/grass.png");
+        this.spritesheet = ASSET_MANAGER.getAsset("images/ground.png");
     };
     update() {
 
@@ -152,14 +291,18 @@ class Ground {
     draw(ctx) {
         ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
     };
-
 }
+
+
+
 class Mashroom {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
         this.width = 20;
         this.height = 20;
+
+
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/mashroom.png");
     };
@@ -172,3 +315,41 @@ class Mashroom {
     };
 
 };
+
+class Bush {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 150;
+        this.height = 150;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/bush.png");
+    };
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
+
+};
+
+// class BackColor {
+//     constructor(game, x, y) {
+//         Object.assign(this, { game, x, y });
+
+//         this.width = 500;
+//         this.height = 500;
+
+//         this.spritesheet = ASSET_MANAGER.getAsset("images/green-background-images.jpg");
+//     };
+//     update() {
+
+//     };
+
+//     draw(ctx) {
+//         ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+//     };
+
+// };

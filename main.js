@@ -3,20 +3,37 @@ const gameEngine = new GameEngine();
 const ASSET_MANAGER = new AssetManager();
 
 //spritesheets
-ASSET_MANAGER.queueDownload("images/riskPlayer.png");
-ASSET_MANAGER.queueDownload("images/zombie.png");
-ASSET_MANAGER.queueDownload("images/sky.png");
-ASSET_MANAGER.queueDownload("images/clouds.png");
-ASSET_MANAGER.queueDownload("images/tree.png");
-ASSET_MANAGER.queueDownload("images/sun.png");
-ASSET_MANAGER.queueDownload("images/mashroom.png");
-ASSET_MANAGER.queueDownload("images/pixalTree.png");
 
 ASSET_MANAGER.queueDownload("images/sun.png");
+ASSET_MANAGER.queueDownload("images/sky.png");
+ASSET_MANAGER.queueDownload("images/clouds.png");
+
+ASSET_MANAGER.queueDownload("images/tree.png");
+ASSET_MANAGER.queueDownload("images/tree2.png");
+ASSET_MANAGER.queueDownload("images/bigTree.png");
+ASSET_MANAGER.queueDownload("images/backGrass.png");
+ASSET_MANAGER.queueDownload("images/river.png");
+
+
+
+ASSET_MANAGER.queueDownload("images/pixalTree.png");
+ASSET_MANAGER.queueDownload("images/mashroom.png");
+ASSET_MANAGER.queueDownload("images/bush.png");
+ASSET_MANAGER.queueDownload("images/rock.png");
+ASSET_MANAGER.queueDownload("images/grass.png");
+
+ASSET_MANAGER.queueDownload("images/riskPlayer.png");
+ASSET_MANAGER.queueDownload("images/zombie.png");
+ASSET_MANAGER.queueDownload("images/bird.png");
+
+
 ASSET_MANAGER.queueDownload("images/iconHeart.png");
 ASSET_MANAGER.queueDownload("images/background.png");
 ASSET_MANAGER.queueDownload("images/mountain.png");
-ASSET_MANAGER.queueDownload("images/grass.png");
+ASSET_MANAGER.queueDownload("images/ground.png");
+ASSET_MANAGER.queueDownload("images/green-background-images.jpg");
+
+
 
 
 //music 
@@ -39,9 +56,9 @@ ASSET_MANAGER.downloadAll(() => {
         console.log("Font Loaded");
     });
 
-	sceneManager = new Scene(gameEngine);
+    sceneManager = new Scene(gameEngine);
     gameEngine.addEntity(sceneManager);
-	gameEngine.sceneManager = sceneManager;
+    gameEngine.sceneManager = sceneManager;
 
     gameEngine.init(ctx);
 
