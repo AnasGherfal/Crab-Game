@@ -27,8 +27,9 @@ class Scene extends Entity {
         this.player = new Player(game, 400, 600);
         this.game.addEntity(this.player);
 
+
         //Entity Counter
-        this.entityCounter = new TextElement(game, 50, 200, "Entities: " + game.entities.length);
+        this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
         this.game.addEntity(this.entityCounter);
 
         this.loadLevel(400, 300);
@@ -37,17 +38,15 @@ class Scene extends Entity {
         this.testDummy = new Dummy(game, 850, 700);
         this.game.addEntity(this.testDummy);
 
+
         this.teleporter = new Teleporter(game, 600, 710);
         this.game.addEntity(this.teleporter);
 
         this.platform = new Platform(game, 96, 644, 165, 22);
         // this.game.addEntity(this.platform);
 
-        this.testItem = new Item(game, 172, 748);
+        this.testItem = new Item(game, 250, 748);
         this.game.addEntity(this.testItem);
-
-        
-
     };
 
     clearEntities() {
@@ -59,7 +58,7 @@ class Scene extends Entity {
     enemyWave() {
 
         //generate 5 zombies
-        // for (var i = 0; i < 5; i++) {
+        // for (var i = 0; i < 1; i++) {
         //     this.zombie = new Zombie(this.game, i * 200, 700);
         //     this.game.addEntity(this.zombie);
         // }
@@ -91,13 +90,21 @@ class Scene extends Entity {
                 this.game.addEntity(this.background);
             }
         }
+
+
+        //Bird flying in the Background it can be an enemy or not
+
+        // this.bird = new Bird(this.game, 500, 200);
+        // this.game.addEntity(this.bird);
+
+
         for (var i = 0; i < 100; i++) {
             this.background = new Ground(this.game, i * 48, 750);
             this.game.addEntity(this.background);
         }
 
         for (var i = 0; i < 50; i++) {
-            this.background = new PixalTree(this.game, i * 1200, 630);
+            this.background = new PixalTree(this.game, i * 1200, 590);
             this.game.addEntity(this.background);
         }
         for (var i = 0.01; i < 20; i++) {
@@ -106,28 +113,83 @@ class Scene extends Entity {
         }
 
         for (var i = 0; i < 50; i++) {
-            this.background = new Tree(this.game, -80 + i * 100, 250);
+            this.background = new Tree(this.game, -80 + i * 140, 380, 200, 250);
             this.game.addEntity(this.background);
         }
+        for (var i = 0; i < 50; i++) {
+            this.background = new Grass(this.game, i * 100, 503, 200, 200);
+            this.game.addEntity(this.background);
+        }
+
+
+
+        for (var i = 0; i < 50; i++) {
+            this.background = new River(this.game, -80 + i * 450, 535, 550, 70);
+            this.game.addEntity(this.background);
+        }
+
+
+
+
+        for (var i = 0; i < 100; i++) {
+            this.background = new Tree3(this.game, -120 + i * 350, 200, 400, 400);
+            this.game.addEntity(this.background);
+        }
+
+
+        // further trees
+        for (var i = 0; i < 100; i++) {
+            this.background = new Tree(this.game, -80 + i * 30, 389, 100, 150);
+            this.game.addEntity(this.background);
+        }
+
+
+        for (var i = 0; i < 50; i++) {
+            this.background = new Bush(this.game, i * 440, 660);
+            this.game.addEntity(this.background);
+        }
+
+        for (var i = 0; i < 50; i++) {
+            this.background = new Rock(this.game, 100 - i * 1000, 610, 150, 200);
+            this.game.addEntity(this.background);
+        }
+
+
+
+
+
+        // for (var i = 0; i < 50; i++) {
+        //     this.background = new Tree2(this.game, -100 + i * 300, 400);
+        //     this.game.addEntity(this.background);
+        // }
+
+
+
 
         for (var i = 0; i < 20; i++) {
-            this.background = new Clouds(this.game, i * 1236, 50);
+            this.background = new Clouds(this.game, i * 1236, 0);
             this.game.addEntity(this.background);
         }
-
 
 
         this.background = new Sun(this.game, 900, 90);
         this.game.addEntity(this.background);
 
         for (var i = 0; i < 20; i++) {
-            this.background = new Mountain(this.game, i * 1236, 158);
+            this.background = new Mountain(this.game, i * 1236, 280);
             this.game.addEntity(this.background);
         }
         for (var i = 0; i < 20; i++) {
-            this.background = new Sky(this.game, i * 1236, 50);
+            this.background = new Sky(this.game, i * 1236, 0);
             this.game.addEntity(this.background);
         }
+
+        // for (var i = 0; i < 50; i++) {
+        //     this.background = new Grass2(this.game, i * 100, 605, 100, 100);
+        //     this.game.addEntity(this.background);
+        // }
+
+
 
 
 
@@ -164,14 +226,11 @@ class Scene extends Entity {
         this.game.addEntity(entity);
     }
 
-    getHit(shootingVector)
-    {
+    getHit(shootingVector) {
         let hitEntities = []
         this.game.entities.forEach(entity => {
-            if (entity.shootable)
-            {
-                if (shootingVector.intersect(entity.hitVector))
-                {
+            if (entity.shootable) {
+                if (shootingVector.intersect(entity.hitVector)) {
                     hitEntities.push(entity);
                 }
             }
@@ -197,10 +256,8 @@ class Scene extends Entity {
         // Shoot Detection
         this.player.hitVector.color = rgba(0, 0, 0, 1);
         this.game.entities.forEach(entity => {
-            if (entity.shootable)
-            {
-                if (this.player.hitVector.intersect(entity.hitVector))
-                {
+            if (entity.shootable) {
+                if (this.player.hitVector.intersect(entity.hitVector)) {
                     this.player.hitVector.color = rgba(255, 0, 0, 1);
                 }
             }
