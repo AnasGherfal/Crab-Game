@@ -39,8 +39,8 @@ class Tree2 {
     constructor(game, x, y) {
         Object.assign(this, { game, x, y });
 
-        this.width = 70;
-        this.height = 200;
+        this.width = 100;
+        this.height = 230;
 
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/tree2.png");
@@ -293,7 +293,47 @@ class Ground {
     };
 }
 
+class Palm {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
 
+        this.width = 200;
+        this.height = 350;
+
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/palm.png");
+    };
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
+
+};
+
+class mashroomTree {
+    constructor(game, x, y) {
+        Object.assign(this, { game, x, y });
+
+        this.width = 250;
+        this.height = 250;
+
+
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/mushroomTree.png");
+    };
+    update() {
+
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
+
+};
 
 class Mashroom {
     constructor(game, x, y) {

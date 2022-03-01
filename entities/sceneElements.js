@@ -32,7 +32,6 @@ class Scene extends Entity {
         this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
         this.game.addEntity(this.entityCounter);
 
-        this.loadLevel(400, 300);
 
         //Test Stuff
         this.testDummy = new Dummy(game, 850, 700);
@@ -47,6 +46,9 @@ class Scene extends Entity {
 
         this.testItem = new Item(game, 250, 748);
         this.game.addEntity(this.testItem);
+
+        this.loadLevel(400, 300);
+
     };
 
     clearEntities() {
@@ -99,47 +101,11 @@ class Scene extends Entity {
 
 
         for (var i = 0; i < 100; i++) {
-            this.background = new Ground(this.game, i * 48, 750);
-            this.game.addEntity(this.background);
-        }
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new PixalTree(this.game, i * 1200, 590);
+            this.background = new Ground(this.game, i * 48, 753);
             this.game.addEntity(this.background);
         }
         for (var i = 0.01; i < 20; i++) {
             this.background = new Mashroom(this.game, i * 1200, 737);
-            this.game.addEntity(this.background);
-        }
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new Tree(this.game, -80 + i * 140, 380, 200, 250);
-            this.game.addEntity(this.background);
-        }
-        for (var i = 0; i < 50; i++) {
-            this.background = new Grass(this.game, i * 100, 503, 200, 200);
-            this.game.addEntity(this.background);
-        }
-
-
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new River(this.game, -80 + i * 450, 535, 550, 70);
-            this.game.addEntity(this.background);
-        }
-
-
-
-
-        for (var i = 0; i < 100; i++) {
-            this.background = new Tree3(this.game, -120 + i * 350, 200, 400, 400);
-            this.game.addEntity(this.background);
-        }
-
-
-        // further trees
-        for (var i = 0; i < 100; i++) {
-            this.background = new Tree(this.game, -80 + i * 30, 389, 100, 150);
             this.game.addEntity(this.background);
         }
 
@@ -148,22 +114,53 @@ class Scene extends Entity {
             this.background = new Bush(this.game, i * 440, 660);
             this.game.addEntity(this.background);
         }
-
         for (var i = 0; i < 50; i++) {
-            this.background = new Rock(this.game, 100 - i * 1000, 610, 150, 200);
+            this.background = new PixalTree(this.game, i * 1200, 590);
             this.game.addEntity(this.background);
         }
 
 
+        for (var i = 1.5; i < 50; i++) {
+            this.background = new Rock(this.game, i * 600, 610, 150, 200);
+            this.game.addEntity(this.background);
+        }
 
-
-
+        for (var i = 0; i < 50; i++) {
+            this.background = new Grass(this.game, i * 100, 630, 200, 200);
+            this.game.addEntity(this.background);
+        }
         // for (var i = 0; i < 50; i++) {
-        //     this.background = new Tree2(this.game, -100 + i * 300, 400);
+        //     this.background = new Tree(this.game, -80 + i * 200, 500, 200, 250);
         //     this.game.addEntity(this.background);
         // }
 
 
+        for (var i = 0; i < 50; i++) {
+            this.background = new River(this.game, -80 + i * 450, 665, 550, 70);
+            this.game.addEntity(this.background);
+        }
+        for (var i = 0.2; i < 50; i++) {
+            this.background = new mashroomTree(this.game, i * 500, 480);
+            this.game.addEntity(this.background);
+        }
+
+        //Big trees
+        for (var i = 0; i < 100; i++) {
+            this.background = new Tree3(this.game, i * 380, 300, 400, 400);
+            this.game.addEntity(this.background);
+        }
+
+
+        // further trees
+        for (var i = 0; i < 100; i++) {
+            this.background = new Tree(this.game, -80 + i * 40, 500, 120, 170);
+            this.game.addEntity(this.background);
+        }
+
+        for (var i = 0.5; i < 100; i++) {
+            this.background = new Palm(this.game, i * 620, 250);
+            this.game.addEntity(this.background);
+        }
 
 
         for (var i = 0; i < 20; i++) {
@@ -184,10 +181,10 @@ class Scene extends Entity {
             this.game.addEntity(this.background);
         }
 
-        // for (var i = 0; i < 50; i++) {
-        //     this.background = new Grass2(this.game, i * 100, 605, 100, 100);
-        //     this.game.addEntity(this.background);
-        // }
+        for (var i = 0; i < 50; i++) {
+            this.background = new Grass2(this.game, i * 100, 570, 100, 100);
+            this.game.addEntity(this.background);
+        }
 
 
 
