@@ -21,6 +21,7 @@ class Player extends Entity {
         //Properties
         this.jumpCooldown = 100;
         this.currentHealth = 0.5;
+        this.onPlatform = false;
 
         //Attached Objects
         this.hitVector = new Vector(game, x, y, x, y);
@@ -105,29 +106,55 @@ class Player extends Entity {
 
         this.vx *= 0.94;
 
+        if (this.onPlatform)
+        {
+            this.currentHealth = 1;
+        }
+        else
+        {
+            this.currentHealth = 0.5;
+        }
 
         // COLLISION DETECTION
+        let detected = false;
         for (let i = 0; i < this.game.entities.length; i++)
         {
             if (this.game.entities[i].collisions)
             {
-                let t = this.game.entities[i];
-                if (this.x > t.x && this.x < t.x + t.width)
+                let thePlatform = this.game.entities[i];
+                if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width)
                 {
-                    if (this.y < t.y - this.height * this.scale)
+                    let playerAdjustedHeight = (thePlatform.y - (this.height * this.scale));
+                    if (this.y < playerAdjustedHeight)
                     {
-                        t.platformRect.color = rgba(255, 100, 100, 1);
-                    }
-                    
+
+                        if (this.vy >= 0 && this.y > playerAdjustedHeight - 10 && this.y < playerAdjustedHeight + 10)
+                        {
+                            console.log(this.y + ", " + (playerAdjustedHeight))
+
+                            this.onPlatform = true;
+                        }
+
+                        detected = true;
+                        thePlatform.platformRect.color = rgba(255, 100, 100, 1);
+                    }  
                 }
-                else
+
+                if (detected == false)
                 {
-                    t.platformRect.color = rgba(0, 100, 100, 1);
+                    thePlatform.platformRect.color = rgba(0, 100, 100, 1);
                 }
             }
+            if (detected == false)
+            {
+                this.onPlatform = false;
+            }
+
+           
+
         }
 
-        if (this.y < this.game.height - this.height * this.scale) {
+        if (this.y < this.game.height - this.height * this.scale && this.onPlatform == false) {
             this.vy += 0.25;
         } else {
             this.vy = 0;
