@@ -14,9 +14,15 @@ class Player extends Entity {
         //Flags
         this.clickable = true;
         this.hoverable = true;
-
+        
+        //state 0 = idle 1 = walk
+        this.state = 0;
+        
         //Sprite
-        this.animator = new Animator(ASSET_MANAGER.getAsset("images/crabwalk.png"), 0, 0, 33, 27, 4, 0.15);
+        this.animator = [];
+        this.animator[0] = new Animator(ASSET_MANAGER.getAsset("images/crabidle.png"), 0, 0, 32, 27, 4, 0.45);
+        this.animator[1] = new Animator(ASSET_MANAGER.getAsset("images/crabwalk.png"), 0, 0, 33, 27, 4, 0.15);
+        
 
         //Properties
         this.jumpCooldown = 100;
@@ -27,8 +33,8 @@ class Player extends Entity {
         this.hitVector = new Vector(game, x, y, x, y);
         this.children.push(this.hitVector);
 
-        this.muzzleFlash = new ParticleSpawner(game, x, y, [rgba(255, 200, 0, 1)]);
-        this.children.push(this.muzzleFlash);
+        this.bulletShell = new ParticleSpawner(game, x, y, [rgba(255, 200, 0, 1)]);
+        this.children.push(this.bulletShell);
 
         //Debug Options
         this.hitVector.invisible = false;
@@ -41,7 +47,7 @@ class Player extends Entity {
 
     mouseClicked(mouseX, mouseY) {
         // this.displayDamageText(randomInt(10) + 1);
-        this.muzzleFlash.spawnParticles(1, 0, -1);
+        this.bulletShell.spawnParticles(1, 0, -1);
         this.setHitVector();
         this.game.sceneManager.getHit(this.hitVector).forEach(entity => {
             let damage = -getRandomInteger(1, 10);
@@ -169,15 +175,20 @@ class Player extends Entity {
 
             if (this.game.keys["a"] ) { 
                 this.vx = -2;
+                this.state = 1;
                 dampenHorizontal = false;
-            } else
-                this.vs = 0;
+            } else {
+                this.vx = 0;
+                this.state = 0;
+            }
 
             if (this.game.keys["d"] ) { 
                 if (dampenHorizontal) {
                     this.vx = 2;
+                    this.state = 1;
                 } else {
                     this.vx = 0;
+                    this.state = 0;
                 }
                 dampenHorizontal = false;
             }
@@ -222,7 +233,7 @@ class Player extends Entity {
         ctx.moveTo(this.x + (this.scale * this.width / 2), this.y + (this.scale * this.height / 2));
 
         super.draw(ctx);
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, 0);
+        this.animator[this.state].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, 0);
 
         ctx.restore();
 

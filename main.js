@@ -26,6 +26,7 @@ ASSET_MANAGER.queueDownload("images/rock.png");
 ASSET_MANAGER.queueDownload("images/grass.png");
 
 ASSET_MANAGER.queueDownload("images/crabwalk.png");
+ASSET_MANAGER.queueDownload("images/crabidle.png");
 ASSET_MANAGER.queueDownload("images/crabgun.png");
 //ASSET_MANAGER.queueDownload("images/riskPlayer.png");
 ASSET_MANAGER.queueDownload("images/zombie.png");
