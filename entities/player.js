@@ -3,9 +3,9 @@ class Player extends Entity {
         super(game, x, y);
 
         //Sizing
-        this.width = 6;
-        this.height = 11;
-        this.scale = 5;
+        this.width = 33;
+        this.height = 23;
+        this.scale = 2;
 
         //Right = 0
         //Left  = 1
@@ -16,7 +16,7 @@ class Player extends Entity {
         this.hoverable = true;
 
         //Sprite
-        this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
+        this.animator = new Animator(ASSET_MANAGER.getAsset("images/crabwalk.png"), 0, 0, 33, 27, 4, 0.15);
 
         //Properties
         this.jumpCooldown = 100;
