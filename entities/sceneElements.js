@@ -53,8 +53,15 @@ class Scene extends Entity {
     enemyWave() {
 
         //generate 5 zombies
-        for (var i = 0.99; i < 3; i++) {
-            this.zombie = new Zombie(this.game, i * 200, 200);
+        
+        for (var i = 0.99; i < Math.round(Math.random() * 20 )  ; i++) {
+            this.zombie = new Zombie(this.game, i * 800 + i, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + i*60, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + i*40, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + 90, 200);
             this.game.addEntity(this.zombie);
         }
     }
@@ -69,10 +76,6 @@ class Scene extends Entity {
         //todo: spawn new wave after a set time?
 
         this.enemyWave();
-
-        //todo : figure out max level length
-        // spawn trees based on level length
-        // spawn clouds based on level length
         
         /*
         var platNum = Math.round(Math.random() * maxplat);

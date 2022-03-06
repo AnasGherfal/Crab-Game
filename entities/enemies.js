@@ -20,12 +20,12 @@ class Zombie extends Entity {
         
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
-        this.children.push(this.hitVector);
+        //this.children.push(this.hitVector);
 
         this.healthBar = new ProgressBar(game, x - 10, y - 20, 60, 10, rgb(160, 38, 37), true);
-        this.children.push(this.healthBar);
+        //this.children.push(this.healthBar);
 
-        this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(150, 0, 150, 1), rgba(160, 38, 37, 1)]);
+        this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(50, 0, 0, 1), rgba(0, 100, 5, 1)]);
         this.children.push(this.particleSpawner);
 
         //Properties
@@ -34,6 +34,7 @@ class Zombie extends Entity {
         this.maxHealth = 100;
         this.corpseTimer = 100;
         this.onPlatform = false;
+        this.isEnemy = true;
 
 
     }
@@ -58,7 +59,7 @@ class Zombie extends Entity {
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width){
                     this.state = 0;
                     this.vx = 0;
-                    player.changeHealth(-.01);
+                    player.changeHealth(-.005);
                 } else {
                     if (this.x < player.x) {
                         this.state = 1;
@@ -69,7 +70,7 @@ class Zombie extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.01);
+                        player.changeHealth(-.005);
                     }
                     
                 }
@@ -141,7 +142,7 @@ class Zombie extends Entity {
 
     die() {
         if (this.corpseTimer-- == 100) {
-            this.particleSpawner.spawnParticles(1000);
+            this.particleSpawner.spawnParticles(100);
             this.vx += 5;
             this.vy -= 5;
         } else if (this.corpseTimer > 0) {

@@ -15,6 +15,7 @@ class Player extends Entity {
         this.clickable = true;
         this.hoverable = true;
         this.isPlayer = true;
+        this.isDead = false;
 
         //state 0 = idle 1 = walk
         this.state = 0;
@@ -43,6 +44,11 @@ class Player extends Entity {
 
     changeHealth(val) {
         this.currentHealth += val;
+        
+        if (this.currentHealth == 0) {
+            this.isDead = true;
+        }
+        
     }
 
     mouseClicked(mouseX, mouseY) {
