@@ -34,17 +34,13 @@ class Scene extends Entity {
 
 
         //Test Stuff
-        this.testDummy = new Dummy(game, 850, 700);
-        this.game.addEntity(this.testDummy);
+        //this.testDummy = new Dummy(game, 850, 700);
+        //this.game.addEntity(this.testDummy);
 
+        //this.testItem = new Item(game, 350, 600);
+        //this.game.addEntity(this.testItem);
 
-        this.teleporter = new Teleporter(game, 600, 710);
-        this.game.addEntity(this.teleporter);
-
-        this.testItem = new Item(game, 350, 600);
-        this.game.addEntity(this.testItem);
-
-        this.loadLevel(400, 300);
+        this.loadLevel(1, 400, 300);
 
     };
 
@@ -63,12 +59,12 @@ class Scene extends Entity {
         }
     }
 
-    loadLevel(level, x, y, title) {
+    loadLevel(level, x, y) {
         this.game.entites = [];
         this.clearEntities();
         this.x = 0;
         this.level = level;
-        this.title = title;
+        //this.title = title;
 
         //todo: spawn new wave after a set time?
 
@@ -77,18 +73,25 @@ class Scene extends Entity {
         //todo : figure out max level length
         // spawn trees based on level length
         // spawn clouds based on level length
+        
+        /*
+        var platNum = Math.round(Math.random() * maxplat);
 
-        var platNum = Math.round(Math.random() * 20);
+         for (var i = 3; i < maxplat; i++) {
+             //coin flip to make it more random idk
 
-        // for (var i = 3; i < 20; i++) {
-        //     //coin flip to make it more random idk
-
-        //     if (Math.round(Math.random()) / 2 == 0) {
-        //         var j = Math.round(Math.random() * 100);
-        //         this.background = new Platform(this.game, i * 300, j + 400, 100, 30);
-        //         this.game.addEntity(this.background);
-        //     }
-        // }
+             if (Math.round(Math.random()) / 2 == 0) {
+                 var j = Math.round(Math.random() * 100);
+                 this.background = new Platform(this.game, i * 300, j + 400, 100, 30);
+                 this.game.addEntity(this.background);
+             }
+         }
+         */
+        
+        for (var i = 0; i < 5000/100; i++) {
+            this.platform = new Platform(this.game, i * 100, 650, 100, 100);
+            this.game.addEntity(this.platform);
+        }
 
 
         //Bird flying in the Background it can be an enemy or not
@@ -96,63 +99,65 @@ class Scene extends Entity {
         // this.bird = new Bird(this.game, 500, 200);
         // this.game.addEntity(this.bird);
 
+        //for (var i = 0.01; i < 20; i++) {
+        //    this.background = new Mashroom(this.game, i * 1200, 737);
+        //    this.game.addEntity(this.background);
+        //}
 
-        for (var i = 0; i < 30; i++) {
-            this.platform = new Platform(this.game, i * 100, 610, 100, 100);
-            this.game.addEntity(this.platform);
+        for (var i = 0; i < (5000%150) ; i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.background = new Bush(this.game, i * 400, 555);
+                this.game.addEntity(this.background);
+            }
         }
 
-
-        for (var i = 0.01; i < 20; i++) {
-            this.background = new Mashroom(this.game, i * 1200, 737);
-            this.game.addEntity(this.background);
+        for (var i = 0; i < (5000%120) ; i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.background = new PixalTree(this.game, i * 1300, 490);
+                this.game.addEntity(this.background);
+            }
         }
 
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new Bush(this.game, i * 800, 515);
-            this.game.addEntity(this.background);
+        for (var i = 1.5; i < (5000%640) ; i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.background = new Rock(this.game, i * 600, 505, 150, 200);
+                this.game.addEntity(this.background);
+            }
         }
-        for (var i = 0; i < 50; i++) {
-            this.background = new PixalTree(this.game, i * 1300, 450);
-            this.game.addEntity(this.background);
-        }
-
-
-        for (var i = 1.5; i < 50; i++) {
-            this.background = new Rock(this.game, i * 600, 480, 150, 200);
-            this.game.addEntity(this.background);
-        }
-
-        for (var i = 0; i < 50; i++) {
+        
+        for (var i = 0; i < (5000%800); i++) {
             this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
             this.game.addEntity(this.background);
         }
-        for (var i = 0.2; i < 50; i++) {
-            this.background = new mashroomTree(this.game, i * 1000, 420);
-            this.game.addEntity(this.background);
+        
+        for (var i = 0.2; i < (5000%250) ; i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.background = new mashroomTree(this.game, i * 1000, 420);
+                this.game.addEntity(this.background);
+            }
         }
 
-        //Big trees
-        for (var i = 0; i < 100; i++) {
-            this.background = new Tree3(this.game, i * 380, 300, 400, 400);
-            this.game.addEntity(this.background);
+        //Big trees     
+        for (var i = 0; i < (5000%380); i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.background = new Tree3(this.game, i * 380, 300, 400, 400);
+                this.game.addEntity(this.background);
+            }
         }
 
 
         // further trees
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < (5000%840); i++) {
             this.background = new Tree(this.game, -80 + i * 40, 500, 120, 170);
             this.game.addEntity(this.background);
         }
-
-        for (var i = 0.5; i < 100; i++) {
+        for (var i = 0.5; i < (5000%200); i++) {
             this.background = new Palm(this.game, i * 620, 250);
             this.game.addEntity(this.background);
         }
 
 
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < (5000%1240); i++) {
             this.background = new Clouds(this.game, i * 1236, 0);
             this.game.addEntity(this.background);
         }
@@ -161,19 +166,23 @@ class Scene extends Entity {
         this.background = new Sun(this.game, 900, 90);
         this.game.addEntity(this.background);
 
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < (5000%1240); i++) {
             this.background = new Mountain(this.game, i * 1236, 280);
             this.game.addEntity(this.background);
         }
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < (5000%1240); i++) {
             this.background = new Sky(this.game, i * 1236, 0);
             this.game.addEntity(this.background);
         }
 
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < (5000%640); i++) {
             this.background = new Grass2(this.game, i * 100, 570, 100, 100);
             this.game.addEntity(this.background);
         }
+        
+        //spawn teleporter at a random space from 600 but also within the bounds of the game
+        this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);
+        this.game.addEntity(this.background);
 
 
         // if (music && !this.title) {

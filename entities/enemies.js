@@ -17,6 +17,7 @@ class Zombie extends Entity {
         this.animator = [];
         this.animator[0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 10, 5, 100, 170, 3, 0.5);
         this.animator[1] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 18, 100, 170, 3, 0.5);
+        
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
         this.children.push(this.hitVector);
@@ -46,15 +47,35 @@ class Zombie extends Entity {
             this.die();
         }
 
-
-
-
         this.moveBy(this.vx, this.vy);
 
         // COLLISION DETECTION
         let detected = false;
         for (let i = 0; i < this.game.entities.length; i++) {
-            if (this.game.entities[i].collisions) {
+            
+            if (this.game.entities[i].isPlayer){
+                let player = this.game.entities[i];
+                if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width){
+                    this.state = 0;
+                    this.vx = 0;
+                    player.changeHealth(-.01);
+                } else {
+                    if (this.x < player.x) {
+                        this.state = 1;
+                        this.vx = .1;
+                    } else if (this.x > player.x){
+                        this.state = 1;
+                        this.vx = -.1;
+                    } else {
+                        this.state = 0;
+                        this.vx = 0;
+                        player.changeHealth(-.01);
+                    }
+                    
+                }
+            }
+            
+            else if (this.game.entities[i].collisions) {
                 let thePlatform = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width) {
                     let zombieAdjustedHeight = (thePlatform.y - (this.height * this.scale));
@@ -79,7 +100,9 @@ class Zombie extends Entity {
                 this.onPlatform = false;
             }
         }
-
+        
+        
+        
 
 
         if (this.y < this.game.height - this.height * this.scale && this.onPlatform == false) {
@@ -105,12 +128,14 @@ class Zombie extends Entity {
             this.vy = -10;
         }
 
-        // this.x += this.vx;
-        // this.y += this.vy;
+        this.x += this.vx;
+        //this.y += this.vy;
 
         // if (abs(this.vx) < 0.0001) {
         //     this.vx = 0;
         // }
+        
+        
 
     }
 

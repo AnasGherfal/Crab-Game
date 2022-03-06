@@ -4,7 +4,7 @@ class Player extends Entity {
 
         //Sizing
         this.width = 33;
-        this.height = 23;
+        this.height = 20;
         this.scale = 2;
 
         //Right = 0
@@ -14,6 +14,7 @@ class Player extends Entity {
         //Flags
         this.clickable = true;
         this.hoverable = true;
+        this.isPlayer = true;
 
         //state 0 = idle 1 = walk
         this.state = 0;
@@ -108,12 +109,13 @@ class Player extends Entity {
         let dampenHorizontal = true;
 
         this.vx *= 0.94;
-
+        /*
         if (this.onPlatform) {
             this.currentHealth = 1;
         } else {
             this.currentHealth = 0.5;
         }
+        */
 
         // COLLISION DETECTION
         let detected = false;
