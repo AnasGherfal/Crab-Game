@@ -14,15 +14,15 @@ class Player extends Entity {
         //Flags
         this.clickable = true;
         this.hoverable = true;
-        
+
         //state 0 = idle 1 = walk
         this.state = 0;
-        
+
         //Sprite
         this.animator = [];
         this.animator[0] = new Animator(ASSET_MANAGER.getAsset("images/crabidle.png"), 0, 0, 32, 27, 4, 0.45);
         this.animator[1] = new Animator(ASSET_MANAGER.getAsset("images/crabwalk.png"), 0, 0, 33, 27, 4, 0.15);
-        
+
 
         //Properties
         this.jumpCooldown = 100;
@@ -40,8 +40,7 @@ class Player extends Entity {
         this.hitVector.invisible = false;
     }
 
-    changeHealth(val)
-    {
+    changeHealth(val) {
         this.currentHealth += val;
     }
 
@@ -60,22 +59,20 @@ class Player extends Entity {
     }
 
     displayDamageText(text) {
-        
+
         let sX = this.game.sceneManager.x;
         let sY = this.game.sceneManager.y;
 
         this.children.push(new DamageIndicator(this.game, this.x - sX, this.y - sY, text, 100));
     }
 
-    setHitVector()
-    {
+    setHitVector() {
         let sX = this.game.sceneManager.x;
         let sY = this.game.sceneManager.y;
 
         var mouse = this.game.mouse;
 
-        if (mouse != null)
-        {
+        if (mouse != null) {
             let x1 = this.x + (this.width * this.scale / 2);
             let y1 = this.y + (this.height * this.scale / 2);
 
@@ -112,30 +109,22 @@ class Player extends Entity {
 
         this.vx *= 0.94;
 
-        if (this.onPlatform)
-        {
+        if (this.onPlatform) {
             this.currentHealth = 1;
-        }
-        else
-        {
+        } else {
             this.currentHealth = 0.5;
         }
 
         // COLLISION DETECTION
         let detected = false;
-        for (let i = 0; i < this.game.entities.length; i++)
-        {
-            if (this.game.entities[i].collisions)
-            {
+        for (let i = 0; i < this.game.entities.length; i++) {
+            if (this.game.entities[i].collisions) {
                 let thePlatform = this.game.entities[i];
-                if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width)
-                {
+                if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width) {
                     let playerAdjustedHeight = (thePlatform.y - (this.height * this.scale));
-                    if (this.y < playerAdjustedHeight)
-                    {
+                    if (this.y < playerAdjustedHeight) {
 
-                        if (this.vy >= 0 && this.y > playerAdjustedHeight - 10 && this.y < playerAdjustedHeight + 10)
-                        {
+                        if (this.vy >= 0 && this.y > playerAdjustedHeight - 10 && this.y < playerAdjustedHeight + 10) {
                             console.log(this.y + ", " + (playerAdjustedHeight))
 
                             this.onPlatform = true;
@@ -143,20 +132,16 @@ class Player extends Entity {
 
                         detected = true;
                         thePlatform.platformRect.color = rgba(255, 100, 100, 1);
-                    }  
+                    }
                 }
 
-                if (detected == false)
-                {
+                if (detected == false) {
                     thePlatform.platformRect.color = rgba(0, 100, 100, 1);
                 }
             }
-            if (detected == false)
-            {
+            if (detected == false) {
                 this.onPlatform = false;
             }
-
-           
 
         }
 
@@ -173,7 +158,7 @@ class Player extends Entity {
                 // this.particleSpawner.trigger();
             }
 
-            if (this.game.keys["a"] ) { 
+            if (this.game.keys["a"] && this.x > 130) {
                 this.vx = -2;
                 this.state = 1;
                 dampenHorizontal = false;
@@ -182,7 +167,7 @@ class Player extends Entity {
                 this.state = 0;
             }
 
-            if (this.game.keys["d"] ) { 
+            if (this.game.keys["d"] && this.x < 5000) {
                 if (dampenHorizontal) {
                     this.vx = 2;
                     this.state = 1;
@@ -222,7 +207,7 @@ class Player extends Entity {
     }
 
     draw(ctx) {
-        
+
         ctx.save();
         // if (this.direction == 1) {
         //     ctx.scale(-1, 1);

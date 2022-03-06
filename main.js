@@ -9,7 +9,6 @@ ASSET_MANAGER.queueDownload("images/sky.png");
 ASSET_MANAGER.queueDownload("images/clouds.png");
 
 ASSET_MANAGER.queueDownload("images/tree.png");
-// ASSET_MANAGER.queueDownload("images/tree2.png");
 ASSET_MANAGER.queueDownload("images/bigTree.png");
 ASSET_MANAGER.queueDownload("images/palm.png");
 ASSET_MANAGER.queueDownload("images/mushroomTree.png");
@@ -30,6 +29,7 @@ ASSET_MANAGER.queueDownload("images/crabidle.png");
 ASSET_MANAGER.queueDownload("images/crabgun.png");
 //ASSET_MANAGER.queueDownload("images/riskPlayer.png");
 ASSET_MANAGER.queueDownload("images/zombie.png");
+ASSET_MANAGER.queueDownload("images/zombiewalk.png");
 ASSET_MANAGER.queueDownload("images/bird.png");
 
 

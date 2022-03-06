@@ -40,6 +40,7 @@ class Item extends Entity {
         this.moveBy(0, d);
         super.draw(ctx);
         this.moveBy(0, -d);
+
     }
 
 }

@@ -24,7 +24,7 @@ class Scene extends Entity {
         this.game.addEntity(this.playerHealthBar);
 
         //Player
-        this.player = new Player(game, 400, 600);
+        this.player = new Player(game, 400, 400);
         this.game.addEntity(this.player);
 
 
@@ -41,10 +41,7 @@ class Scene extends Entity {
         this.teleporter = new Teleporter(game, 600, 710);
         this.game.addEntity(this.teleporter);
 
-        this.platform = new Platform(game, 96, 644, 165, 22);
-        // this.game.addEntity(this.platform);
-
-        this.testItem = new Item(game, 250, 748);
+        this.testItem = new Item(game, 350, 600);
         this.game.addEntity(this.testItem);
 
         this.loadLevel(400, 300);
@@ -60,10 +57,10 @@ class Scene extends Entity {
     enemyWave() {
 
         //generate 5 zombies
-        // for (var i = 0; i < 1; i++) {
-        //     this.zombie = new Zombie(this.game, i * 200, 700);
-        //     this.game.addEntity(this.zombie);
-        // }
+        for (var i = 0.99; i < 3; i++) {
+            this.zombie = new Zombie(this.game, i * 200, 200);
+            this.game.addEntity(this.zombie);
+        }
     }
 
     loadLevel(level, x, y, title) {
@@ -83,15 +80,15 @@ class Scene extends Entity {
 
         var platNum = Math.round(Math.random() * 20);
 
-        for (var i = 0; i < 20; i++) {
-            //coin flip to make it more random idk
+        // for (var i = 3; i < 20; i++) {
+        //     //coin flip to make it more random idk
 
-            if (Math.round(Math.random()) / 2 == 0) {
-                var j = Math.round(Math.random() * 100);
-                this.background = new Platform(this.game, i * 300, j + 600, 300, 10);
-                this.game.addEntity(this.background);
-            }
-        }
+        //     if (Math.round(Math.random()) / 2 == 0) {
+        //         var j = Math.round(Math.random() * 100);
+        //         this.background = new Platform(this.game, i * 300, j + 400, 100, 30);
+        //         this.game.addEntity(this.background);
+        //     }
+        // }
 
 
         //Bird flying in the Background it can be an enemy or not
@@ -100,10 +97,12 @@ class Scene extends Entity {
         // this.game.addEntity(this.bird);
 
 
-        for (var i = 0; i < 100; i++) {
-            this.background = new Ground(this.game, i * 48, 753);
-            this.game.addEntity(this.background);
+        for (var i = 0; i < 30; i++) {
+            this.platform = new Platform(this.game, i * 100, 610, 100, 100);
+            this.game.addEntity(this.platform);
         }
+
+
         for (var i = 0.01; i < 20; i++) {
             this.background = new Mashroom(this.game, i * 1200, 737);
             this.game.addEntity(this.background);
@@ -111,36 +110,26 @@ class Scene extends Entity {
 
 
         for (var i = 0; i < 50; i++) {
-            this.background = new Bush(this.game, i * 440, 660);
+            this.background = new Bush(this.game, i * 800, 515);
             this.game.addEntity(this.background);
         }
         for (var i = 0; i < 50; i++) {
-            this.background = new PixalTree(this.game, i * 1200, 590);
+            this.background = new PixalTree(this.game, i * 1300, 450);
             this.game.addEntity(this.background);
         }
 
 
         for (var i = 1.5; i < 50; i++) {
-            this.background = new Rock(this.game, i * 600, 610, 150, 200);
+            this.background = new Rock(this.game, i * 600, 480, 150, 200);
             this.game.addEntity(this.background);
         }
 
         for (var i = 0; i < 50; i++) {
-            this.background = new Grass(this.game, i * 100, 630, 200, 200);
-            this.game.addEntity(this.background);
-        }
-        // for (var i = 0; i < 50; i++) {
-        //     this.background = new Tree(this.game, -80 + i * 200, 500, 200, 250);
-        //     this.game.addEntity(this.background);
-        // }
-
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new River(this.game, -80 + i * 450, 665, 550, 70);
+            this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
             this.game.addEntity(this.background);
         }
         for (var i = 0.2; i < 50; i++) {
-            this.background = new mashroomTree(this.game, i * 500, 480);
+            this.background = new mashroomTree(this.game, i * 1000, 420);
             this.game.addEntity(this.background);
         }
 
@@ -187,26 +176,11 @@ class Scene extends Entity {
         }
 
 
-
-
-
-
         // if (music && !this.title) {
         //     ASSET_MANAGER.pauseBackgroundMusic();
         //     ASSET_MANAGER.playAsset(music);
         // }
 
-
-        //this.player.x = x;
-        //this.player.y = y;
-
-        //var that = this;
-        //var player = false;
-        //this.game.entites.forEach(function(entity) {
-        //    if(that.player === entity) player = true;
-        //});
-
-        //if(!player) this.game.addEntity(this.player);
 
     };
 

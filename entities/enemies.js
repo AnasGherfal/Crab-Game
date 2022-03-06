@@ -5,12 +5,18 @@ class Zombie extends Entity {
         super(game, x, y);
 
         this.width = 6;
-        this.height = 145;
-        this.scale = 0.4;
+        this.height = 135;
+        this.scale = 0.5;
 
         this.direction = 0;
 
-        this.animator = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 154, 717, 89, 130, 6, 0.5);
+        //state 0 = idle 1 = walk
+        this.state = 0;
+
+        //Sprite
+        this.animator = [];
+        this.animator[0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 10, 5, 100, 170, 3, 0.5);
+        this.animator[1] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 18, 100, 170, 3, 0.5);
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
         this.children.push(this.hitVector);
@@ -26,31 +32,85 @@ class Zombie extends Entity {
         this.currentHealth = 100;
         this.maxHealth = 100;
         this.corpseTimer = 100;
+        this.onPlatform = false;
+
 
     }
 
 
     update() {
-
-
         super.update();
-        this.vx = 0.1;
+        this.healthBar.setPercent(this.currentHealth / this.maxHealth);
+
+        if (this.currentHealth <= 0) {
+            this.die();
+        }
+
+
+
+
         this.moveBy(this.vx, this.vy);
 
+        // COLLISION DETECTION
+        let detected = false;
+        for (let i = 0; i < this.game.entities.length; i++) {
+            if (this.game.entities[i].collisions) {
+                let thePlatform = this.game.entities[i];
+                if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width) {
+                    let zombieAdjustedHeight = (thePlatform.y - (this.height * this.scale));
+                    if (this.y < zombieAdjustedHeight) {
 
-        // if (this.jumpCooldown > 0) {
-        //     this.jumpCooldown -= 1;
-        // }
+                        if (this.vy >= 0 && this.y > zombieAdjustedHeight - 10 && this.y < zombieAdjustedHeight + 10) {
+                            console.log(this.y + ", " + (zombieAdjustedHeight))
+
+                            this.onPlatform = true;
+                        }
+
+                        detected = true;
+                        thePlatform.platformRect.color = rgba(255, 100, 100, 1);
+                    }
+                }
+
+                if (detected == false) {
+                    thePlatform.platformRect.color = rgba(0, 100, 100, 1);
+                }
+            }
+            if (detected == false) {
+                this.onPlatform = false;
+            }
+        }
 
 
-        if (this.y < this.game.height - this.height * this.scale) {
+
+        if (this.y < this.game.height - this.height * this.scale && this.onPlatform == false) {
             this.vy += 0.25;
         } else {
             this.vy = 0;
         }
-        this.x += this.vx;
-        this.y += this.vy;
 
+
+
+
+        if (this.vx > 10) {
+            this.vx = 10;
+        }
+        if (this.vx < -10) {
+            this.vx = -10;
+        }
+
+        if (this.vy > 10) {
+            this.vy = 10;
+        }
+        if (this.vy < -10) {
+            this.vy = -10;
+        }
+
+        // this.x += this.vx;
+        // this.y += this.vy;
+
+        // if (abs(this.vx) < 0.0001) {
+        //     this.vx = 0;
+        // }
 
     }
 
@@ -82,9 +142,11 @@ class Zombie extends Entity {
     }
 
     draw(ctx) {
+        ctx.save();
+
 
         super.draw(ctx);
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
+        this.animator[this.state].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
         ctx.restore();
 
     }
@@ -120,14 +182,6 @@ class Bird extends Entity {
         this.vx = 0.1;
         this.moveBy(this.vx, this.vy);
 
-
-        // if (this.y < this.game.height - this.height * this.scale) {
-        //     this.vy += 0.25;
-        // } else {
-        //     this.vy = 0;
-        // }
-        // this.x += this.vx;
-        // this.y += this.vy;
 
 
     }
