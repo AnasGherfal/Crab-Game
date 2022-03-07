@@ -21,10 +21,10 @@ class Zombie extends Entity {
 
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
-        //this.children.push(this.hitVector);
+        this.children.push(this.hitVector);
 
         this.healthBar = new ProgressBar(game, x - 10, y - 20, 60, 10, rgb(160, 38, 37), true);
-        //this.children.push(this.healthBar);
+        this.children.push(this.healthBar);
 
         this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(50, 0, 0, 1), rgba(0, 100, 5, 1)]);
         this.children.push(this.particleSpawner);
@@ -166,8 +166,11 @@ class Zombie extends Entity {
             this.vy = -10;
         }
 
-        this.x += this.vx;
-        //this.y += this.vy;
+        // this.x += this.vx;
+
+        this.moveBy(this.vx, 0);
+
+        // this.y += this.vy;
 
         // if (abs(this.vx) < 0.0001) {
         //     this.vx = 0;
@@ -209,7 +212,7 @@ class Zombie extends Entity {
 
 
         super.draw(ctx);
-        this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale);
+        this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
         ctx.restore();
 
     }
