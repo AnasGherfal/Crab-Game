@@ -5,7 +5,7 @@ class Player extends Entity {
         //Sizing
         this.width = 33;
         this.height = 20;
-        this.scale = 2;
+        this.scale = 2.5;
 
         //Right = 0
         //Left  = 1
@@ -44,11 +44,11 @@ class Player extends Entity {
 
     changeHealth(val) {
         this.currentHealth += val;
-        
+
         if (this.currentHealth == 0) {
             this.isDead = true;
         }
-        
+
     }
 
     mouseClicked(mouseX, mouseY) {

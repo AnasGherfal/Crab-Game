@@ -5,19 +5,20 @@ class Zombie extends Entity {
         super(game, x, y);
 
         this.width = 6;
-        this.height = 125;
-        this.scale = 0.5;
+        this.height = 90;
+        this.scale = 0.7;
 
-        this.direction = 0;
 
         //state 0 = idle 1 = walk
         this.state = 0;
+        this.direction = 0;
+
+
 
         //Sprite
         this.animator = [];
-        this.animator[0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 10, 5, 100, 170, 3, 0.5);
-        this.animator[1] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 18, 100, 170, 3, 0.5);
-        
+        this.loadAnimations();
+
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
         //this.children.push(this.hitVector);
@@ -39,6 +40,39 @@ class Zombie extends Entity {
 
     }
 
+    loadAnimations() {
+        for (var i = 0; i < 2; i++) { // six states
+            this.animator.push([]);
+            for (var j = 0; j < 2; j++) { // two directions
+                this.animator[i].push([]);
+            }
+        }
+
+
+        //idel
+        //facing right
+        this.animator[0][0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 5, 7, 70, 100, 3, 0.5);
+
+        //idel
+        //facing Left
+        this.animator[0][1] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 5, 7, 70, 100, 3, 0.5);
+
+        //walk
+        //facing right
+        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 468, 65, 120, 6, 0.3);
+
+        //walk 
+        //facing left
+        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/zombieFlipped.png"), 411, 470, -63, 200, 6, 0.3);
+
+        //attack 
+        //face right
+
+
+        //Animation for the zombie death, not implemented
+        this.dead = new Animator(ASSET_MANAGER.getAsset("images/zombie"), 21, 379, 60, 50, 3, 0.7)
+    }
+
 
     update() {
         super.update();
@@ -53,32 +87,35 @@ class Zombie extends Entity {
         // COLLISION DETECTION
         let detected = false;
         for (let i = 0; i < this.game.entities.length; i++) {
-            
-            if (this.game.entities[i].isPlayer){
+
+            if (this.game.entities[i].isPlayer) {
                 let player = this.game.entities[i];
-                if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width){
+                if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width) {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
-                    this.state = 0;
-                    this.vx = 0;
-                    player.changeHealth(-.005);
-                    }
-                } else {
-                    if (this.x < player.x) {
-                        this.state = 1;
-                        this.vx = Math.random() * ( .15 - .001) + .001 ;
-                    } else if (this.x > player.x){
-                        this.state = 1;
-                        this.vx = -(Math.random() * ( .15 - .001) + .001) ;
-                    } else {
                         this.state = 0;
                         this.vx = 0;
                         player.changeHealth(-.005);
                     }
-                    
+                } else {
+                    if (this.x < player.x) {
+                        this.state = 1;
+                        this.direction = 0;
+                        this.vx = Math.random() * (.15 - .001) + .001;
+                    } else if (this.x > player.x) {
+                        this.state = 1;
+                        this.direction = 1;
+                        this.vx = -(Math.random() * (.15 - .001) + .001);
+                    } else {
+                        this.state = 0;
+
+                        this.vx = 0;
+                        player.changeHealth(-.005);
+                    }
+
                 }
             }
-            
-            
+
+
             if (this.game.entities[i].collisions) {
                 let thePlatform = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width) {
@@ -104,9 +141,6 @@ class Zombie extends Entity {
                 this.onPlatform = false;
             }
         }
-        
-        
-        
 
 
         if (this.y < this.game.height - this.height * this.scale && this.onPlatform == false) {
@@ -138,8 +172,8 @@ class Zombie extends Entity {
         // if (abs(this.vx) < 0.0001) {
         //     this.vx = 0;
         // }
-        
-        
+
+
 
     }
 
@@ -175,80 +209,13 @@ class Zombie extends Entity {
 
 
         super.draw(ctx);
-        this.animator[this.state].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
+        this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale);
         ctx.restore();
 
     }
 
 };
 
-class Bird extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-
-        this.width = 10;
-        this.height = 10;
-        this.scale = 0.3;
-
-        this.direction = 0;
-
-
-        this.animator = new Animator(ASSET_MANAGER.getAsset("images/bird.png"), 70, 100, 180, 150, 6, 0.5);
-
-
-        this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(150, 0, 150, 1), rgba(160, 38, 37, 1)]);
-        this.children.push(this.particleSpawner);
-
-        //Properties
-        this.shootable = true;
-        this.currentHealth = 100;
-        this.maxHealth = 100;
-        this.corpseTimer = 100;
-    }
-
-    update() {
-        super.update();
-        this.vx = 0.1;
-        this.moveBy(this.vx, this.vy);
-
-
-
-    }
-    changeHealth(amount) {
-        if (amount < 0) {
-            this.particleSpawner.spawnParticles(10, (this.x < this.game.sceneManager.player.x ? -1 : 1));
-        }
-        this.currentHealth += amount;
-    }
-
-    displayDamageText(text) {
-        this.children.push(new DamageIndicator(this.game, this.x - this.game.camera.x, this.y, text, 100));
-    }
-
-    die() {
-        if (this.corpseTimer-- == 100) {
-            this.particleSpawner.spawnParticles(1000);
-            this.vx += 5;
-            this.vy -= 5;
-        } else if (this.corpseTimer > 0) {
-            this.corpseTimer--;
-            this.vy += 0.5;
-            this.vx *= 0.99;
-            this.vy *= 0.99;
-        } else {
-            this.removeFromWorld = true;
-        }
-
-    }
-
-    draw(ctx) {
-
-        super.draw(ctx);
-        this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
-        ctx.restore();
-
-    }
-}
 
 class Dummy extends Entity {
     constructor(game, x, y) {
