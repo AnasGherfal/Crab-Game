@@ -245,7 +245,7 @@ class Scene extends Entity {
         });
         
         this.game.elapsedTime += 1;
-        if (this.game.elapsedTime % 1000 == 0) {
+        if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
         }
 

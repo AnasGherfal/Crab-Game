@@ -108,7 +108,6 @@ class Zombie extends Entity {
                         this.vx = -(Math.random() * (.15 - .001) + .001);
                     } else {
                         this.state = 0;
-
                         this.vx = 0;
                         player.changeHealth(-.005);
                     }
