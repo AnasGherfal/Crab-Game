@@ -213,11 +213,12 @@ class Zombie extends Entity {
 
         super.draw(ctx);
         
-        if (this.direction == 0) {
-            this.animator[this.state][0].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale);
-        }
-        else if (this.direction == 1) {
-            this.animator[this.state][1].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
+        
+        //bug:when zombies are idle and turn right, there is 1 frame where they are off by 45 
+        if (this.direction == 1) {
+            this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
+        } else {
+            this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale);
         }
         
         
