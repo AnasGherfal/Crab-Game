@@ -142,7 +142,7 @@ class Vector extends Entity
 
         let u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
 
-        if (t > 0 && t < 1 && u > 0)
+        if (t > 0 && t < 1 && u > 0 && u < 1)
         {
             return true;
         }
