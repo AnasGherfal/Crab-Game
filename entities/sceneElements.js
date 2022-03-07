@@ -91,13 +91,8 @@ class Scene extends Entity {
              }
          }
          */
-<<<<<<< HEAD
 
-        for (var i = 0; i < 5000 / 100; i++) {
-=======
-        
         for (var i = 0; i < 53; i++) {
->>>>>>> f9ed9f7a8b7f0cd46571378372bf5b07a7416973
             this.platform = new Platform(this.game, i * 100, 650, 100, 100);
             this.game.addEntity(this.platform);
         }
@@ -161,7 +156,7 @@ class Scene extends Entity {
             this.game.addEntity(this.background);
         }
 
-        for (var i = 0; i < (5000 % 700); i++) {
+        for (var i = 0; i < (5000 % 250); i++) {
             this.background = new Palm(this.game, i * 620, 250);
             this.game.addEntity(this.background);
         }
