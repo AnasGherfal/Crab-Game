@@ -52,17 +52,17 @@ class Scene extends Entity {
 
     enemyWave() {
 
-        //generate 5 zombies
+        //generate random amount of zombies in a hoard near player
 
-        for (var i = 0.99; i < Math.round(Math.random() * 20); i++) {
-            this.zombie = new Zombie(this.game, i * 800 + i, 200);
-            this.game.addEntity(this.zombie);
-            // this.zombie = new Zombie(this.game, i * 800 + i * 60, 200);
-            // this.game.addEntity(this.zombie);
-            // this.zombie = new Zombie(this.game, i * 800 + i * 40, 200);
-            // this.game.addEntity(this.zombie);
-            // this.zombie = new Zombie(this.game, i * 800 + 90, 200);
-            // this.game.addEntity(this.zombie);
+        for (var i = 0.99; i < Math.round(Math.random() * 10); i++) {
+            if (Math.round(Math.random()) / 2 == 0) {
+                this.zombie = new Zombie(this.game, this.player.x + 100 + (45 * i), 500); 
+                } else {
+                    this.zombie = new Zombie(this.game, this.player.x - 100 + (45 * i), 500); 
+                }
+            
+            this.game.entities.unshift(this.zombie);
+            
         }
     }
 
@@ -71,12 +71,9 @@ class Scene extends Entity {
         this.game.entites = [];
         this.clearEntities();
         this.x = 0;
+        this.game.elapsedTime = 0;
         this.level = level;
         //this.title = title;
-
-        //todo: spawn new wave after a set time?
-
-        this.enemyWave();
 
         /*
         var platNum = Math.round(Math.random() * maxplat);
@@ -246,6 +243,13 @@ class Scene extends Entity {
                 }
             }
         });
+        
+        this.game.elapsedTime += 1;
+        if (this.game.elapsedTime % 1000 == 0) {
+            this.enemyWave();
+        }
+        
+        
 
         // if (this.lineOne.intersect(this.player.hitVector))
         // {

@@ -80,7 +80,7 @@ class ImageEntity extends Entity
     {
         super(game, x, y);
         
-        this.image = image
+        this.image = image;
         this.width = width;
         this.height = height;
     }
