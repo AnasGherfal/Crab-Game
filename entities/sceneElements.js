@@ -248,6 +248,7 @@ class Scene extends Entity {
         if (this.game.elapsedTime % 1000 == 0) {
             this.enemyWave();
         }
+
         
         
 
