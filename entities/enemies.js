@@ -22,6 +22,7 @@ class Zombie extends Entity {
 
         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
         this.children.push(this.hitVector);
+        this.hitVector.invisible = true;
 
         this.healthBar = new ProgressBar(game, x - 10, y - 20, 60, 10, rgb(160, 38, 37), true);
         this.children.push(this.healthBar);
@@ -212,7 +213,15 @@ class Zombie extends Entity {
 
 
         super.draw(ctx);
-        this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
+        
+        if (this.direction == 0) {
+            this.animator[this.state][0].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale);
+        }
+        else if (this.direction == 1) {
+            this.animator[this.state][1].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
+        }
+        
+        
         ctx.restore();
 
     }
