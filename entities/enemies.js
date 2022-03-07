@@ -5,7 +5,7 @@ class Zombie extends Entity {
         super(game, x, y);
 
         this.width = 6;
-        this.height = 135;
+        this.height = 125;
         this.scale = 0.5;
 
         this.direction = 0;
@@ -57,16 +57,18 @@ class Zombie extends Entity {
             if (this.game.entities[i].isPlayer){
                 let player = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width){
+                    if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                     this.state = 0;
                     this.vx = 0;
                     player.changeHealth(-.005);
+                    }
                 } else {
                     if (this.x < player.x) {
                         this.state = 1;
-                        this.vx = .1;
+                        this.vx = Math.random() * ( .15 - .001) + .001 ;
                     } else if (this.x > player.x){
                         this.state = 1;
-                        this.vx = -.1;
+                        this.vx = -(Math.random() * ( .15 - .001) + .001) ;
                     } else {
                         this.state = 0;
                         this.vx = 0;
@@ -76,7 +78,8 @@ class Zombie extends Entity {
                 }
             }
             
-            else if (this.game.entities[i].collisions) {
+            
+            if (this.game.entities[i].collisions) {
                 let thePlatform = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= thePlatform.x && this.x <= thePlatform.x + thePlatform.width) {
                     let zombieAdjustedHeight = (thePlatform.y - (this.height * this.scale));
@@ -141,7 +144,7 @@ class Zombie extends Entity {
     }
 
     die() {
-        if (this.corpseTimer-- == 100) {
+        if (this.corpseTimer-- == 90) {
             this.particleSpawner.spawnParticles(100);
             this.vx += 5;
             this.vy -= 5;
