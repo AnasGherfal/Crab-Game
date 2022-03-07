@@ -91,7 +91,7 @@ class Scene extends Entity {
          }
          */
         
-        for (var i = 0; i < 5000/100; i++) {
+        for (var i = 0; i < 53; i++) {
             this.platform = new Platform(this.game, i * 100, 650, 100, 100);
             this.game.addEntity(this.platform);
         }
