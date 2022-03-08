@@ -56,13 +56,13 @@ class Scene extends Entity {
 
         for (var i = 0.99; i < Math.round(Math.random() * 10); i++) {
             if (Math.round(Math.random()) / 2 == 0) {
-                this.zombie = new Zombie(this.game, this.player.x + 100 + (45 * i), 500); 
-                } else {
-                    this.zombie = new Zombie(this.game, this.player.x - 100 + (45 * i), 500); 
-                }
-            
+                this.zombie = new Zombie(this.game, this.player.x + 100 + (45 * i), 500);
+            } else {
+                this.zombie = new Zombie(this.game, this.player.x - 100 + (45 * i), 500);
+            }
+
             this.game.entities.unshift(this.zombie);
-            
+
         }
     }
 
@@ -104,6 +104,10 @@ class Scene extends Entity {
         //    this.background = new Mashroom(this.game, i * 1200, 737);
         //    this.game.addEntity(this.background);
         //}
+
+        //debugging
+        // this.zombie = new Zombie(this.game, 300, 400);
+        // this.game.addEntity(this.zombie);
 
         for (var i = 0; i < (5000 % 150); i++) {
             if (Math.round(Math.random()) / 2 == 0) {
@@ -243,14 +247,14 @@ class Scene extends Entity {
                 }
             }
         });
-        
+
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
         }
 
-        
-        
+
+
 
         // if (this.lineOne.intersect(this.player.hitVector))
         // {
