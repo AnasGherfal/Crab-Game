@@ -223,7 +223,7 @@ class Scene extends Entity {
         }
         if(this.gameOver == true){
             this.gameOver = false;
-            //this.player = new Player(this.game, 400, 300);
+            this.player = new Player(this.game, 400, 300);
             this.clearEntities();
             this.game.addEntity(new TransitionScreen(this.game, x, y, true));
 
