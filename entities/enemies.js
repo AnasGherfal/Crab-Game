@@ -9,11 +9,10 @@ class Zombie extends Entity {
         this.scale = 0.7;
 
 
-        //state 0 = idle 1 = walk
+        //state 0 = idle 1 = walk 2 = attack
         this.state = 0;
+        //direction 0 = right 1 = left
         this.direction = 0;
-
-
 
         //Sprite
         this.animator = [];
@@ -42,7 +41,7 @@ class Zombie extends Entity {
     }
 
     loadAnimations() {
-        for (var i = 0; i < 2; i++) { // six states
+        for (var i = 0; i < 3; i++) { // 3 states
             this.animator.push([]);
             for (var j = 0; j < 2; j++) { // two directions
                 this.animator[i].push([]);
@@ -60,17 +59,23 @@ class Zombie extends Entity {
 
         // //walk
         // //facing right
-        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 468, 65, 120, 6, 0.3);
+        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 8, 468, 65, 120, 6, 0.2);
 
         // //walk 
         // //facing left
-        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/zombieFlipped.png"), 411, 470, -63, 200, 6, 0.3);
+        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/zombieFlipped.png"), 411, 470, -63, 200, 6, 0.2);
 
         //attack 
         //face right
+        this.animator[2][0] = new Animator(ASSET_MANAGER.getAsset("images/zombieAttackJumpRun.png"), 13, 463, 75, 200, 6, 0.3);
+
+        //attack 
+        //face left
+        this.animator[2][1] = new Animator(ASSET_MANAGER.getAsset("images/zombieAttackJumpRunFlipped.png"), 435, 463, -75, 200, 6, 0.3);
+
 
         //Animation for the zombie death, not implemented
-        this.dead = new Animator(ASSET_MANAGER.getAsset("images/zombie"), 21, 379, 60, 50, 3, 0.7)
+        this.dead = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 21, 379, 60, 50, 3, 0.7)
     }
 
 
@@ -92,9 +97,9 @@ class Zombie extends Entity {
                 let player = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width) {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
-                        this.state = 0;
+                        this.state = 2;
                         this.vx = 0;
-                        player.changeHealth(-.005);
+                        // player.changeHealth(-.005);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -108,7 +113,7 @@ class Zombie extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.005);
+                        // player.changeHealth(-.005);
                     }
 
                 }
@@ -148,9 +153,6 @@ class Zombie extends Entity {
             this.vy = 0;
         }
 
-
-
-
         if (this.vx > 10) {
             this.vx = 10;
         }
@@ -174,8 +176,6 @@ class Zombie extends Entity {
         // if (abs(this.vx) < 0.0001) {
         //     this.vx = 0;
         // }
-
-
 
     }
 

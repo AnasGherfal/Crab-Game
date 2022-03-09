@@ -4,7 +4,7 @@ class Player extends Entity {
 
         //Sizing
         this.width = 33;
-        this.height = 20;
+        this.height = 22;
         this.scale = 2.5;
 
         //Right = 0

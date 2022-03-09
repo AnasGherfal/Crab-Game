@@ -23,6 +23,10 @@ class Scene extends Entity {
         this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
         this.game.addEntity(this.playerHealthBar);
 
+        //debugging
+        // this.zombie = new Zombie(game, 300, 400);
+        // this.game.addEntity(this.zombie);
+
         //Player
         this.player = new Player(game, 400, 400);
         this.game.addEntity(this.player);
@@ -105,9 +109,7 @@ class Scene extends Entity {
         //    this.game.addEntity(this.background);
         //}
 
-        //debugging
-        // this.zombie = new Zombie(this.game, 300, 400);
-        // this.game.addEntity(this.zombie);
+
 
         for (var i = 0; i < (5000 % 150); i++) {
             if (Math.round(Math.random()) / 2 == 0) {
