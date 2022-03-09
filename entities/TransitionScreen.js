@@ -4,12 +4,12 @@ class TransitionScreen {
         this.elapsed = 0;
     };
 
-    // update() {
-    //     this.elapsedTime += this.game.clockTick;
+    update() {
+        this.elapsedTime += this.game.clockTick;
 
-    //     if (this.elapsedTime > 2) 
-    //         this.game.camera.loadLevel(this.x, this.y, false, this.gameOver);
-    // };
+        if (this.elapsedTime > 2) 
+            this.game.camera.loadLevel(this.x, this.y, false, this.gameOver);
+    };
 
     draw(ctx) {
         ctx.fillStyle = "Red";
