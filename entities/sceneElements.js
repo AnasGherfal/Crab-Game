@@ -21,7 +21,7 @@ class Scene extends Entity {
         // this.zombie = new Zombie(game, 300, 400);
         // this.game.addEntity(this.zombie);
 
-        this.slime = new Slime(game, 300, 400);
+        this.slime = new Slime(game, 900, 400);
         this.game.addEntity(this.slime);
 
         //Player
@@ -34,12 +34,10 @@ class Scene extends Entity {
         this.game.addEntity(this.entityCounter);
 
 
+        this.testItem = new Item(game, 350, 600);
+        this.game.addEntity(this.testItem);
 
-
-        //this.testItem = new Item(game, 350, 600);
-        //this.game.addEntity(this.testItem);
-
-        this.loadLevel(1, 400, 300);
+        this.loadLevel(1, 400, 300, true);
 
     };
 
@@ -65,7 +63,7 @@ class Scene extends Entity {
         }
     }
 
-    loadLevel(level, x, y) {
+    loadLevel(level, x, y, title) {
 
         this.game.entites = [];
         this.clearEntities();
@@ -86,8 +84,8 @@ class Scene extends Entity {
          }
          */
 
-        for (var i = 0; i < 53; i++) {
-            this.platform = new Platform(this.game, i * 100, 650, 100, 100);
+        for (var i = 0; i < 55; i++) {
+            this.platform = new Platform(this.game, -50 + i * 100, 650, 100, 100);
             this.game.addEntity(this.platform);
         }
 
@@ -117,7 +115,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.background);
             }
         }
-        
+
 
         for (var i = 1.5; i < (5000 % 640); i++) {
             if (Math.round(Math.random()) / 2 == 0) {
@@ -158,7 +156,7 @@ class Scene extends Entity {
             this.game.addEntity(this.background);
         }
 
-        for (var i = 0; i < (5000 % 1240); i++) {
+        for (var i = -0.1; i < (5000 % 1240); i++) {
             this.background = new Clouds(this.game, i * 1236, 0);
             this.game.addEntity(this.background);
         }
@@ -168,7 +166,7 @@ class Scene extends Entity {
         this.game.addEntity(this.background);
 
         for (var i = 0; i < (5000 % 1240); i++) {
-            this.background = new Mountain(this.game, i * 1236, 280);
+            this.background = new Mountain(this.game, -10 + i * 1236, 280);
             this.game.addEntity(this.background);
         }
         for (var i = 0; i < (5000 % 1240); i++) {
@@ -246,7 +244,7 @@ class Scene extends Entity {
 
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
-            this.enemyWave();
+            // this.enemyWave();
         }
 
 

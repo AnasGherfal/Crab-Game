@@ -286,7 +286,7 @@ class Slime extends Entity {
 
         //idel
         //facing Left
-        this.animator[0][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -20, 32, 2, 0.5);
+        this.animator[0][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -20, 32, 2, 0.2);
 
         // //walk
         // //facing right
@@ -294,7 +294,7 @@ class Slime extends Entity {
 
         // //walk 
         // //facing left
-        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 125, 0, -20, 32, 6, 0.2);
+        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -22, 32, 5, 0.2);
 
 
     }
