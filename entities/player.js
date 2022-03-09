@@ -214,6 +214,21 @@ class Player extends Entity {
 
 
     }
+    die() {
+        if (this.corpseTimer-- == 90) {
+            this.particleSpawner.spawnParticles(100);
+            this.vx += 5;
+            this.vy -= 5;
+        } else if (this.corpseTimer > 0) {
+            this.corpseTimer--;
+            this.vy += 0.5;
+            this.vx *= 0.99;
+            this.vy *= 0.99;
+        } else {
+            this.removeFromWorld = true;
+        }
+
+    }
 
     draw(ctx) {
 
