@@ -127,6 +127,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.background);
             }
         }
+        
 
         for (var i = 1.5; i < (5000 % 640); i++) {
             if (Math.round(Math.random()) / 2 == 0) {
