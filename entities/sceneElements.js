@@ -29,7 +29,6 @@ class Scene extends Entity {
 
         //this.testItem = new Item(game, 350, 600);
         //this.game.addEntity(this.testItem);
-        //this.transition = new TransitionScreen(this.game, 400, 300, this.title);
         this.loadLevel(400, 300, false, true);
     };
 
@@ -138,12 +137,21 @@ class Scene extends Entity {
                 this.game.addEntity(this.entityCounter);
                 this.enemyWave();
                 
-             }
+             
             // if (music && !this.title) {
             //     ASSET_MANAGER.pauseBackgroundMusic();
             //     ASSET_MANAGER.playAsset(music);
             // }
             
+
+            // var that = this;
+            // var player = false;
+            // this.game.entities.forEach(function(entity) {
+            //     if(that.player === entity) player = true;
+            // });
+            // if(!player) this.game.addEntity(this.player);
+    
+            }
         }
     };
     updateAudio() {
@@ -192,15 +200,10 @@ class Scene extends Entity {
                 }
             }
         });
-
-        // if (this.lineOne.intersect(this.player.hitVector))
-        // {
-        //     this.player.hitVector.color = rgba(255, 0, 0, 1);
-        // }
-        // else
-        // {
-        //     this.player.hitVector.color = rgba(0, 0, 0, 1);
-        // }
+        this.game.elapsedTime += 1;
+        if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
+            this.enemyWave();
+        }
         if(this.title && this.game.click){
             if(this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445
                  && this.game.mouse.x > 440 && this.game.mouse.x < 569){

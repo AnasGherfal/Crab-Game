@@ -12,14 +12,13 @@ class TransitionScreen {
     };
 
     draw(ctx) {
-        ctx.fillStyle = "Red";
-        ctx.fillRect(0, 0, PARAMS.CANVAS_WIDTH, PARAMS.CANVAS_HEIGHT);
-        ctx.font = 50  + "px " + "robotoCondensed"
-        ctx.fillStyle = "White";
-        ctx.fillStyle = "White";
-        ctx.fillText("GOLD#3", 200, 400);
+        // ctx.fillStyle = "Red";
+        // ctx.font = 50  + "px " + "robotoCondensed"
+        // ctx.fillStyle = "White";
+        // ctx.fillStyle = "White";
+        // ctx.fillText("GOLD#3", 400, 400);
 
-        if (this.gameOver) {
+        if (this.gameOver == true) {
             ctx.fillText("GAME OVER", 200, 400);
         }else{
             ctx.drawImage(this.game.player.animator, 400, 600);
