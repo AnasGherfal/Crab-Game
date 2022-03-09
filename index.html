@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Game Project </title>
+    <title> Crab Outlaw </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
             margin-left: auto;
             margin-right: auto;
             display: block;
-            font-size: 20px;
+            box-shadow: rgb(255, 255, 255) 20px 10px 50px;
         }
         
         div {
@@ -44,8 +44,12 @@
     <script type="text/javascript" src="./entities/player.js"></script>
     <script type="text/javascript" src="./entities/ui.js"></script>
     <script type="text/javascript" src="./entities/sceneElements.js"></script>
+    <script type="text/javascript" src="./entities/items.js"></script>
     <script type="text/javascript" src="./handlers/inputHandler.js"></script>
     <script type="text/javascript" src="./handlers/misc.js"></script>
+    <script type="text/javascript" src="./entities/TransitionScreen.js"></script>
+
+
     <!--To be deleted-->
     <script type="text/javascript" src="./entities/testEntities.js"></script>
 
@@ -55,7 +59,7 @@
 
 <body>
     <div>
-        <br>Gold 3 <br /> <br>
+        <br> Crab Outlaw <br /> <br>
     </div>
 
 
@@ -71,7 +75,14 @@
 
     <div>
         <br />
-        <input type="checkbox" id="debug"> Debug <input type="checkbox" id="mute"> Mute <input type="range" id="volume" min="0" max="1" value="0.2" step="0.05"> Volume
+        <input type="checkbox" id="mute"> Mute <input type="range" id="volume" min="0" max="1" value="0.2" step="0.05"> Volume
+
+    </div>
+    <div>
+
+        <h1> Controls </h1>
+        <p> WASD to move </p>
+        <p> E to pick up items </p>
 
     </div>
 

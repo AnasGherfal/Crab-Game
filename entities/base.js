@@ -17,6 +17,41 @@ class Entity
         this.affectedByGravity = false;
         this.clickable = false;
         this.hoverable = false;
+
+        this.collisions = false;
+        this.shootable = false;
+        this.sceneElement = true;
+
+        this.activatable = false;
+         this.invisible = false;
+
+    }
+
+    setInvisible(b)
+    {
+        this.invisible = b;
+        this.children.forEach(child => {
+            child.setInvisible(b);
+        });
+    }
+
+    setSceneElement(val)
+    {
+        this.sceneElement = val;
+        this.children.forEach(child => {
+            console.log("Setting " + child);
+            child.setSceneElement(val);
+        });
+    }
+
+    getChildrenCount()
+    {
+
+        let c = 0;
+        this.children.forEach(child => {
+            c += child.getChildrenCount() + 1;
+        });
+        return c;
     }
 
     moveBy(x, y)
@@ -53,6 +88,11 @@ class Entity
 
     draw(ctx)
     {
+        if (this.invisible)
+        {
+            return;
+        }
+
         ctx.save();
 
         // Runs through children and deletes and draws

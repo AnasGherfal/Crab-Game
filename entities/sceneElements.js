@@ -10,46 +10,40 @@ class Scene extends Entity {
         super(game, 0, 0);
         this.game.camera = this;
         this.x = 0;
-
+        this.gameOver = false;
         this.title = true;
         this.gameOver = false;
 
         this.menuSelect = {
             newGame: false,
-            credits: false
+            credits: false,
         }
 
-        //Heakth bar for the player
-        this.game.addEntity(new ProgressBar(game, 25, 200, 350, 30, rgb(0,0,255)));
-        this.healthBar = new healthBar(game, 10, 10, 1);
-        this.game.addEntity(this.healthBar);
-
-        //Heakth bar for the enemy
-        this.game.addEntity(new ProgressBar(game, 650, 200, 350, 30, rgb(0,128,0)));
-        this.healthBar = new healthBar(game, 10, 10, 1);
-        this.game.addEntity(this.healthBar);
+        //UI Panels
+        // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
+        //this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        //this.game.addEntity(this.playerHealthBar);
 
         //Player
-        this.player = new Player(game, 400, 600, this.title);
-        this.game.addEntity(this.player);
-
-        this.loadLevel(400, 300);
+        this.player = new Player(game, 400, 300);
+        //this.game.addEntity(this.player);
         
 
-        /*
-        //Test Button
-        this.testButton = new Button(game, 10, 710, 200, 50, rgba(26, 188, 156, 1.0), rgba(22, 160, 133, 1.0));
-        this.testButton.onMouseClicked = function() {
-            // this.game.addEntity(new DamageIndicator(game, 200, 300, "HIT!", 100));
-        };
-        this.game.addEntity(this.testButton);
-        */
 
-        this.entityTracker = new EntityTracker(game, 10, 600, this.player);
-        // this.addEntity(this.entityTracker);
+        //Entity Counter
+        this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
+        //this.game.addEntity(this.entityCounter);
 
-        //this.addEntity(new Circle(game, 200, 200, rgba(100, 0, 100, 1), 3));
-        //this.addEntity(new FloatingBalls(game, game.width, game.height));
+
+        //Test Stuff
+        //this.testDummy = new Dummy(game, 850, 700);
+        //this.game.addEntity(this.testDummy);
+
+        //this.testItem = new Item(game, 350, 600);
+        //this.game.addEntity(this.testItem);
+        this.transition = new TransitionScreen(this.game, 400, 300, this.title);
+        this.loadLevel(400, 300, false, true);
+        
 
     };
 
@@ -62,64 +56,168 @@ class Scene extends Entity {
     enemyWave() {
 
         //generate 5 zombies
-        for (var i = 0; i < 5; i++) {
-            this.zombie = new Zombie(this.game, i * 50, 700, this.title);
+        
+        for (var i = 0.99; i < Math.round(Math.random() * 20 )  ; i++) {
+            this.zombie = new Zombie(this.game, i * 800 + i, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + i*60, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + i*40, 200);
+            this.game.addEntity(this.zombie);
+            this.zombie = new Zombie(this.game, i * 800 + 90, 200);
             this.game.addEntity(this.zombie);
         }
     }
 
-    loadLevel(level, x, y, transition, title) {
+    loadLevel(x, y, transition, title) {
+        this.title = title;
+        
         this.game.entites = [];
         this.clearEntities();
-        this.x = 0;
-        this.level = level;
-        this.title = title;
+        //this.x = 0;
+        if(transition && title){
+            this.game.addEntity(this.transition);
+        }else{
+            //console.log("Title");
 
-        //todo: spawn new wave after a set time?
+        //  if(title==false){
+        //     //this.game.camera = this;
+        //     //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
+        //     //this.game.addEntity(this.playerHealthBar);
+        //     //Player
+        //     //this.player = new Player(this.game, 400, 400);
+        //     this.player.x = x;
+        //     this.player.y = y;
+        //     this.game.addEntity(this.player);
+            
+    
+        //    // console.log("Inside Title");
 
-        this.enemyWave();
+        //     //Entity Counter
+        //     //this.entityCounter = new TextElement(this.game, 470, 55, "Entities: " + this.game.entities.length);
+        //     this.game.addEntity(this.entityCounter);
+            
+        //  }
+    
+            // this.player = new Player(this.game, 400, 400);
+             //this.game.addEntity(this.player);
+            
+            
 
-        //todo : figure out max level length
-        // spawn trees based on level length
-        // spawn clouds based on level length
-
-        var platNum = Math.round(Math.random() * 20);
-
-        for (var i = 0; i < 20; i++) {
-            //coin flip to make it more random idk
-
-            if (Math.round(Math.random()) / 2 == 0) {
-                var j = Math.round(Math.random() * 100);
-                this.background = new Platform(this.game, i * 300, j + 600, 300, 10);
+            for (var i = 0; i < (5000%640); i++) {
+                this.background = new Grass2(this.game, i * 100, 570, 100, 100);
                 this.game.addEntity(this.background);
             }
-        }
-
-        for (var i = 0; i < 50; i++) {
-            this.background = new Tree(this.game, -80 + i * 100, 300);
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Sky(this.game, i * 1236, 0);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Mountain(this.game, i * 1236, 280);
+                this.game.addEntity(this.background);
+            }
+            this.background = new Sun(this.game, 900, 90);
             this.game.addEntity(this.background);
-        }
 
-        for (var i = 0; i < 20; i++) {
-            this.background = new Clouds(this.game, i * 1236, 50);
-            this.game.addEntity(this.background);
-        }
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Clouds(this.game, i * 1236, 0);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0.5; i < (5000%200); i++) {
+                this.background = new Palm(this.game, i * 620, 250);
+                this.game.addEntity(this.background);
+            }
+             // further trees
+             for (var i = 0; i < (5000%840); i++) {
+                this.background = new Tree(this.game, -80 + i * 40, 500, 120, 170);
+                this.game.addEntity(this.background);
+            }
+            //Big trees     
+            for (var i = 0; i < (5000%380); i++) {
+                if (Math.round(Math.random()) / 2 == 0) {
+                    this.background = new Tree3(this.game, i * 380, 300, 400, 400);
+                    this.game.addEntity(this.background);
+                }
+            }
+            
+            for (var i = 0; i < (5000%800); i++) {
+                this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0.2; i < (5000%250) ; i++) {
+                if (Math.round(Math.random()) / 2 == 0) {
+                    this.background = new mashroomTree(this.game, i * 1000, 420);
+                    this.game.addEntity(this.background);
+                }
+            }
+            for (var i = 1.5; i < (5000%640) ; i++) {
+                if (Math.round(Math.random()) / 2 == 0) {
+                    this.background = new Rock(this.game, i * 600, 505, 150, 200);
+                    this.game.addEntity(this.background);
+                }
+            }
+            for (var i = 0; i < (5000%120) ; i++) {
+                if (Math.round(Math.random()) / 2 == 0) {
+                    this.background = new PixalTree(this.game, i * 1300, 490);
+                    this.game.addEntity(this.background);
+                }
+            }
+            for (var i = 0; i < (5000%150) ; i++) {
+                if (Math.round(Math.random()) / 2 == 0) {
+                    this.background = new Bush(this.game, i * 400, 555);
+                    this.game.addEntity(this.background);
+                }
+            }
+            for (var i = 0; i < 5000/100; i++) {
+                this.platform = new Platform(this.game, i * 100, 650, 100, 100);
+                this.game.addEntity(this.platform);
+            }
+           
+           
+            //spawn teleporter at a random space from 600 but also within the bounds of the game
+            
+            if(title==false){
+                //this.game.camera = this;
+                this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
+                this.game.addEntity(this.playerHealthBar);
+                //Player
+                //this.player = new Player(this.game, 400, 400);
+                //this.player.x = x;
+               // this.player.y = y;
+                this.game.addEntity(this.player);
+                
+        
+               // console.log("Inside Title");
+    
+                //Entity Counter
+                //this.entityCounter = new TextElement(this.game, 470, 55, "Entities: " + this.game.entities.length);
+                this.game.addEntity(this.entityCounter);
+                this.enemyWave();
+                
+             }
 
+           // console.log("LOL Title");
 
-        this.background = new Sun(this.game, 900, 80);
-        this.game.addEntity(this.background);
+            // if (music && !this.title) {
+            //     ASSET_MANAGER.pauseBackgroundMusic();
+            //     ASSET_MANAGER.playAsset(music);
+            // }
+            //if(title == false){
+                // this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+                // this.game.addEntity(this.playerHealthBar);
+        
+                //Player
+                //this.player = new Player(game, 400, 400);
+                //this.game.addEntity(this.player);
+                //this.enemyWave();
+        
+        
+                // //Entity Counter
+                // this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
+                // this.game.addEntity(this.entityCounter);
+            //}
 
-        for (var i = 0; i < 20; i++) {
-            this.background = new Mountain(this.game, i * 1236, 158);
-            this.game.addEntity(this.background);
-        }
-        for (var i = 0; i < 20; i++) {
-            this.background = new Sky(this.game, i * 1236, 50);
-            this.game.addEntity(this.background);
-        }
-
-        for (var i = 0; i < 100; i++) {
-            this.background = new Ground(this.game, i * 48, 750);
+            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);
             this.game.addEntity(this.background);
         }
         // for (var i = 0; i < 10; i++) {
@@ -127,23 +225,6 @@ class Scene extends Entity {
         //     this.game.addEntity(this.background);
         // }
 
-
-        // if (music && !this.title) {
-        //     ASSET_MANAGER.pauseBackgroundMusic();
-        //     ASSET_MANAGER.playAsset(music);
-        // }
-
-
-        //this.player.x = x;
-        //this.player.y = y;
-
-        //var that = this;
-        //var player = false;
-        //this.game.entites.forEach(function(entity) {
-        //    if(that.player === entity) player = true;
-        //});
-
-        //if(!player) this.game.addEntity(this.player);
 
     };
 
@@ -162,8 +243,19 @@ class Scene extends Entity {
 
     addEntity(entity) {
         this.game.addEntity(entity);
+    }
 
-    };
+    getHit(shootingVector) {
+        let hitEntities = []
+        this.game.entities.forEach(entity => {
+            if (entity.shootable) {
+                if (shootingVector.intersect(entity.hitVector)) {
+                    hitEntities.push(entity);
+                }
+            }
+        });
+        return hitEntities;
+    }
 
     update() {
         //camera follow forward movement
@@ -173,104 +265,75 @@ class Scene extends Entity {
         let camB = this.game.width * 1 / 8;
         if (this.x > this.player.x - camB) this.x = this.player.x - camB;
 
-        //zombie following player
-        //if (this.zombie) {
-        //    if (this.player.x - this.zombie.x < 30) {
-        //    this.zombie.vx = 0;
-        //    }
-        //}
 
+        let c = 0;
+        this.game.entities.forEach(entity => {
+            c += 1;
+        });
+        this.entityCounter.text = "Entities: " + c;
 
-        //platform collistion detection
-        /*
-         if (this.player.vy + this.player.height <= this.platform.y && this.player.y +
-             this.player.height + this.player.vy >= this.platform.y && this.player.x +
-             this.player.width >= this.platform.x) {
-             this.player.vy = 0
-         } */
-        };
-
-};
-
-class ParticleSpawner extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-    };
-
-    trigger() {
-        this.spawnBits();
-    };
-
-    spawnBits() {
-        this.children.push(new Particle(this.game, this.x, this.y));
-    };
-
-    draw(ctx) {
-        for (let i = 0; i < this.children.length; i++) {
-            this.children[i].draw(ctx);
-        }
-    };
-
-};
-
-class Particle extends Entity {
-    constructor(game, x, y) {
-        super(game, x, y);
-
-        this.vx = Math.random() * 10 - 5;
-        this.vy = Math.random() * 10 - 5;
-
-        this.updateTick = 5;
-        this.tick = 0;
-        this.lifeSpan = 50;
-        this.lifeSpanInit = this.lifeSpan;
-
-        this.size = Math.random() * 5;
-
-        this.markedForDeletion = false; ////TODO
-    };
-
-    update() {
-        this.tick += 1;
-        if (this.tick >= this.updateTick) {
-            this.tick = 0;
-            if (--this.lifeSpan <= 0) {
-                this.removeFromWorld = true;
+        // Shoot Detection
+        this.player.hitVector.color = rgba(0, 0, 0, 1);
+        this.game.entities.forEach(entity => {
+            if (entity.shootable) {
+                if (this.player.hitVector.intersect(entity.hitVector)) {
+                    this.player.hitVector.color = rgba(255, 0, 0, 1);
+                }
             }
-        }
-        this.updatePos();
-    };
+        });
 
-    updatePos() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        this.vx *= 0.999;
-        this.vy *= 0.999;
-
-        this.vy += 0.1;
-    };
-    draw(ctx) {
-
-        
-        // ctx.font = 24 + "px " + "robotoCondensed";
-        // ctx.fillStyle = "White";
-        
-        // if (this.title) { 
-        //     var width = 200;
-        //     var height = 250;
-        //     ctx.fillText("Start", 100, 100, width, height);
+        // if (this.lineOne.intersect(this.player.hitVector))
+        // {
+        //     this.player.hitVector.color = rgba(255, 0, 0, 1);
         // }
-        ctx.save();
-        if (this.removeFromWorld) return;
-        ctx.beginPath();
-        ctx.fillStyle = 'hsl(' + Math.floor(((this.lifeSpanInit - this.lifeSpan) / this.lifeSpanInit) * 50) + ', 100%, 50%)'
-        ctx.fillRect(this.x, this.y, this.size, this.size);
-        ctx.stroke();
+        // else
+        // {
+        //     this.player.hitVector.color = rgba(0, 0, 0, 1);
+        // }
+        var that = this;
+        var transition = false;
 
-        ctx.restore();
+        if(this.title && this.game.click){
+            if(this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445
+                 && this.game.mouse.x > 440 && this.game.mouse.x < 569){
+                this.title = false;
 
-        
+                console.log("hi");
+            }
+                // this.game.entities.forEach(function(entity) {
+                // if(entity instanceof TransitionScreen)
+                //     entity.removeFromWorld = true;
+                // });
+                //this.loadLevel(400, 300, true, false);
+
+
+            
+            this.loadLevel(400, 300, true, false);
+
+
+
+        } 
+        if(this.gameOver){
+            this.gameOver = false;
+            this.player = new Player(game, 400, 400);
+            this.clearEntities();
+            this.game.addEntity(new TransitionScreen(this.game, x, y, true));
+
+        }
+
+
     };
 
-};
+    draw(ctx){
+        ctx.font = 50  + "px " + "robotoCondensed"
+        ctx.fillStyle = "White"
+        if(this.title){
+            ctx.fillStyle = this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445 && this.game.mouse.x > 440 && this.game.mouse.x < 569 ? "White" : "Black";
+            //ctx.fillRect(569, 435, 1, 5);
+            ctx.fillText("START", 440, 440)
+
+        }
+
+    };
+
+}

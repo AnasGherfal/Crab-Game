@@ -1,18 +1,24 @@
 class Platform extends Entity {
-    constructor(game, x, y) {
+    constructor(game, x, y, width, height) {
         super(game, x, y);
-        
-        
+        this.width = width;
+        this.height = height;
+
+        this.collisions = true;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("images/ground.png");
+
+
+        this.platformRect = new Rectangle(this.game, this.x - this.game.camera.x, this.y, this.width, this.height);
+        this.children.push(this.platformRect);
+
     }
     update() {
 
-
-    }
+    };
 
     draw(ctx) {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(800 - this.game.camera.x, 600, this.width, this.height);
-        // this.animator.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, this.direction);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+    };
 
-    }
 }
