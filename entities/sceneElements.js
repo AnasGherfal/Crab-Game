@@ -159,7 +159,7 @@ class Scene extends Entity {
             this.game.addEntity(this.background);
         }
 
-        for (var i = 0; i < (5000 % 250); i++) {
+        for (var i = 0; i < (5000 % 300); i++) {
             this.background = new Palm(this.game, i * 620, 250);
             this.game.addEntity(this.background);
         }

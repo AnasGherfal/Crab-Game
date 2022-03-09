@@ -28,35 +28,35 @@ class Tree {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.3, this.y, this.width, this.height);
 
         // ctx.fillRect(this.x, this.y, this.width, this.height)
 
     };
 
 };
-class Tree2 {
-    constructor(game, x, y) {
-        Object.assign(this, { game, x, y });
+// class Tree2 {
+//     constructor(game, x, y) {
+//         Object.assign(this, { game, x, y });
 
-        this.width = 100;
-        this.height = 230;
-
-
-        this.spritesheet = ASSET_MANAGER.getAsset("images/tree2.png");
-    };
-
-    update() {
-
-    };
-
-    draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+//         this.width = 100;
+//         this.height = 230;
 
 
-    };
+//         this.spritesheet = ASSET_MANAGER.getAsset("images/tree2.png");
+//     };
 
-};
+//     update() {
+
+//     };
+
+//     draw(ctx) {
+//         ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+
+
+//     };
+
+// };
 
 class Tree3 {
     constructor(game, x, y, width, height) {
@@ -74,7 +74,7 @@ class Tree3 {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.7, this.y, this.width, this.height);
 
 
     };
@@ -119,7 +119,7 @@ class PixalTree {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 1.3, this.y, this.width, this.height);
 
         // ctx.fillRect(this.x, this.y, this.width, this.height)
 
@@ -140,10 +140,11 @@ class River {
 
     update() {
 
+
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 1.5, this.y, this.width, this.height);
 
 
     };
@@ -166,7 +167,7 @@ class Rock {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 1.2, this.y, this.width, this.height);
 
 
     };
@@ -189,7 +190,7 @@ class Grass2 {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.2, this.y, this.width, this.height);
 
 
     };
@@ -231,7 +232,8 @@ class Clouds {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.5, this.y, this.width, this.height);
+
     };
 
 };
@@ -270,7 +272,7 @@ class Mountain {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.1, this.y, this.width, this.height);
     };
 
 };
@@ -309,7 +311,7 @@ class Palm {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 0.4, this.y, this.width, this.height);
     };
 
 };
@@ -330,7 +332,7 @@ class mashroomTree {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y, this.width, this.height);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x * 1.1, this.y, this.width, this.height);
     };
 
 };
