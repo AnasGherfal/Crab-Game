@@ -101,7 +101,7 @@ class Zombie extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 2;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -115,7 +115,7 @@ class Zombie extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        //player.changeHealth(-.005);
                     }
 
                 }
@@ -322,7 +322,7 @@ class Slime extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -336,7 +336,7 @@ class Slime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
 
                 }
