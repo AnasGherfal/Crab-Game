@@ -290,7 +290,7 @@ class Slime extends Entity {
 
         // //walk
         // //facing right
-        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/slime.png"), 7, 0, 20.3, 32, 5, 0.2);
+        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/slime.png"), 3, 0, 22, 32, 5, 0.2);
 
         // //walk 
         // //facing left
@@ -310,7 +310,7 @@ class Slime extends Entity {
         }
 
 
-        this.moveBy(this.vx * 10, this.vy);
+        this.moveBy(this.vx * 15, this.vy);
 
         // COLLISION DETECTION
         let detected = false;
