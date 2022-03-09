@@ -303,7 +303,7 @@ class ProgressBar extends UIElement
     }
 }
 
-class healthBar extends UIElement
+class PlayerHealthBar extends UIElement
 {
     constructor(game, x, y, scale)
     {
