@@ -46,19 +46,27 @@ class Scene extends Entity {
             entity.removeFromWorld = true;
         });
     };
+    
+    itemSpawn() {
+        this.health = new Item(this.game, this.player.x - 350, 600);
+        this.game.entities.unshift(this.health);
+    }
 
     enemyWave() {
 
         //generate random amount of zombies in a hoard near player
 
         for (var i = 0.99; i < Math.round(Math.random() * 10); i++) {
-            if (Math.round(Math.random()) / 2 == 0) {
-                this.zombie = new Zombie(this.game, this.player.x + 100 + (45 * i), 500);
+            
+            if (Math.round(Math.random()) / 10 == 0) {
+                this.enemy = new Slime(this.game, this.player.x + 120 + (45 * i), 500);
+            } else if (Math.round(Math.random()) / 2 == 0) {
+                this.enemy = new Zombie(this.game, this.player.x + 100 + (45 * i), 500);
             } else {
-                this.zombie = new Zombie(this.game, this.player.x - 100 + (45 * i), 500);
+                this.enemy = new Zombie(this.game, this.player.x - 100 + (45 * i), 500);
             }
-
-            this.game.entities.unshift(this.zombie);
+            
+            this.game.entities.unshift(this.enemy);
 
         }
     }
@@ -245,8 +253,10 @@ class Scene extends Entity {
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
-        }
-
+        } 
+        if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
+            this.itemSpawn();
+        } 
 
 
 

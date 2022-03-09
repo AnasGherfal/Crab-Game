@@ -8,11 +8,17 @@ class Item extends Entity {
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/mashroom.png");
 
-        this.tempSprite = new Rectangle(this.game, x, y - 20, 10, 10, rgba(300, 50, 50, 1));
-        this.children.push(this.tempSprite);
+        //this.tempSprite = new Rectangle(this.game, x, y - 20, 10, 10, rgba(300, 50, 50, 1));
+        //this.children.push(this.tempSprite);
+        
+        this.plusl = new Rectangle(this.game, x+10, y, 10, 30, rgba(300, 50, 50, 1));
+        this.children.push(this.plusl);
+        this.plush = new Rectangle(this.game, x, y+10, 30, 10, rgba(300, 50, 50, 1));
+        this.children.push(this.plush);
+        
 
-        this.text = new TextElement(game, x + 5, y - 70, "Health [E]");
-        this.text.textAlign = "center";
+        this.text = new TextElement(game, x - 30, y - 40, "Health [E]");
+        //this.text.textAlign = "center";
         this.text.sceneElement = true;
         this.children.push(this.text);
     }
