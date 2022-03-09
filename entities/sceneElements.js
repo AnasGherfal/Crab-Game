@@ -40,9 +40,7 @@ class Scene extends Entity {
         this.game.addEntity(this.entityCounter);
 
 
-        //Test Stuff
-        //this.testDummy = new Dummy(game, 850, 700);
-        //this.game.addEntity(this.testDummy);
+
 
         //this.testItem = new Item(game, 350, 600);
         //this.game.addEntity(this.testItem);
