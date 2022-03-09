@@ -1,5 +1,5 @@
 class Player extends Entity {
-    constructor(game, x, y ) {
+    constructor(game, x, y) {
         super(game, x, y);
 
         //Sizing
@@ -14,17 +14,11 @@ class Player extends Entity {
         //Flags
         this.clickable = true;
         this.hoverable = true;
-<<<<<<< HEAD
-        //if(title == false){
-        this.animator = new Animator(ASSET_MANAGER.getAsset("images/riskPlayer.png"), 0, 0, 6, 11, 8, 0.2);
-        //}
-=======
         this.isPlayer = true;
         this.isDead = false;
 
         //state 0 = idle 1 = walk
         this.state = 0;
->>>>>>> main
 
         //Sprite
         this.animator = [];
@@ -109,12 +103,6 @@ class Player extends Entity {
             this.hitVector.y2 = y2;
         }
     }
-
-    updateBB(){
-
-        this.lastBB = this.BB;
-            this.BB = new BoundingBox(this.x, this.y, width, height);
-    };
 
     update() {
         super.update();
@@ -223,15 +211,12 @@ class Player extends Entity {
         if (abs(this.vx) < 0.0001) {
             this.vx = 0;
         }
-        //this.updateBB();
-        // collison
-
-        
 
 
     }
 
     draw(ctx) {
+
         ctx.save();
         // if (this.direction == 1) {
         //     ctx.scale(-1, 1);
@@ -247,6 +232,4 @@ class Player extends Entity {
         ctx.restore();
 
     }
-
-    
 }
