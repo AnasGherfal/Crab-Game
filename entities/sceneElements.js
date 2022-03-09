@@ -48,7 +48,12 @@ class Scene extends Entity {
     };
     
     itemSpawn() {
-        this.health = new Item(this.game, this.player.x - 350, 600);
+        
+        if (this.player.x <= 350) {
+            this.health = new Item(this.game, this.player.x + 350, 600);
+        } else {
+            this.health = new Item(this.game, this.player.x - 350, 600);
+        }
         this.game.entities.unshift(this.health);
     }
 
@@ -254,7 +259,7 @@ class Scene extends Entity {
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
         } 
-        if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
+        if (this.game.elapsedTime % 10000 == 0 && this.player.isDead == false) {
             this.itemSpawn();
         } 
 
