@@ -24,14 +24,14 @@ class Scene extends Entity {
         //this.game.addEntity(this.playerHealthBar);
 
         //Player
-        this.player = new Player(game, 400, 400);
+        this.player = new Player(game, 400, 300);
         //this.game.addEntity(this.player);
         
 
 
         //Entity Counter
         this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
-        this.game.addEntity(this.entityCounter);
+        //this.game.addEntity(this.entityCounter);
 
 
         //Test Stuff
@@ -42,7 +42,7 @@ class Scene extends Entity {
         //this.game.addEntity(this.testItem);
         this.transition = new TransitionScreen(this.game, 400, 300, this.title);
         this.loadLevel(400, 300, false, true);
-        //this.enemyWave();
+        
 
     };
 
@@ -72,48 +72,80 @@ class Scene extends Entity {
         this.title = title;
         
         this.game.entites = [];
-        //this.clearEntities();
+        this.clearEntities();
         //this.x = 0;
         if(transition && title){
             this.game.addEntity(this.transition);
         }else{
-            console.log("Title");
+            //console.log("Title");
 
-         if(title==false){
-
-            //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
-            this.game.addEntity(this.playerHealthBar);
-            //Player
-            //this.player = new Player(this.game, 400, 400);
-            //this.player.x = x;
-            //this.player.y = y;
-            this.game.addEntity(this.player);
+        //  if(title==false){
+        //     //this.game.camera = this;
+        //     //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
+        //     //this.game.addEntity(this.playerHealthBar);
+        //     //Player
+        //     //this.player = new Player(this.game, 400, 400);
+        //     this.player.x = x;
+        //     this.player.y = y;
+        //     this.game.addEntity(this.player);
             
     
-           // console.log("Inside Title");
+        //    // console.log("Inside Title");
 
-            //Entity Counter
-            //this.entityCounter = new TextElement(this.game, 470, 55, "Entities: " + this.game.entities.length);
-            this.game.addEntity(this.entityCounter);
+        //     //Entity Counter
+        //     //this.entityCounter = new TextElement(this.game, 470, 55, "Entities: " + this.game.entities.length);
+        //     this.game.addEntity(this.entityCounter);
             
-         }
+        //  }
     
             // this.player = new Player(this.game, 400, 400);
              //this.game.addEntity(this.player);
-            // for (var i = 0; i < 5000/100; i++) {
-            //     this.platform = new Platform(this.game, i * 100, 650, 100, 100);
-            //     this.game.addEntity(this.platform);
-            // }
-            for (var i = 0; i < (5000%150) ; i++) {
+            
+            
+
+            for (var i = 0; i < (5000%640); i++) {
+                this.background = new Grass2(this.game, i * 100, 570, 100, 100);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Sky(this.game, i * 1236, 0);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Mountain(this.game, i * 1236, 280);
+                this.game.addEntity(this.background);
+            }
+            this.background = new Sun(this.game, 900, 90);
+            this.game.addEntity(this.background);
+
+            for (var i = 0; i < (5000%1240); i++) {
+                this.background = new Clouds(this.game, i * 1236, 0);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0.5; i < (5000%200); i++) {
+                this.background = new Palm(this.game, i * 620, 250);
+                this.game.addEntity(this.background);
+            }
+             // further trees
+             for (var i = 0; i < (5000%840); i++) {
+                this.background = new Tree(this.game, -80 + i * 40, 500, 120, 170);
+                this.game.addEntity(this.background);
+            }
+            //Big trees     
+            for (var i = 0; i < (5000%380); i++) {
                 if (Math.round(Math.random()) / 2 == 0) {
-                    this.background = new Bush(this.game, i * 400, 555);
+                    this.background = new Tree3(this.game, i * 380, 300, 400, 400);
                     this.game.addEntity(this.background);
                 }
             }
-
-            for (var i = 0; i < (5000%120) ; i++) {
+            
+            for (var i = 0; i < (5000%800); i++) {
+                this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
+                this.game.addEntity(this.background);
+            }
+            for (var i = 0.2; i < (5000%250) ; i++) {
                 if (Math.round(Math.random()) / 2 == 0) {
-                    this.background = new PixalTree(this.game, i * 1300, 490);
+                    this.background = new mashroomTree(this.game, i * 1000, 420);
                     this.game.addEntity(this.background);
                 }
             }
@@ -123,65 +155,45 @@ class Scene extends Entity {
                     this.game.addEntity(this.background);
                 }
             }
-            
-            for (var i = 0; i < (5000%800); i++) {
-                this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
-                this.game.addEntity(this.background);
-            }
-            
-            for (var i = 0.2; i < (5000%250) ; i++) {
+            for (var i = 0; i < (5000%120) ; i++) {
                 if (Math.round(Math.random()) / 2 == 0) {
-                    this.background = new mashroomTree(this.game, i * 1000, 420);
+                    this.background = new PixalTree(this.game, i * 1300, 490);
                     this.game.addEntity(this.background);
                 }
             }
-
-            //Big trees     
-            for (var i = 0; i < (5000%380); i++) {
+            for (var i = 0; i < (5000%150) ; i++) {
                 if (Math.round(Math.random()) / 2 == 0) {
-                    this.background = new Tree3(this.game, i * 380, 300, 400, 400);
+                    this.background = new Bush(this.game, i * 400, 555);
                     this.game.addEntity(this.background);
                 }
             }
-
-
-            // further trees
-            for (var i = 0; i < (5000%840); i++) {
-                this.background = new Tree(this.game, -80 + i * 40, 500, 120, 170);
-                this.game.addEntity(this.background);
+            for (var i = 0; i < 5000/100; i++) {
+                this.platform = new Platform(this.game, i * 100, 650, 100, 100);
+                this.game.addEntity(this.platform);
             }
-            for (var i = 0.5; i < (5000%200); i++) {
-                this.background = new Palm(this.game, i * 620, 250);
-                this.game.addEntity(this.background);
-            }
-
-
-            for (var i = 0; i < (5000%1240); i++) {
-                this.background = new Clouds(this.game, i * 1236, 0);
-                this.game.addEntity(this.background);
-            }
-
-
-            this.background = new Sun(this.game, 900, 90);
-            this.game.addEntity(this.background);
-
-            for (var i = 0; i < (5000%1240); i++) {
-                this.background = new Mountain(this.game, i * 1236, 280);
-                this.game.addEntity(this.background);
-            }
-            for (var i = 0; i < (5000%1240); i++) {
-                this.background = new Sky(this.game, i * 1236, 0);
-                this.game.addEntity(this.background);
-            }
-
-            for (var i = 0; i < (5000%640); i++) {
-                this.background = new Grass2(this.game, i * 100, 570, 100, 100);
-                this.game.addEntity(this.background);
-            }
-            
+           
+           
             //spawn teleporter at a random space from 600 but also within the bounds of the game
-            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);
-            this.game.addEntity(this.background);
+            
+            if(title==false){
+                //this.game.camera = this;
+                this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
+                this.game.addEntity(this.playerHealthBar);
+                //Player
+                //this.player = new Player(this.game, 400, 400);
+                //this.player.x = x;
+               // this.player.y = y;
+                this.game.addEntity(this.player);
+                
+        
+               // console.log("Inside Title");
+    
+                //Entity Counter
+                //this.entityCounter = new TextElement(this.game, 470, 55, "Entities: " + this.game.entities.length);
+                this.game.addEntity(this.entityCounter);
+                this.enemyWave();
+                
+             }
 
            // console.log("LOL Title");
 
@@ -203,6 +215,9 @@ class Scene extends Entity {
                 // this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
                 // this.game.addEntity(this.entityCounter);
             //}
+
+            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);
+            this.game.addEntity(this.background);
         }
 
 
@@ -266,16 +281,20 @@ class Scene extends Entity {
         // {
         //     this.player.hitVector.color = rgba(0, 0, 0, 1);
         // }
+        var that = this;
+        var transition = false;
 
         if(this.title && this.game.click){
             if(this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445
                  && this.game.mouse.x > 440 && this.game.mouse.x < 569){
                 this.title = false;
+
+                console.log("hi");
             }
-                this.game.entities.forEach(function(entity) {
-                if(entity instanceof TransitionScreen)
-                    entity.removeFromWorld = true;
-                });
+                // this.game.entities.forEach(function(entity) {
+                // if(entity instanceof TransitionScreen)
+                //     entity.removeFromWorld = true;
+                // });
                 //this.loadLevel(400, 300, true, false);
 
 
