@@ -4,6 +4,8 @@ class Zombie extends Entity {
 
         super(game, x, y);
 
+        //this.BB = new BoundingBox(this.x, this.y, width, height);
+
         this.width = 6;
         this.height = 90;
         this.scale = 0.7;
@@ -38,6 +40,7 @@ class Zombie extends Entity {
         this.isEnemy = true;
 
 
+        //this.updateBB();
     }
 
     loadAnimations() {
@@ -77,6 +80,10 @@ class Zombie extends Entity {
         //Animation for the zombie death, not implemented
         this.dead = new Animator(ASSET_MANAGER.getAsset("images/zombie.png"), 21, 379, 60, 50, 3, 0.7)
     }
+    // updateBB(){
+    //     this.lastBB = this.BB;
+    //         this.BB = new BoundingBox(this.x, this.y, width, height);
+    // };
 
 
     update() {
