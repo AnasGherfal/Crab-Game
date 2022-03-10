@@ -9,7 +9,7 @@ class TransitionScreen {
 
         if (this.elapsedTime > 2) {
 
-            this.game.camera.loadLevel(this.x, this.y, true, this.gameOver);
+            this.game.camera.loadLevel(this.x, this.wdwy, true, this.gameOver);
         }
     };
 
