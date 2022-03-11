@@ -105,10 +105,10 @@ class Scene extends Entity {
             this.platform = new Platform(this.game, -50 + i * 100, 650, 100, 100);
             this.game.addEntity(this.platform);
         }
-        for (var i = 5; i < 6; i++) {
-            this.platform = new Platform(this.game, i * 100, 500, 100, 50);
-            this.game.addEntity(this.platform);
-        }
+        // for (var i = 5; i < 6; i++) {
+        //     this.platform = new Platform(this.game, i * 100, 500, 100, 50);
+        //     this.game.addEntity(this.platform);
+        // }
 
 
         //Bird flying in the Background it can be an enemy or not
