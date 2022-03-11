@@ -38,8 +38,8 @@ class Scene extends Entity {
         this.game.addEntity(this.entityCounter);
 
 
-        this.testItem = new Item(game, 350, 600);
-        this.game.addEntity(this.testItem);
+        this.health = new Item(game, 350, 600);
+        this.game.addEntity(this.health);
 
         this.loadLevel(1, 400, 300, true);
 
@@ -262,12 +262,11 @@ class Scene extends Entity {
                 }
             }
         });
-
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
         }
-        if (this.game.elapsedTime % 10000 == 0 && this.player.isDead == false) {
+        if (this.game.elapsedTime % 10000 == 0 && this.player.isDead == false && this.health.isExist == false) {
             this.itemSpawn();
         }
 

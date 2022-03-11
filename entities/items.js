@@ -4,7 +4,8 @@ class Item extends Entity {
 
         //Properties
         this.activatable = true;
-        this.floatPercent = 0
+        this.floatPercent = 0;
+        this.isExist = true;
 
         this.spritesheet = ASSET_MANAGER.getAsset("images/mashroom.png");
 
@@ -29,6 +30,7 @@ class Item extends Entity {
         if (Math.abs(player.x - this.x) < 50 && Math.abs(player.y - this.y) < 50) {
             this.activatable = false;
             this.setInvisible(true);
+            this.isExist = false;
             player.changeHealth(0.3);
         }
     }
