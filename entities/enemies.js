@@ -524,7 +524,7 @@ class Hatslime extends Entity {
 
         super.update();
         this.healthBar.setPercent(this.currentHealth / this.maxHealth);
-        dw
+
         if (this.currentHealth <= 0) {
             this.die();
         }
