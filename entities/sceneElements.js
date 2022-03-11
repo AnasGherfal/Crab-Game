@@ -21,11 +21,15 @@ class Scene extends Entity {
         // this.zombie = new Zombie(game, 300, 400);
         // this.game.addEntity(this.zombie);
 
+        this.slime = new Hatslime(game, 800, 400);
+        this.game.addEntity(this.slime);
+
         this.slime = new Slime(game, 900, 400);
         this.game.addEntity(this.slime);
 
+
         //Player
-        this.player = new Player(game, 400, 400);
+        this.player = new Player(game, 500, 400);
         this.game.addEntity(this.player);
 
 
@@ -46,9 +50,9 @@ class Scene extends Entity {
             entity.removeFromWorld = true;
         });
     };
-    
+
     itemSpawn() {
-        
+
         if (this.player.x <= 350) {
             this.health = new Item(this.game, this.player.x + 350, 600);
         } else {
@@ -62,7 +66,7 @@ class Scene extends Entity {
         //generate random amount of zombies in a hoard near player
 
         for (var i = 0.99; i < Math.round(Math.random() * 10); i++) {
-            
+
             if (Math.round(Math.random()) / 10 == 0) {
                 this.enemy = new Slime(this.game, this.player.x + 120 + (45 * i), 500);
             } else if (Math.round(Math.random()) / 2 == 0) {
@@ -70,7 +74,7 @@ class Scene extends Entity {
             } else {
                 this.enemy = new Zombie(this.game, this.player.x - 100 + (45 * i), 500);
             }
-            
+
             this.game.entities.unshift(this.enemy);
 
         }
@@ -99,6 +103,10 @@ class Scene extends Entity {
 
         for (var i = 0; i < 55; i++) {
             this.platform = new Platform(this.game, -50 + i * 100, 650, 100, 100);
+            this.game.addEntity(this.platform);
+        }
+        for (var i = 5; i < 6; i++) {
+            this.platform = new Platform(this.game, i * 100, 500, 100, 50);
             this.game.addEntity(this.platform);
         }
 
@@ -258,10 +266,10 @@ class Scene extends Entity {
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
-        } 
+        }
         if (this.game.elapsedTime % 10000 == 0 && this.player.isDead == false) {
             this.itemSpawn();
-        } 
+        }
 
 
 
