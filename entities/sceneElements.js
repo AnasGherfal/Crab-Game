@@ -6,6 +6,7 @@ class Scene extends Entity {
         this.x = 0;
 
         this.title = true;
+        this.level = null;
 
         this.menuSelect = {
             newGame: false,
@@ -37,7 +38,7 @@ class Scene extends Entity {
         this.health = new Item(game, 350, 600);
         //this.game.addEntity(this.health);
 
-        this.loadLevel(400, 300, false, true);
+        this.loadLevel(1, 400, 300, false, true);
 
     };
 
@@ -74,15 +75,14 @@ class Scene extends Entity {
         
     }
 
-    loadLevel(x, y, transition, title) {
-        console.log("We are here");
-
-        this.title = title;   
+    loadLevel(level,x, y, transition, title) {
+        this.title = title; 
+        this.level = level;  
         this.game.entites = [];
         this.clearEntities();
-        //this.x = 0;
+        this.x = 0;
         if(transition && title){
-            this.game.addEntity(new TransitionScreen(this.game, 400, 300, title));
+            this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
         }else{
             
             for (var i = 0; i < (5000%640); i++) {
@@ -160,7 +160,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.playerHealthBar);
                 this.game.addEntity(this.player);
                 console.log("hey" + this.player.x, this.player.y)
-                this.game.addEntity(this.entityCounter);
+                //this.game.addEntity(this.entityCounter);
                 this.enemyWave();
             // if (music && !this.title) {
             //     ASSET_MANAGER.pauseBackgroundMusic();
@@ -248,7 +248,7 @@ class Scene extends Entity {
             //         entity.removeFromWorld = true;
             //     });
                  }
-            this.loadLevel(400, 300, true, false);
+            this.loadLevel(1,400, 300, true, false);
         } 
         if (this.player.isDead == true){
             this.gameOver = true;
@@ -256,9 +256,11 @@ class Scene extends Entity {
         if(this.gameOver == true){
             this.gameOver = false;
             this.clearEntities();            
-            this.game.addEntity(new TransitionScreen(this.game, this.x, this.y, true));
-            
+            this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
+            //this.loadLevel(1,400, 300, false, true);
+
         }
+
 
 
     };
