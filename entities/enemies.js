@@ -539,7 +539,7 @@ class Hatslime extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.0025);
+                        player.changeHealth(-.0045);
                     }
                 } else {
                     if (this.x < player.x) {
