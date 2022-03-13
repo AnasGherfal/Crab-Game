@@ -241,11 +241,6 @@ class Scene extends Entity {
             if(this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388
                  && this.game.mouse.x > 590 && this.game.mouse.x < 722){
                 this.title = false;
-            // }
-            //     this.game.entities.forEach(function(entity) {
-            //     if(entity instanceof TransitionScreen)
-            //         entity.removeFromWorld = true;
-            //     });
                  }
             this.loadLevel(1,400, 300, true, false);
         } 
@@ -255,8 +250,7 @@ class Scene extends Entity {
         if(this.gameOver == true){
             this.gameOver = false;
             this.clearEntities();            
-            this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
-            //this.loadLevel(1,400, 300, false, true);
+            this.game.addEntity(new TransitionScreen(this.game, 1, x, y, true));
 
         }
 
