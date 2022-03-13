@@ -38,6 +38,9 @@ class Player extends Entity {
         this.bulletShell = new ParticleSpawner(game, x, y, [rgba(255, 200, 0, 1)]);
         this.children.push(this.bulletShell);
 
+        this.crabGun = new CrabGun(game, x, y);
+        this.children.push(this.crabGun);
+
         //Debug Options
         this.hitVector.invisible = false;
     }
@@ -91,6 +94,12 @@ class Player extends Entity {
             let y2 = mouse.y;
 
             this.direction = x1 > x2 ? 0 : 1;
+
+            let angle = -Math.asin((y2-y1)/(Math.sqrt((x2-x1)**2+(y2-y1)**2))) * (180/Math.PI)
+            this.crabGun.setRotation(angle)
+            this.crabGun.setDirection(this.direction)
+            // print(angle)
+            // print(this.direction)
 
             let m = (y2 - y1) / (x2 - x1);
 
@@ -244,10 +253,64 @@ class Player extends Entity {
         ctx.beginPath();
         ctx.moveTo(this.x + (this.scale * this.width / 2), this.y + (this.scale * this.height / 2));
 
-        super.draw(ctx);
+        
         this.animator[this.state].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scale, 0);
-
+        super.draw(ctx);
         ctx.restore();
 
     }
+}
+
+class CrabGun extends ImageEntity 
+{
+    constructor(game, x, y)
+    {
+        super(game, x + 50, y + 30, ASSET_MANAGER.getAsset("images/crabgun.png"), 30, 30);
+
+        this.currentRot = 0
+        this.currentDir = 1
+
+        // this.crabGun = new ImageEntity(game, x + 50, y + 10, ASSET_MANAGER.getAsset("images/crabgun.png"), 30, 30);
+        // this.children.push(this.crabGun);
+
+        
+    }
+
+    update()
+    {
+        // this.currentRot = this.currentRot >= 360 ? 0 : this.currentRot += 1
+    }
+
+    setDirection(direction)
+    {
+        this.currentDir = direction
+    }
+
+    setRotation(angle)
+    {
+        this.currentRot = angle
+    }
+
+    draw(ctx)
+    {
+        
+        ctx.save();
+        ctx.beginPath();
+        ctx.imageSmoothingEnabled = false;
+        ctx.scale(1, 1);
+
+        print(this.currentRot)
+        print(this.currentDir)
+        let t = Math.PI / 180 * (-this.currentRot)
+        let d = 20
+        
+        ctx.translate(this.currentDir * (d * Math.cos(t)) + this.x - this.game.camera.x, (d * Math.sin(t)) + this.y);
+        ctx.rotate(t);
+
+        ctx.drawImage(this.image, -this.width/2, -this.height/2, this.width, this.height);
+        ctx.filter = "none";
+        ctx.restore();
+        
+    }
+
 }

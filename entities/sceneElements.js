@@ -1,34 +1,45 @@
-// class Background extends Entity {
-//     constructor(game, images) {
-//         super(game, 0, 0);
-//     }
-// }
-
 class Scene extends Entity {
 
     constructor(game) {
         super(game, 0, 0);
         this.game.camera = this;
         this.x = 0;
-        this.gameOver = false;
+
         this.title = true;
+        this.level = null;
 
         this.menuSelect = {
             newGame: false,
-            credits: false,
+            credits: false
         }
+
+        //UI Panels
+        // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
         this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        //this.game.addEntity(this.playerHealthBar);
+
+        //debugging
+        // this.zombie = new Zombie(game, 300, 400);
+        // this.game.addEntity(this.zombie);
+
+        //this.slime = new Slime(game, 900, 400);
+       // this.game.addEntity(this.slime);
 
         //Player
-        this.player = new Player(game, 400, 200);
-        
+        this.player = new Player(game, 400, 400);
+        //this.game.addEntity(this.player);
+
+
         //Entity Counter
         this.entityCounter = new TextElement(game, 470, 55, "Entities: " + game.entities.length);
-        
+        //this.game.addEntity(this.entityCounter);
 
-        //this.testItem = new Item(game, 350, 600);
-        //this.game.addEntity(this.testItem);
-        this.loadLevel(400, 300, false, true);
+
+        this.health = new Item(game, 350, 600);
+        //this.game.addEntity(this.health);
+
+        this.loadLevel(1, 400, 300, false, true);
+
     };
 
     clearEntities() {
@@ -36,10 +47,21 @@ class Scene extends Entity {
             entity.removeFromWorld = true;
         });
     };
+    
+    itemSpawn() {
+        
+        if (this.player.x <= 350) {
+            this.health = new Item(this.game, this.player.x + 350, 600);
+        } else {
+            this.health = new Item(this.game, this.player.x - 350, 600);
+        }
+        this.game.entities.unshift(this.health);
+    }
 
     enemyWave() {
 
-        //generate 5 zombies
+        //generate random amount of zombies in a hoard near player
+
         for (var i = 0.99; i < Math.round(Math.random() * 20 )  ; i++) {
             this.zombie = new Zombie(this.game, i * 800 + i, 200);
             this.game.addEntity(this.zombie);
@@ -52,17 +74,17 @@ class Scene extends Entity {
         }
         
     }
-    
-    loadLevel(x, y, transition, title) {
-        this.title = title;   
+
+    loadLevel(level,x, y, transition, title) {
+        this.title = title; 
+        this.level = level;  
         this.game.entites = [];
         this.clearEntities();
-        //this.x = 0;
+        this.x = 0;
         if(transition && title){
-            this.game.addEntity(new TransitionScreen(this.game, 400, 300, title));
+            this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
         }else{
-            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);
-
+            
             for (var i = 0; i < (5000%640); i++) {
                 this.background = new Grass2(this.game, i * 100, 570, 100, 100);
                 this.game.addEntity(this.background);
@@ -130,15 +152,14 @@ class Scene extends Entity {
             for (var i = 0; i < 5000/100; i++) {
                 this.platform = new Platform(this.game, i * 100, 650, 100, 100);
                 this.game.addEntity(this.platform);
-            }            
+            }
+            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);            
             this.game.addEntity(this.background);
             if(title==false){
                 //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
                 this.game.addEntity(this.playerHealthBar);
                 
                 this.game.addEntity(this.player);
-                console.log("hey" + this.player.x, this.player.y)
-                this.game.addEntity(this.entityCounter);
                 this.enemyWave();
             // if (music && !this.title) {
             //     ASSET_MANAGER.pauseBackgroundMusic();
@@ -156,16 +177,20 @@ class Scene extends Entity {
             }
         }
     };
+
     updateAudio() {
         var mute = document.getElementById("mute").checked;
         var volume = document.getElementById("volume").value;
+
         ASSET_MANAGER.muteAudio(mute);
         ASSET_MANAGER.adjustVolume(volume);
 
     };
+
     addEntity(entity) {
         this.game.addEntity(entity);
     }
+
     getHit(shootingVector) {
         let hitEntities = []
         this.game.entities.forEach(entity => {
@@ -205,10 +230,16 @@ class Scene extends Entity {
         this.game.elapsedTime += 1;
         if (this.game.elapsedTime % 1000 == 0 && this.player.isDead == false) {
             this.enemyWave();
-        }
+        } 
+        if (this.game.elapsedTime % 10000 == 0 && this.player.isDead == false && this.health.isExist == false) {
+            this.itemSpawn();
+        } 
+
+
+
         if(this.title && this.game.click){
-            if(this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445
-                 && this.game.mouse.x > 440 && this.game.mouse.x < 569){
+            if(this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388
+                 && this.game.mouse.x > 590 && this.game.mouse.x < 722){
                 this.title = false;
             // }
             //     this.game.entities.forEach(function(entity) {
@@ -216,18 +247,19 @@ class Scene extends Entity {
             //         entity.removeFromWorld = true;
             //     });
                  }
-            this.loadLevel(400, 300, true, false);
+            this.loadLevel(1,400, 300, true, false);
         } 
         if (this.player.isDead == true){
             this.gameOver = true;
         }
         if(this.gameOver == true){
             this.gameOver = false;
-            this.player = new Player(this.game, 400, 300);
-            this.clearEntities();
-            this.game.addEntity(new TransitionScreen(this.game, x, y, true));
+            this.clearEntities();            
+            this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
+            //this.loadLevel(1,400, 300, false, true);
 
         }
+
 
 
     };
@@ -236,9 +268,9 @@ class Scene extends Entity {
         ctx.font = 50  + "px " + "robotoCondensed"
         ctx.fillStyle = "White"
         if(this.title){
-            ctx.fillStyle = this.game.mouse && this.game.mouse.y > 403 && this.game.mouse.y < 445 && this.game.mouse.x > 440 && this.game.mouse.x < 569 ? "White" : "Black";
-            //ctx.fillRect(569, 435, 1, 5);
-            ctx.fillText("START", 440, 440)
+            ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
+            //ctx.fillRect(720, 388, 10, 5);
+            ctx.fillText("START", 600, 384)
 
         }
 

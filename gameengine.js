@@ -131,10 +131,9 @@ class GameEngine {
 
         // Draw latest things first
         for (let i = 0; i < this.entities.length; i++) {
-            //console.log("Hi" + this.entities[i]);
             this.entities[i].draw(this.ctx);
-            
         }
+        
         
         this.camera.draw(this.ctx);
         

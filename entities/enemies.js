@@ -108,7 +108,7 @@ class Zombie extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 2;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -122,7 +122,7 @@ class Zombie extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        //player.changeHealth(-.005);
                     }
 
                 }
@@ -293,15 +293,15 @@ class Slime extends Entity {
 
         //idel
         //facing Left
-        this.animator[0][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -20, 32, 2, 0.5);
+        this.animator[0][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -20, 32, 2, 0.2);
 
         // //walk
         // //facing right
-        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/slime.png"), 7, 0, 20.3, 32, 5, 0.2);
+        this.animator[1][0] = new Animator(ASSET_MANAGER.getAsset("images/slime.png"), 3, 0, 22, 32, 5, 0.2);
 
         // //walk 
         // //facing left
-        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 125, 0, -20, 32, 6, 0.2);
+        this.animator[1][1] = new Animator(ASSET_MANAGER.getAsset("images/slimeFlipped.png"), 130, 0, -22, 32, 5, 0.2);
 
 
     }
@@ -317,7 +317,7 @@ class Slime extends Entity {
         }
 
 
-        this.moveBy(this.vx * 10, this.vy);
+        this.moveBy(this.vx * 15, this.vy);
 
         // COLLISION DETECTION
         let detected = false;
@@ -329,7 +329,7 @@ class Slime extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -343,7 +343,7 @@ class Slime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        // player.changeHealth(-.005);
+                        player.changeHealth(-.005);
                     }
 
                 }

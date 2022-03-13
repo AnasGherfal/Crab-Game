@@ -90,7 +90,7 @@ class ImageEntity extends Entity
         super.draw(ctx);
         ctx.save();
         ctx.beginPath();
-        ctx.filter = "blur(5px)";
+        // ctx.filter = "blur(5px)";
         ctx.imageSmoothingEnabled = false;
         // ctx.globalAlpha = 0.4;
         ctx.scale(1, 1);
