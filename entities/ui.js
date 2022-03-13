@@ -307,7 +307,9 @@ class PlayerHealthBar extends UIElement
     {
         super(game, x, y);
 
-        this.icon = new Rectangle(game, x, y, 50, 50, rgb(255, 255, 255));
+        this.icon = new TextElement(game, x+1, y+50, "❤");
+        this.icon.fontSize = 50;
+        this.icon.color = 'darkred';
         this.progressBarHealth = new ProgressBar(game, x + 55, y + 20, 400, 30, rgb(160,38,37));
         this.progressBarText = new TextElement(game, x + 55, y + 18, "Health");
         
