@@ -48,13 +48,10 @@ class Player extends Entity {
     changeHealth(val) {
         this.currentHealth += val;
 
-        if (this.currentHealth == 0) {
         if (this.currentHealth <= 0) {
             this.isDead = true;
             this.removeFromWorld = true;
         }
-
-    }
 
     }
 
