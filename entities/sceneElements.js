@@ -38,7 +38,7 @@ class Scene extends Entity {
         this.health = new Item(game, 350, 600);
         //this.game.addEntity(this.health);
 
-        this.loadLevel(400, 300, false, true);
+        this.loadLevel(1, 400, 300, false, true);
 
     };
 
@@ -75,8 +75,9 @@ class Scene extends Entity {
         
     }
 
-    loadLevel(x, y, transition, title) {
+    loadLevel(level, x, y, transition, title) {
         this.title = title; 
+        this.level = level;
         this.game.entites = [];
         this.clearEntities();
         this.x = 0;
@@ -240,8 +241,9 @@ class Scene extends Entity {
             if(this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388
                  && this.game.mouse.x > 590 && this.game.mouse.x < 722){
                 this.title = false;
+                 
+            this.loadLevel(1, 400, 300, true, false);
                  }
-            this.loadLevel(400, 300, true, false);
         } 
         if (this.player.isDead == true){
             this.gameOver = true;
@@ -250,7 +252,7 @@ class Scene extends Entity {
             this.gameOver = false;
             
             this.clearEntities();            
-            this.game.addEntity(new TransitionScreen(this.game, this.x, this.y, true));
+            this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
             //this.loadLevel(400, 300, false, true);
 
         }

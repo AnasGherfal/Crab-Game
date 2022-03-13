@@ -1,6 +1,6 @@
 class TransitionScreen {
-    constructor(game, x, y, gameOver) {
-        Object.assign(this, { game , x, y, gameOver });
+    constructor(game, level, x, y, gameOver) {
+        Object.assign(this, { game, level, x, y, gameOver });
         this.elapsedTime = 0;
     };
 
@@ -9,13 +9,13 @@ class TransitionScreen {
 
         if (this.elapsedTime > 2) {
 
-            this.game.camera.loadLevel(this.x, this.y, false, this.gameOver);
+            this.game.camera.loadLevel(this.level, this.x, this.y, false, this.gameOver);
         }
     };
     draw(ctx) {
         if (this.gameOver) {
             ctx.fillText("GAME OVER", 600, 384);
-            this.game.camera.loadLevel(400, 300, false, true);
+            //this.game.camera.loadLevel(400, 300, false, true);
 
         }
         
