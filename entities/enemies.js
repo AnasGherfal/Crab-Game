@@ -38,6 +38,8 @@ class Zombie extends Entity {
         this.isEnemy = true;
 
 
+        ASSET_MANAGER.playAsset("music/zombie.mp3");
+
     }
 
     loadAnimations() {
@@ -95,20 +97,25 @@ class Zombie extends Entity {
         let detected = false;
         for (let i = 0; i < this.game.entities.length; i++) {
 
+
             if (this.game.entities[i].isPlayer) {
                 let player = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width) {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 2;
                         this.vx = 0;
+
+                        
                         player.changeHealth(-.0065);
                     }
                 } else {
                     if (this.x < player.x) {
+
                         this.state = 1;
                         this.direction = 0;
                         this.vx = Math.random() * (.15 - .001) + .001;
                     } else if (this.x > player.x) {
+
                         this.state = 1;
                         this.direction = 1;
                         this.vx = -(Math.random() * (.15 - .001) + .001);
@@ -675,7 +682,7 @@ class Dummy extends Entity {
         super(game, x, y);
 
 
-        this.body = new Rectangle(game, x, y, 1240, 1000, "black");
+        this.body = new Rectangle(game, x, y, 1400, 1000, "black");
         this.children.push(this.body);
 
         // this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
