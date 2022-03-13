@@ -56,6 +56,9 @@ ASSET_MANAGER.queueDownload("images/green-background-images.jpg");
 //music 
 ASSET_MANAGER.queueDownload("music/test.mp3");
 ASSET_MANAGER.queueDownload("music/crabDance.mp3");
+ASSET_MANAGER.queueDownload("music/myMusic.mp3");
+ASSET_MANAGER.queueDownload("music/pistol.mp3");
+
 
 
 
@@ -64,6 +67,7 @@ ASSET_MANAGER.downloadAll(() => {
     const ctx = canvas.getContext("2d");
 
     ASSET_MANAGER.autoRepeat("music/test.mp3");
+    ASSET_MANAGER.autoRepeat("music/crabDance.mp3");
 
     ctx.imageSmoothingEnabled = false;
 

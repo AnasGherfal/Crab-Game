@@ -51,6 +51,8 @@ class Player extends Entity {
         if (this.currentHealth <= 0) {
             this.isDead = true;
             this.removeFromWorld = true;
+            ASSET_MANAGER.playAsset("music/myMusic.mp3");
+
         }
 
     }
@@ -60,6 +62,7 @@ class Player extends Entity {
         this.bulletShell.spawnParticles(1, 0, -1);
         this.setHitVector();
         this.game.sceneManager.getHit(this.hitVector).forEach(entity => {
+            ASSET_MANAGER.playAsset("music/pistol.mp3");
             let damage = -getRandomInteger(1, 10);
             entity.displayDamageText(damage); //Deal damage
             entity.changeHealth(damage);

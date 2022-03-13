@@ -176,20 +176,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.health);
                 this.enemyWave();
 
-                // if (this.loadLevel.music && !this.title) {
-                //     ASSET_MANAGER.pauseBackgroundMusic();
-                //     ASSET_MANAGER.playAsset(this.loadLevel.music);
-                // }
-    
-
-
-            // if (music && !this.title) {
-            //     ASSET_MANAGER.pauseBackgroundMusic();
-            //     ASSET_MANAGER.playAsset(music);
-            // }
-            
-
-            
+           
             if(!this.player) this.game.addEntity(this.player);
 
             }
