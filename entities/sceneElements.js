@@ -273,18 +273,20 @@ class Scene extends Entity {
     };
 
     draw(ctx){
-        ctx.font = 50  + "px " + "robotoCondensed"
+        ctx.font = 100  + "px " + "robotoCondensed"
         ctx.fillStyle = "White"
         if(this.title){
             ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
             //ctx.fillRect(720, 388, 10, 5);
-            ctx.fillText("START", 600, 384);
+            ctx.fillText("START", 490, 384);
 
         } 
         if (this.gameOver) {
-            ctx.fillText("GAME OVER", 600, 384);
+            ctx.fillStyle = "black"
+
+            ctx.fillText("GAME OVER", 420, 350);
             //ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
-            ctx.fillText("REFRESH TO RETRY", 600, 450);
+            ctx.fillText("REFRESH TO RETRY", 300, 600);
             
 
         }
