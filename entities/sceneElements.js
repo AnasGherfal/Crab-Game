@@ -86,7 +86,6 @@ class Scene extends Entity {
         this.level = level;
         this.game.entites = [];
         this.clearEntities();
-        this.game.elapsedTime = 0;
         this.x = 0;
         if(transition && title){
             this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
@@ -165,7 +164,7 @@ class Scene extends Entity {
             if(title==false){
                 //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
                 this.game.addEntity(this.playerHealthBar);
-                
+                this.game.elapsedTime = 0;
                 this.game.addEntity(this.player);
                 this.game.addEntity(this.health);
                 this.enemyWave();
