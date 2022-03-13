@@ -18,7 +18,6 @@ class TransitionScreen {
             this.game.camera.loadLevel(1,400, 300, false, true);
 
         }
-
         
     }
 };
