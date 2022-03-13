@@ -52,6 +52,9 @@ class Player extends Entity {
             this.isDead = true;
             this.removeFromWorld = true;
             ASSET_MANAGER.playAsset("music/myMusic.mp3");
+            ASSET_MANAGER.playAsset("music/death.mp4");
+
+
 
         }
 
@@ -128,6 +131,7 @@ class Player extends Entity {
         let dampenHorizontal = true;
 
         this.vx *= 0.94;
+
         /*
         if (this.onPlatform) {
             this.currentHealth = 1;
@@ -174,30 +178,37 @@ class Player extends Entity {
 
         if (this.game.keys != undefined) {
             if (this.game.keys["w"] && this.jumpCooldown == 0) {
+
                 this.vy -= 10;
                 this.jumpCooldown = 100;
                 // this.particleSpawner.trigger();
             }
 
             if (this.game.keys["a"] && this.x > 130) {
+
                 this.vx = -2;
                 this.state = 1;
                 dampenHorizontal = false;
             } else {
+
                 this.vx = 0;
                 this.state = 0;
             }
 
             if (this.game.keys["d"] && this.x < 5000) {
                 if (dampenHorizontal) {
+
                     this.vx = 2;
                     this.state = 1;
+
                 } else {
+                    
                     this.vx = 0;
                     this.state = 0;
                 }
                 dampenHorizontal = false;
             }
+            
 
         }
 

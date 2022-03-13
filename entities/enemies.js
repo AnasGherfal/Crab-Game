@@ -670,66 +670,65 @@ class Hatslime extends Entity {
 };
 
 
-// class Dummy extends Entity {
-//     constructor(game, x, y) {
-//         super(game, x, y);
+class Dummy extends Entity {
+    constructor(game, x, y) {
+        super(game, x, y);
 
-//         this.color = rgba(150, 0, 150, 1)
 
-//         this.body = new Rectangle(game, x, y, 40, 80, this.color);
-//         this.children.push(this.body);
+        this.body = new Rectangle(game, x, y, 1240, 1000, "black");
+        this.children.push(this.body);
 
-//         this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
-//         this.children.push(this.hitVector);
+        // this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
+        // this.children.push(this.hitVector);
 
-//         this.healthBar = new ProgressBar(game, x - 10, y - 20, 60, 10, rgb(160, 38, 37), true);
-//         this.children.push(this.healthBar);
+        // this.healthBar = new ProgressBar(game, x - 10, y - 20, 60, 10, rgb(160, 38, 37), true);
+        // this.children.push(this.healthBar);
 
-//         this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(150, 0, 150, 1), rgba(160, 38, 37, 1)]);
-//         this.children.push(this.particleSpawner);
+        // this.particleSpawner = new ParticleSpawner(game, x + 20, y + 40, [rgba(150, 0, 150, 1), rgba(160, 38, 37, 1)]);
+        // this.children.push(this.particleSpawner);
 
-//         //Properties
-//         this.shootable = true;
-//         this.currentHealth = 100;
-//         this.maxHealth = 100;
-//         this.corpseTimer = 100;
-//     }
+        //Properties
+        // this.shootable = true;
+        // this.currentHealth = 100;
+        // this.maxHealth = 100;
+        // this.corpseTimer = 100;
+    }
 
-//     update() {
-//         super.update();
-//         this.healthBar.setPercent(this.currentHealth / this.maxHealth);
+    // update() {
+    //     super.update();
+    //     this.healthBar.setPercent(this.currentHealth / this.maxHealth);
 
-//         if (this.currentHealth <= 0) {
-//             this.die();
-//         }
+    //     if (this.currentHealth <= 0) {
+    //         this.die();
+    //     }
 
-//         this.moveBy(this.vx, this.vy);
-//     }
+    //     this.moveBy(this.vx, this.vy);
+    // }
 
-//     die() {
-//         if (this.corpseTimer-- == 100) {
-//             this.particleSpawner.spawnParticles(1000);
-//             this.vx += 5;
-//             this.vy -= 5;
-//         } else if (this.corpseTimer > 0) {
-//             this.corpseTimer--;
-//             this.vy += 0.5;
-//             this.vx *= 0.99;
-//             this.vy *= 0.99;
-//         } else {
-//             this.removeFromWorld = true;
-//         }
+    // die() {
+    //     if (this.corpseTimer-- == 100) {
+    //         this.particleSpawner.spawnParticles(1000);
+    //         this.vx += 5;
+    //         this.vy -= 5;
+    //     } else if (this.corpseTimer > 0) {
+    //         this.corpseTimer--;
+    //         this.vy += 0.5;
+    //         this.vx *= 0.99;
+    //         this.vy *= 0.99;
+    //     } else {
+    //         this.removeFromWorld = true;
+    //     }
 
-//     }
+    // }
 
-//     changeHealth(amount) {
-//         if (amount < 0) {
-//             this.particleSpawner.spawnParticles(10, (this.x < this.game.sceneManager.player.x ? -1 : 1));
-//         }
-//         this.currentHealth += amount;
-//     }
+    // changeHealth(amount) {
+    //     if (amount < 0) {
+    //         this.particleSpawner.spawnParticles(10, (this.x < this.game.sceneManager.player.x ? -1 : 1));
+    //     }
+    //     this.currentHealth += amount;
+    // }
 
-//     displayDamageText(text) {
-//         this.children.push(new DamageIndicator(this.game, this.x - this.game.camera.x, this.y, text, 100));
-//     }
-// };
+    // displayDamageText(text) {
+    //     this.children.push(new DamageIndicator(this.game, this.x - this.game.camera.x, this.y, text, 100));
+    // }
+};

@@ -286,11 +286,16 @@ class Scene extends Entity {
 
         } 
         if (this.gameOver) {
-            ctx.fillStyle = "black"
+          
 
-            ctx.fillText("GAME OVER", 420, 350);
+        
+            ctx.fillStyle = "red"
+            ctx.fillText("YOU DIED", 420, 380);
             //ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
-            ctx.fillText("REFRESH TO RETRY", 300, 600);
+            // ctx.fillText("REFRESH TO RETRY", 300, 600);
+            
+         this.dummy = new Dummy(this.game, 0,0);
+         this.game.addEntity(this.dummy);
             
 
         }
