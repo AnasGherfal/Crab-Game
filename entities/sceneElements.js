@@ -38,6 +38,8 @@ class Scene extends Entity {
         this.health = new Item(game, 350, 600);
         //this.game.addEntity(this.health);
 
+        this.enemyCounter = new EnemyCounter(game, 70, 90);
+
         this.loadLevel(1, 400, 300, false, true);
 
     };
@@ -174,6 +176,7 @@ class Scene extends Entity {
                 this.game.elapsedTime = 0;
                 this.game.addEntity(this.player);
                 this.game.addEntity(this.health);
+                this.game.addEntity(this.enemyCounter);
                 this.enemyWave();
 
                 // if (this.loadLevel.music && !this.title) {
