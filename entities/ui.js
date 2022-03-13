@@ -339,3 +339,29 @@ class PlayerHealthBar extends UIElement
     }
 
 }
+
+class EnemyCounter extends UIElement
+{
+    constructor(game, x, y)
+    {
+        super(game, x, y);
+
+        this.enemyCount = 0
+
+        this.counterText = new TextElement(game, x, y, "Enemies Remaining: " + this.enemyCount);
+        this.counterText.sceneElement = false;
+        this.children.push(this.counterText);
+    }
+
+    update()
+    {
+        this.enemyCount = 0;
+        this.game.entities.forEach(entity => {
+            if (entity.shootable)
+            {
+                this.enemyCount += 1;
+            }
+        });
+        this.counterText.text = "Enemies Remaining: " + this.enemyCount;
+    }
+}
