@@ -4,14 +4,14 @@ class TransitionScreen {
         this.elapsedTime = 0;
     };
 
-    update() {
-        this.elapsedTime += this.game.clockTick;
+    // update() {
+    //     this.elapsedTime += this.game.clockTick;
 
-        if (this.elapsedTime > 2) {
+    //     if (this.elapsedTime > 2) {
 
-            this.game.camera.loadLevel(this.level, this.x, this.y, false, this.gameOver);
-        }
-    };
+    //         this.game.camera.loadLevel(this.level, this.x, this.y, false, this.gameOver);
+    //     }
+    // };
     draw(ctx) {
         if (this.gameOver) {
             ctx.fillText("GAME OVER", 600, 384);
