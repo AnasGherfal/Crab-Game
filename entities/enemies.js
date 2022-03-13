@@ -682,7 +682,7 @@ class Dummy extends Entity {
         super(game, x, y);
 
 
-        this.body = new Rectangle(game, x, y, 1400, 1000, "black");
+        this.body = new Rectangle(game, x, y, 5000, 1000, "black");
         this.children.push(this.body);
 
         // this.hitVector = new Vector(game, x + (20), y, x + (20), y + 80);
