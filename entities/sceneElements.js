@@ -40,6 +40,9 @@ class Scene extends Entity {
 
         this.enemyCounter = new EnemyCounter(game, 70, 90);
 
+        this.killCounter = new KillCounter(game, 70, 125);
+        this.currentKills = 0;
+
         this.loadLevel(1, 400, 300, false, true);
 
     };
@@ -177,6 +180,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.player);
                 this.game.addEntity(this.health);
                 this.game.addEntity(this.enemyCounter);
+                this.game.addEntity(this.killCounter);
                 this.enemyWave();
 
            

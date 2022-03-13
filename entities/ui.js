@@ -365,3 +365,23 @@ class EnemyCounter extends UIElement
         this.counterText.text = "Enemies Remaining: " + this.enemyCount;
     }
 }
+
+class KillCounter extends UIElement
+{
+    constructor(game, x, y)
+    {
+        super(game, x, y);
+
+        this.killCount = 0
+
+        this.counterText = new TextElement(game, x, y, "Kills: " + this.killCount);
+        this.counterText.sceneElement = false;
+        this.children.push(this.counterText);
+    }
+
+    update()
+    {
+        this.killCount = this.game.sceneManager.currentKills;
+        this.counterText.text = "Kills: " + this.killCount;
+    }
+}
