@@ -37,7 +37,6 @@ class Zombie extends Entity {
         this.onPlatform = false;
         this.isEnemy = true;
 
-
         ASSET_MANAGER.playAsset("music/zombie.mp3");
 
     }
@@ -91,7 +90,7 @@ class Zombie extends Entity {
         }
 
 
-        this.moveBy(this.vx * 10, this.vy);
+        this.moveBy(this.vx * 15, this.vy);
 
         // COLLISION DETECTION
         let detected = false;

@@ -291,6 +291,8 @@ class Scene extends Entity {
         
             ctx.fillStyle = "red"
             ctx.fillText("YOU DIED", 420, 380);
+           
+
             //ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
             // ctx.fillText("REFRESH TO RETRY", 300, 600);
             
