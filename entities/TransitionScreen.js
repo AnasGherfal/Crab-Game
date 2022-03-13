@@ -27,9 +27,7 @@ class TransitionScreen {
             this.game.camera.loadLevel(1,400, 300, false, true);
 
         }
-        else{
-            ctx.drawImage(this.game.player.animator, 400, 600);
-        }
+        
 
         
     }

@@ -15,7 +15,7 @@ class Scene extends Entity {
 
         //UI Panels
         // this.game.addEntity(new ProgressBar(game, 100, 200, 400, 30, rgb(160,38,37)));
-        //this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
+        this.playerHealthBar = new PlayerHealthBar(game, 10, 10, 1);
         //this.game.addEntity(this.playerHealthBar);
 
         //debugging
@@ -156,7 +156,6 @@ class Scene extends Entity {
             this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);            
             this.game.addEntity(this.background);
             if(title==false){
-                this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
                 this.game.addEntity(this.playerHealthBar);
                 this.game.addEntity(this.player);
                 console.log("hey" + this.player.x, this.player.y)
@@ -257,7 +256,7 @@ class Scene extends Entity {
             this.gameOver = false;
             this.clearEntities();            
             this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
-            //this.loadLevel(1,400, 300, false, true);
+            this.loadLevel(1,400, 300, false, true);
 
         }
 
