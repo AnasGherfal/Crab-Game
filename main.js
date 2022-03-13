@@ -55,6 +55,7 @@ ASSET_MANAGER.queueDownload("images/green-background-images.jpg");
 
 //music 
 ASSET_MANAGER.queueDownload("music/test.mp3");
+ASSET_MANAGER.queueDownload("music/crabDance.mp3");
 
 
 

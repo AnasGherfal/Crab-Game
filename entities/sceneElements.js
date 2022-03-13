@@ -87,6 +87,7 @@ class Scene extends Entity {
         this.game.entites = [];
         this.clearEntities();
         this.x = 0;
+        this.music = "music/crabDance.mp3";
         if(transition && title){
             this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
         }else{
@@ -159,6 +160,12 @@ class Scene extends Entity {
                 this.platform = new Platform(this.game, i * 100, 650, 100, 100);
                 this.game.addEntity(this.platform);
             }
+
+               if (this.music && !this.title) {
+                ASSET_MANAGER.pauseBackgroundMusic();
+                ASSET_MANAGER.playAsset(this.music);
+            }
+
             //this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);            
             //this.game.addEntity(this.background);
             if(title==false){
@@ -168,6 +175,14 @@ class Scene extends Entity {
                 this.game.addEntity(this.player);
                 this.game.addEntity(this.health);
                 this.enemyWave();
+
+                // if (this.loadLevel.music && !this.title) {
+                //     ASSET_MANAGER.pauseBackgroundMusic();
+                //     ASSET_MANAGER.playAsset(this.loadLevel.music);
+                // }
+    
+
+
             // if (music && !this.title) {
             //     ASSET_MANAGER.pauseBackgroundMusic();
             //     ASSET_MANAGER.playAsset(music);
@@ -261,6 +276,7 @@ class Scene extends Entity {
                 //this.loadLevel(1, 400, 300, true, false);
             }
         } 
+        this.updateAudio();
 
 
 
