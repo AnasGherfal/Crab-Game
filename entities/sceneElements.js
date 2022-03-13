@@ -3,6 +3,7 @@ class Scene extends Entity {
     constructor(game) {
         super(game, 0, 0);
         this.game.camera = this;
+        this.elapsedTime = 0;
         this.x = 0;
 
         this.title = true;
@@ -55,7 +56,7 @@ class Scene extends Entity {
         } else {
             this.health = new Item(this.game, this.player.x - 350, 600);
         }
-        this.game.entities.unshift(this.health);
+        this.game.addEntity(this.health);
     }
 
     enemyWave() {
@@ -166,6 +167,7 @@ class Scene extends Entity {
                 this.game.addEntity(this.playerHealthBar);
                 
                 this.game.addEntity(this.player);
+                this.game.addEntity(this.health);
                 this.enemyWave();
             // if (music && !this.title) {
             //     ASSET_MANAGER.pauseBackgroundMusic();
@@ -215,7 +217,7 @@ class Scene extends Entity {
         if (this.x < this.player.x - camF) this.x = this.player.x - camF;
         //camera follow backwards movement
         let camB = this.game.width * 1 / 8;
-        if (this.x > this.player.x - camB) this.x = this.player.x - camB;
+        if (this.x > this.player.x - camB && this.player.x > 200) this.x = this.player.x - camB;
 
 
         let c = 0;
