@@ -101,7 +101,7 @@ class Zombie extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 2;
                         this.vx = 0;
-                        player.changeHealth(-.006);
+                        player.changeHealth(-.0065);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -115,7 +115,7 @@ class Zombie extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.006);
+                        player.changeHealth(-.0065);
                     }
 
                 }
@@ -213,9 +213,6 @@ class Zombie extends Entity {
 
 
         super.draw(ctx);
-
-
-        //bug:when zombies are idle and turn right, there is 1 frame where they are off by 45 
         if (this.direction == 1) {
             this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 60, this.y, this.scale);
         } else {
@@ -322,7 +319,7 @@ class Slime extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.004);
+                        player.changeHealth(-.0045);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -336,7 +333,7 @@ class Slime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.004);
+                        player.changeHealth(-.0045);
                     }
 
                 }
@@ -542,7 +539,7 @@ class Hatslime extends Entity {
                     if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.002);
+                        player.changeHealth(-.0025);
                     }
                 } else {
                     if (this.x < player.x) {
@@ -556,7 +553,7 @@ class Hatslime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.002);
+                        player.changeHealth(-.0025);
                     }
 
                 }
