@@ -62,17 +62,23 @@ class Scene extends Entity {
 
         //generate random amount of zombies in a hoard near player
 
-        for (var i = 0.99; i < Math.round(Math.random() * 20 )  ; i++) {
-            this.zombie = new Zombie(this.game, i * 800 + i, 200);
-            this.game.addEntity(this.zombie);
-            this.zombie = new Zombie(this.game, i * 800 + i*60, 200);
-            this.game.addEntity(this.zombie);
-            this.zombie = new Zombie(this.game, i * 800 + i*40, 200);
-            this.game.addEntity(this.zombie);
-            this.zombie = new Zombie(this.game, i * 800 + 90, 200);
-            this.game.addEntity(this.zombie);
+        for (var i = 0.99; i < Math.round(Math.random() * 10); i++) {
+
+            if (Math.round(Math.random()) / 10 == 0) {
+                if (Math.round(Math.random()) / 10 == 0) {
+                    this.enemy = new Hatslime(this.game, this.player.x + 120 + (45 * i), 500);
+                } else {
+                    this.enemy = new Slime(this.game, this.player.x + 120 + (45 * i), 500);
+                }
+            } else if (Math.round(Math.random()) / 2 == 0) {
+                this.enemy = new Zombie(this.game, this.player.x + 100 + (45 * i), 500);
+            } else {
+                this.enemy = new Zombie(this.game, this.player.x - 100 + (45 * i), 500);
+            }
+
+            this.game.addEntity(this.enemy);
+
         }
-        
     }
 
     loadLevel(level, x, y, transition, title) {
@@ -153,8 +159,8 @@ class Scene extends Entity {
                 this.platform = new Platform(this.game, i * 100, 650, 100, 100);
                 this.game.addEntity(this.platform);
             }
-            this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);            
-            this.game.addEntity(this.background);
+            //this.teleporter = new Teleporter(this.game, (Math.round(Math.random()) * 600)%4000, 200);            
+            //this.game.addEntity(this.background);
             if(title==false){
                 //this.playerHealthBar = new PlayerHealthBar(this.game, 10, 10, 1);
                 this.game.addEntity(this.playerHealthBar);
@@ -242,20 +248,22 @@ class Scene extends Entity {
                  && this.game.mouse.x > 590 && this.game.mouse.x < 722){
                 this.title = false;
                  
-            this.loadLevel(1, 400, 300, true, false);
-                 }
+                this.loadLevel(1, 400, 300, true, false);
+            }
         } 
         if (this.player.isDead == true){
             this.gameOver = true;
         }
-        if(this.gameOver == true){
-            this.gameOver = false;
-            
-            this.clearEntities();            
-            this.game.addEntity(new TransitionScreen(this.game, 1, this.x, this.y, true));
-            //this.loadLevel(400, 300, false, true);
+        
+        if(this.gameOver){
+            this.clearEntities();
 
-        }
+            
+            if (this.game.click){
+                //this.gameOver = false;
+                //this.loadLevel(1, 400, 300, true, false);
+            }
+        } 
 
 
 
@@ -267,10 +275,16 @@ class Scene extends Entity {
         if(this.title){
             ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
             //ctx.fillRect(720, 388, 10, 5);
-            ctx.fillText("START", 600, 384)
+            ctx.fillText("START", 600, 384);
+
+        } 
+        if (this.gameOver) {
+            ctx.fillText("GAME OVER", 600, 384);
+            //ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
+            ctx.fillText("REFRESH TO RETRY", 600, 450);
+            
 
         }
-
     };
 
 }
