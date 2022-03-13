@@ -110,7 +110,7 @@ class Scene extends Entity {
                 this.background = new Clouds(this.game, i * 1236, 0);
                 this.game.addEntity(this.background);
             }
-            for (var i = 0.5; i < (5000%200); i++) {
+            for (var i = 0.5; i < (5000%300); i++) {
                 this.background = new Palm(this.game, i * 620, 250);
                 this.game.addEntity(this.background);
             }
@@ -130,9 +130,9 @@ class Scene extends Entity {
                 this.background = new River(this.game, -80 + i * 450, 700, 550, 70);
                 this.game.addEntity(this.background);
             }
-            for (var i = 0.2; i < (5000%250) ; i++) {
+            for (var i = 0.2; i < (5000%300) ; i++) {
                 if (Math.round(Math.random()) / 2 == 0) {
-                    this.background = new mashroomTree(this.game, i * 1000, 420);
+                    this.background = new mashroomTree(this.game, i * 1000, 460);
                     this.game.addEntity(this.background);
                 }
             }
