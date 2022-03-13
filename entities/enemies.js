@@ -192,6 +192,7 @@ class Zombie extends Entity {
             this.vx *= 0.99;
             this.vy *= 0.99;
         } else {
+            this.game.sceneManager.currentKills++;
             this.removeFromWorld = true;
         }
 
@@ -410,6 +411,7 @@ class Slime extends Entity {
             this.vx *= 0.99;
             this.vy *= 0.99;
         } else {
+            this.game.sceneManager.currentKills++;
             this.removeFromWorld = true;
         }
 
@@ -630,6 +632,7 @@ class Hatslime extends Entity {
             this.vx *= 0.99;
             this.vy *= 0.99;
         } else {
+            this.game.sceneManager.currentKills++;
             this.removeFromWorld = true;
         }
 
