@@ -175,12 +175,8 @@ class Scene extends Entity {
             // }
             
 
-            var that = this;
-            var player = false;
-            this.game.entities.forEach(function(entity) {
-                if(that.player === entity) player = true;
-            });
-            if(!player) this.game.addEntity(this.player);
+            
+            if(!this.player) this.game.addEntity(this.player);
 
             }
         }
@@ -200,7 +196,7 @@ class Scene extends Entity {
     }
 
     getHit(shootingVector) {
-        let hitEntities = []
+        let hitEntities = [];
         this.game.entities.forEach(entity => {
             if (entity.shootable) {
                 if (shootingVector.intersect(entity.hitVector)) {
