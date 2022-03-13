@@ -86,7 +86,7 @@ class Scene extends Entity {
         this.level = level;
         this.game.entites = [];
         this.clearEntities();
-        this.elapsedTime = 0;
+        this.game.elapsedTime = 0;
         this.x = 0;
         if(transition && title){
             this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
