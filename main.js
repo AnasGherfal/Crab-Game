@@ -61,6 +61,7 @@ ASSET_MANAGER.queueDownload("music/pistol.mp3");
 ASSET_MANAGER.queueDownload("music/walk.mp3");
 ASSET_MANAGER.queueDownload("music/death.mp4");
 ASSET_MANAGER.queueDownload("music/zombie.mp3");
+ASSET_MANAGER.queueDownload("music/jump.mp3");
 
 
 

@@ -43,6 +43,8 @@ class Player extends Entity {
 
         //Debug Options
         this.hitVector.invisible = false;
+        ASSET_MANAGER.playAsset("music/walk.mp3");
+
     }
 
     changeHealth(val) {
@@ -53,11 +55,7 @@ class Player extends Entity {
             this.removeFromWorld = true;
             ASSET_MANAGER.playAsset("music/myMusic.mp3");
             ASSET_MANAGER.playAsset("music/death.mp4");
-
-
-
         }
-
     }
 
     mouseClicked(mouseX, mouseY) {
@@ -178,6 +176,7 @@ class Player extends Entity {
 
         if (this.game.keys != undefined) {
             if (this.game.keys["w"] && this.jumpCooldown == 0) {
+                ASSET_MANAGER.playAsset("music/jump.mp3");
 
                 this.vy -= 10;
                 this.jumpCooldown = 100;
