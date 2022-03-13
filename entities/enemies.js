@@ -507,7 +507,7 @@ class Hatslime extends Entity {
 
         //idel
         //facing right
-        this.animator[0][0] = new Animator(ASSET_MANAGER.getAsset("images/hatSlime.png"), 7, 0, 70, 100, 2, 0.3);
+        this.animator[0][0] = new Animator(ASSET_MANAGER.getAsset("images/hatSlime.png"), 7, 0, 70, 100, 2, 0.2);
 
         // idel
         // facing Left
@@ -544,11 +544,12 @@ class Hatslime extends Entity {
             if (this.game.entities[i].isPlayer) {
                 let player = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width) {
-                    if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
-                        this.state = 0;
-                        this.vx = 0;
-                        player.changeHealth(-.0045);
+
+                    if ( player.onPlatform ) {
+                        player.changeHealth(-.0025);
                     }
+                    
+                    
                 } else {
                     if (this.x < player.x) {
                         this.state = 1;
@@ -561,7 +562,6 @@ class Hatslime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.0025);
                     }
 
                 }
