@@ -3,7 +3,6 @@ class Scene extends Entity {
     constructor(game) {
         super(game, 0, 0);
         this.game.camera = this;
-        this.elapsedTime = 0;
         this.x = 0;
 
         this.title = true;
@@ -87,6 +86,7 @@ class Scene extends Entity {
         this.level = level;
         this.game.entites = [];
         this.clearEntities();
+        this.elapsedTime = 0;
         this.x = 0;
         if(transition && title){
             this.game.addEntity(new TransitionScreen(this.game, level, x, y, title));
@@ -156,7 +156,7 @@ class Scene extends Entity {
                 }
             }
             
-            for (var i = 0; i < 5000/100; i++) {
+            for (var i = 0; i < 503; i++) {
                 this.platform = new Platform(this.game, i * 100, 650, 100, 100);
                 this.game.addEntity(this.platform);
             }
