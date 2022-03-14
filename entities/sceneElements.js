@@ -250,8 +250,8 @@ class Scene extends Entity {
 
 
         if(this.title && this.game.click){
-            if(this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388
-                 && this.game.mouse.x > 590 && this.game.mouse.x < 722){
+            if(this.game.mouse && this.game.mouse && this.game.mouse.y > 308 && this.game.mouse.y < 384
+                 && this.game.mouse.x > 490 && this.game.mouse.x < 735){
                 this.title = false;
                  
                 this.loadLevel(1, 400, 300, true, false);
@@ -280,8 +280,8 @@ class Scene extends Entity {
         ctx.font = 100  + "px " + "robotoCondensed"
         ctx.fillStyle = "White"
         if(this.title){
-            ctx.fillStyle = this.game.mouse && this.game.mouse.y > 340 && this.game.mouse.y < 388 && this.game.mouse.x > 590 && this.game.mouse.x < 722 ? "White" : "Black";
-            //ctx.fillRect(720, 388, 10, 5);
+            ctx.fillStyle = this.game.mouse && this.game.mouse.y > 308 && this.game.mouse.y < 384 && this.game.mouse.x > 490 && this.game.mouse.x < 735 ? "White" : "Black";
+            //ctx.fillRect(490, 384, 10, 5);
             ctx.fillText("START", 490, 384);
 
         } 
