@@ -7,7 +7,7 @@ class Zombie extends Entity {
         //this.randomInt = Math.floor(Math.random() * (1.5 - 0.6 + 1) + 0.6);
         this.width = 6;
         this.height = 90;
-        this.scale = 0.6
+        this.scale = 0.7;
 
         //state 0 = idle 1 = walk 2 = attack
         this.state = 0;
@@ -241,7 +241,7 @@ class Slime extends Entity {
 
         this.width = 6;
         this.height = 22;
-        this.scale = Math.floor(Math.random() * 3) + 2.5;
+        this.scale = 2.5;
 
 
         //state 0 = idle 1 = walk 
@@ -461,7 +461,7 @@ class Hatslime extends Entity {
 
         this.width = 6;
         this.height = 75;
-        this.scale = Math.floor(Math.random() * 1.5) + 0.6;
+        this.scale =  0.5;
 
 
         //state 0 = idle 1 = walk 
