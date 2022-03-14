@@ -4,10 +4,10 @@ class Zombie extends Entity {
 
         super(game, x, y);
 
+        //this.randomInt = Math.floor(Math.random() * (1.5 - 0.6 + 1) + 0.6);
         this.width = 6;
         this.height = 90;
-        this.scale = 0.7;
-
+        this.scale = 0.6
 
         //state 0 = idle 1 = walk 2 = attack
         this.state = 0;
@@ -241,7 +241,7 @@ class Slime extends Entity {
 
         this.width = 6;
         this.height = 22;
-        this.scale = 2.5;
+        this.scale = Math.floor(Math.random() * 3) + 2.5;
 
 
         //state 0 = idle 1 = walk 
@@ -439,8 +439,6 @@ class Slime extends Entity {
 
 
         super.draw(ctx);
-
-
         if (this.direction == 1) {
             this.animator[this.state][this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x + 45, this.y, this.scale);
         } else {
@@ -460,9 +458,10 @@ class Hatslime extends Entity {
 
         super(game, x, y);
 
+
         this.width = 6;
         this.height = 75;
-        this.scale = 0.5;
+        this.scale = Math.floor(Math.random() * 1.5) + 0.6;
 
 
         //state 0 = idle 1 = walk 
@@ -507,7 +506,7 @@ class Hatslime extends Entity {
 
         //idel
         //facing right
-        this.animator[0][0] = new Animator(ASSET_MANAGER.getAsset("images/hatSlime.png"), 7, 0, 70, 100, 2, 0.3);
+        this.animator[0][0] = new Animator(ASSET_MANAGER.getAsset("images/hatSlime.png"), 7, 0, 70, 100, 2, 0.2);
 
         // idel
         // facing Left
@@ -544,11 +543,12 @@ class Hatslime extends Entity {
             if (this.game.entities[i].isPlayer) {
                 let player = this.game.entities[i];
                 if (this.x + (this.width * this.scale) >= player.x && this.x <= player.x + player.width) {
-                    if (this.y + (this.height * this.scale) >= player.y && this.y <= player.y + player.height) {
-                        this.state = 0;
-                        this.vx = 0;
-                        player.changeHealth(-.0045);
+
+                    if ( player.onPlatform ) {
+                        player.changeHealth(-.0025);
                     }
+                    
+                    
                 } else {
                     if (this.x < player.x) {
                         this.state = 1;
@@ -561,7 +561,6 @@ class Hatslime extends Entity {
                     } else {
                         this.state = 0;
                         this.vx = 0;
-                        player.changeHealth(-.0025);
                     }
 
                 }
