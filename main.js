@@ -36,6 +36,9 @@ ASSET_MANAGER.queueDownload("images/slime.png");
 ASSET_MANAGER.queueDownload("images/slimeFlipped.png");
 ASSET_MANAGER.queueDownload("images/hatSlime.png");
 ASSET_MANAGER.queueDownload("images/hatSlimeFlipped.png");
+ASSET_MANAGER.queueDownload("images/pixalBird.png");
+ASSET_MANAGER.queueDownload("images/pixalBirdFlipped.png");
+
 
 
 

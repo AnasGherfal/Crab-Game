@@ -22,8 +22,8 @@ class Scene extends Entity {
         // this.zombie = new Zombie(game, 300, 400);
         // this.game.addEntity(this.zombie);
 
-        //this.slime = new Slime(game, 900, 400);
-       // this.game.addEntity(this.slime);
+    //    this.bird = new Bird(game, 700, 200);
+    //    this.game.addEntity(this.bird);
 
         //Player
         this.player = new Player(game, 400, 400);

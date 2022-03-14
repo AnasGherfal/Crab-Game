@@ -28,7 +28,7 @@ class Player extends Entity {
 
         //Properties
         this.jumpCooldown = 100;
-        this.currentHealth = 0.5;
+        this.currentHealth = 1;
         this.onPlatform = false;
 
         //Attached Objects
@@ -42,7 +42,7 @@ class Player extends Entity {
         this.children.push(this.crabGun);
 
         //Debug Options
-        this.hitVector.invisible = false;
+        this.hitVector.invisible = true;
         ASSET_MANAGER.playAsset("music/walk.mp3");
 
     }
